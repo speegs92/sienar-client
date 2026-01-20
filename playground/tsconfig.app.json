@@ -30,7 +30,8 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"],
-			"@sienar/utils/*": ["../utils/src/*"]
+			"@sienar/utils": ["../utils/src/index.ts"],
+			"@utils/*": ["../utils/src/*"]
 		}
 	},
 	"include": [
