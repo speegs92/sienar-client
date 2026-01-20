@@ -29,15 +29,12 @@
 		"noUncheckedSideEffectImports": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"],
+			"@ui/*": ["./src/*"],
 			"@sienar/utils": ["../utils/src/index.ts"],
-			"@utils/*": ["../utils/src/*"],
-			"@sienar/ui": ["../ui/src/index.ts"],
-			"@ui/*": ["../ui/src/*"]
+			"@utils/*": ["../utils/src/*"]
 		}
 	},
 	"include": [
-		"src",
-		"../utils/src"
+		"src"
 	]
 }

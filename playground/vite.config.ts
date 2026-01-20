@@ -15,7 +15,9 @@ export default defineConfig({
 		alias: {
 			'@': resolve(__dirname, './src'),
 			'@sienar/utils': resolve(__dirname, '../utils/src/index.ts'),
-			'@utils': resolve(__dirname, '../utils/src')
+			'@utils': resolve(__dirname, '../utils/src'),
+			'@sienar/ui': resolve(__dirname, '../ui/src/index.ts'),
+			'@ui': resolve(__dirname, '../ui/src')
 		}
 	}
 });
