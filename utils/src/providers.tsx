@@ -18,13 +18,10 @@ export function registerProvider(provider: ComponentType<PropsWithChildren>) {
  * @param rootContent The root React application to render inside the provider tree
  */
 export function buildProviderTree(rootContent: ReactElement): ReactNode {
-	let providerTree: ReactNode|undefined = undefined;
+	let providerTree: ReactNode = rootContent;
 
 	registry.forEach(Component => {
-		const children = providerTree === undefined
-			? rootContent
-			: providerTree;
-		providerTree = <Component children={children}/>;
+		providerTree = <Component children={providerTree}/>;
 	});
 
 	return providerTree;
