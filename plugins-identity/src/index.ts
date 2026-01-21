@@ -1,1 +1,1 @@
-﻿
+﻿export * from '@plugins-identity/plugin.tsx';
