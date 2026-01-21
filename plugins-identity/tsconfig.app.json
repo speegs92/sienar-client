@@ -29,13 +29,11 @@
 		"noUncheckedSideEffectImports": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"],
-			"@sienar/utils": ["../utils/src/index.ts"],
-			"@utils/*": ["../utils/src/*"],
+			"@plugins-identity/*": ["./src/*"],
 			"@sienar/ui": ["../ui/src/index.ts"],
 			"@ui/*": ["../ui/src/*"],
-			"@sienar/plugins-identity": ["../plugins-identity/src/index.ts"],
-			"@plugins-identity/*": ["../plugins-identity/src/*"]
+			"@sienar/utils": ["../utils/src/index.ts"],
+			"@utils/*": ["../utils/src/*"]
 		}
 	},
 	"include": [

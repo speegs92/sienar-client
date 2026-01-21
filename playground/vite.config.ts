@@ -17,7 +17,9 @@ export default defineConfig({
 			'@sienar/utils': resolve(__dirname, '../utils/src/index.ts'),
 			'@utils': resolve(__dirname, '../utils/src'),
 			'@sienar/ui': resolve(__dirname, '../ui/src/index.ts'),
-			'@ui': resolve(__dirname, '../ui/src')
+			'@ui': resolve(__dirname, '../ui/src'),
+			'@sienar/plugins-identity': resolve(__dirname, '../plugins-identity/src/index.ts'),
+			'@plugins-identity': resolve(__dirname, '../plugins-identity/src')
 		}
 	}
 });
