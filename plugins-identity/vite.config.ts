@@ -8,7 +8,8 @@ const external = [
 	'react-router',
 	'react-router-dom',
 	'@sienar/utils',
-	'@sienar/ui'
+	'@sienar/ui',
+	'@sienar/plugins-core'
 ];
 
 // https://vite.dev/config/

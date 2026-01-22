@@ -9,8 +9,9 @@
 		"preview": "vite preview"
 	},
 	"peerDependencies": {
-		"@sienar/utils": "^0.2.0",
+		"@sienar/plugins-core": "^0.2.0",
 		"@sienar/ui": "^0.2.0",
+		"@sienar/utils": "^0.2.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"react-router": "^7.12.0",

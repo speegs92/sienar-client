@@ -34,6 +34,8 @@
 			"@utils/*": ["../utils/src/*"],
 			"@sienar/ui": ["../ui/src/index.ts"],
 			"@ui/*": ["../ui/src/*"],
+			"@sienar/plugins-core": ["../plugins-core/src/index.ts"],
+			"@plugins-core/*": ["../plugins-core/src/*"],
 			"@sienar/plugins-identity": ["../plugins-identity/src/index.ts"],
 			"@plugins-identity/*": ["../plugins-identity/src/*"]
 		}
