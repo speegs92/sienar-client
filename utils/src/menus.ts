@@ -5,6 +5,10 @@ import type { InjectionKey } from './di.ts';
 
 const menuNames: Record<InjectionKey<LinkDictionary>, string> = {};
 
+export const DASHBOARD_MENU = Symbol() as InjectionKey<LinkDictionary>;
+export const DASHBOARD_UTILS_MENU = Symbol() as InjectionKey<LinkDictionary>;
+export const DASHBOARD_UTILS_SETTINGS_MENU = Symbol() as InjectionKey<LinkDictionary>;
+
 /**
  * Sets a menu's display name
  *
