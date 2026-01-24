@@ -4,8 +4,6 @@ export * from '@utils/components/Authorize.tsx';
 export { default as Authorize } from '@utils/components/Authorize.tsx';
 export type * from '@utils/components/AuthorizeRoute.tsx';
 export { default as AuthorizeRoute } from '@utils/components/AuthorizeRoute.tsx';
-export { default as AuthProvider } from '@utils/components/AuthProvider.tsx';
-export { default as InfrastructureProvider } from '@utils/components/InfrastructureProvider.tsx';
 
 // endregion
 
@@ -26,6 +24,5 @@ export * from '@utils/services.ts';
 export * from '@utils/urls.ts';
 export * from '@utils/utils.ts';
 export * from '@utils/validation.ts';
-export { default as setup } from '@utils/setup.ts';
 
 // endregion

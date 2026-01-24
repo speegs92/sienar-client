@@ -1,4 +1,6 @@
-﻿import { registerRoutes } from '@sienar/utils';
+﻿import { registerProvider, registerRoutes } from '@sienar/utils';
+import AuthProvider from '@plugins-core/AuthProvider.tsx';
+import InfrastructureProvider from '@plugins-core/InfrastructureProvider.tsx';
 
 import type { InjectionKey, LinkDictionary } from '@sienar/utils';
 import type { ReactNode } from 'react';
@@ -24,6 +26,9 @@ export const MAIN_VIEW = Symbol() as InjectionKey<ReactNode|InjectionKey<ReactNo
 export const MAIN_URL = Symbol() as InjectionKey<string>;
 
 export function plugin() {
+	registerProvider(AuthProvider);
+	registerProvider(InfrastructureProvider);
+
 	registerRoutes(
 		MAIN_LAYOUT,
 		{
