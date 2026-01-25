@@ -16,6 +16,7 @@ export * from '@utils/http.ts';
 export * from '@utils/menus.ts';
 export * from '@utils/notifications.ts';
 export * from '@utils/partials.ts';
+export * from '@utils/plugins.ts';
 export * from '@utils/providers.tsx';
 export * from '@utils/rendering.tsx';
 export * from '@utils/routing.ts';
