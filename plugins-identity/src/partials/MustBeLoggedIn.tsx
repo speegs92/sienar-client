@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { StatusPage } from '@sienar/ui';
 import { inject } from '@sienar/utils';
-import { LOGIN_URL } from '@plugins-identity/identity/urls.ts';
+import { LOGIN_URL } from '@plugins-identity/urls.ts';
 
 export default function MustBeLoggedIn() {
 	return (

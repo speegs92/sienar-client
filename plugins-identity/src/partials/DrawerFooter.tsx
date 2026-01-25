@@ -3,7 +3,7 @@ import { Authorize } from '@sienar/utils';
 import { inject  } from '@sienar/utils';
 import { ButtonLink } from '@sienar/ui';
 import UserBadge from '@plugins-identity/components/UserBadge.tsx';
-import { REGISTER_URL, LOGIN_URL } from '@plugins-identity/identity/urls.ts';
+import { REGISTER_URL, LOGIN_URL } from '@plugins-identity/urls.ts';
 
 import type { UserBadgeProps } from '@plugins-identity/components/UserBadge.tsx';
 

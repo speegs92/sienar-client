@@ -1,0 +1,188 @@
+import { ApiCrudService, provide, sendServiceRequest, sendStatusServiceRequest } from '@sienar/utils';
+import * as SERVICES from '@plugins-identity/services.ts';
+import type { LockoutReason, Role, User } from '@plugins-identity/types.ts';
+
+export function setupIdentityServices() {
+	provide(
+		SERVICES.CHANGE_EMAIL_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/account/change-email',
+			'POST',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.CHANGE_EMAIL_CONFIRM_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/account/email',
+			'PATCH',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.CHANGE_PASSWORD_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/account/change-password',
+			'PATCH',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.CONFIRM_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/account/confirm',
+			'POST',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.DELETE_ACCOUNT_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/account',
+			'DELETE',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.FORGOT_PASSWORD_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/account/password',
+			'DELETE',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.LOGIN_SERVICE,
+		(data, config) => sendServiceRequest(
+			'/api/account/login',
+			'POST',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.REGISTER_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/account',
+			'POST',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.RESET_PASSWORD_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/account/password',
+			'PATCH',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.GET_LOCKOUT_REASONS_SERVICE,
+		(data, config) => sendServiceRequest(
+			'/api/account/lockout-reasons',
+			'POST',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.USERS_SERVICE,
+		new ApiCrudService<User>('/api/users'),
+		false
+	);
+
+	provide(
+		SERVICES.ROLES_SERVICE,
+		new ApiCrudService<Role>('/api/roles'),
+		false
+	);
+
+	provide(
+		SERVICES.ADD_USER_TO_ROLE_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/users/roles',
+			'POST',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.REMOVE_USER_FROM_ROLE_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/users/roles',
+			'DELETE',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.LOCK_USER_ACCOUNT_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/users/lock',
+			'PATCH',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.UNLOCK_USER_ACCOUNT_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/users/lock',
+			'DELETE',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.MANUALLY_CONFIRM_USER_ACCOUNT_SERVICE,
+		(data, config) => sendStatusServiceRequest(
+			'/api/users/confirm',
+			'PATCH',
+			data,
+			config
+		),
+		false
+	);
+
+	provide(
+		SERVICES.LOCKOUT_REASONS_SERVICE,
+		new ApiCrudService<LockoutReason>('/api/lockout-reasons'),
+		false
+	);
+}

@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Logout from '@mui/icons-material/Logout';
 import Settings from '@mui/icons-material/Settings';
 import { aggregateLinks, createApiCall, filterLinks, inject, useAuthContext } from '@sienar/utils';
-import { USER_SETTINGS_MENU } from '@plugins-identity/identity/menus.tsx';
+import { USER_SETTINGS_MENU } from '@plugins-identity/menus.ts';
 
 import type { ReactNode } from 'react';
 import type { InjectionKey, MenuLink, LinkDictionary } from '@sienar/utils';
