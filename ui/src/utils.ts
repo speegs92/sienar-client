@@ -1,6 +1,5 @@
 ﻿import { enqueueSnackbar } from 'notistack';
-import { NotificationType } from '@sienar/utils';
-import type { Notification, Notifier } from '@sienar/utils';
+import type { Notification, NotificationType, Notifier } from '@sienar/utils';
 
 /**
  * Renders a notification in the UI
@@ -9,8 +8,8 @@ import type { Notification, Notifier } from '@sienar/utils';
  */
 export function notify(message: string, type: NotificationType) {
 	enqueueSnackbar(message, {
-		variant: mapNotificationTypeToVariant(type),
-		autoHideDuration: type === NotificationType.Error || type === NotificationType.Warning
+		variant: type,
+		autoHideDuration: type === 'error' || type === 'warning'
 			? null
 			: 5000
 	});
@@ -18,16 +17,16 @@ export function notify(message: string, type: NotificationType) {
 
 export const notifier: Notifier = {
 	success(message: string) {
-		notify(message, NotificationType.Success);
+		notify(message, 'success');
 	},
 	warning(message: string) {
-		notify(message, NotificationType.Warning);
+		notify(message, 'warning');
 	},
 	info(message: string) {
-		notify(message, NotificationType.Info);
+		notify(message, 'info');
 	},
 	error(message: string) {
-		notify(message, NotificationType.Error);
+		notify(message, 'error');
 	},
 	notify(notification: Notification | string, type?: NotificationType) {
 		if (typeof notification === 'string') {
@@ -35,18 +34,5 @@ export const notifier: Notifier = {
 		} else {
 			notify(notification.message, notification.type);
 		}
-	}
-}
-
-function mapNotificationTypeToVariant(type: NotificationType): 'success' | 'warning' | 'info' | 'error' {
-	switch (type) {
-		case NotificationType.Success:
-			return 'success';
-		case NotificationType.Warning:
-			return 'warning';
-		case NotificationType.Info:
-			return 'info';
-		case NotificationType.Error:
-			return 'error';
 	}
 }
