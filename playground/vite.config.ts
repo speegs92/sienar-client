@@ -23,5 +23,10 @@ export default defineConfig({
 			'@plugins-identity': resolve(__dirname, '../plugins-identity/src'),
 			'@sienar/plugins-identity': resolve(__dirname, '../plugins-identity/src/index.ts')
 		}
+	},
+	server: {
+		proxy: {
+			'^/api': 'http://localhost:5000'
+		}
 	}
 });
