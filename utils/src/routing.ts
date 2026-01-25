@@ -61,10 +61,14 @@ export function convertSienarRoutesToReactRoutes(sienarRoutes: Route[]): RouteOb
 	const reactRouterRoutes: RouteObject[] = [];
 
 	for (let route of sienarRoutes) {
+		const path = typeof route.path === 'string' ? route.path : inject(route.path);
+		const rawElement = typeof route.element === 'symbol' ? inject(route.element) : route.element;
+		const element: ReactNode = typeof rawElement === 'symbol' ? inject(rawElement) : rawElement;
+
 		const reactRouterRoute: RouteObject = {
-			path: typeof route.path === 'string' ? route.path : inject(route.path),
-			children: route.children ? convertSienarRoutesToReactRoutes(route.children) : undefined,
-			element: typeof route.element === 'symbol' ? inject(route.element) : route.element
+			path,
+			element,
+			children: route.children ? convertSienarRoutesToReactRoutes(route.children) : undefined
 		}
 		reactRouterRoutes.push(reactRouterRoute);
 	}
