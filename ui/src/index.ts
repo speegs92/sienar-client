@@ -13,7 +13,7 @@ export { default as MuiDateLocalizationProvider } from './MuiDateLocalizationPro
 export * from './Narrow.tsx';
 export { default as Narrow } from './Narrow.tsx';
 export * from './pages/index.ts';
-export { default as setup } from './setup.ts';
+export * from './plugin.ts';
 export { default as SnackbarProvider } from './SnackbarProvider.tsx';
 export  * from './Spacer.tsx';
 export { default as Spacer } from './Spacer.tsx';

@@ -1,4 +1,5 @@
-﻿import { addLinks, addLinksWithPriority, AUTH_MISSING_ROLES_PARTIAL, AUTH_MUST_BE_LOGGED_IN_PARTIAL, AUTH_MUST_BE_LOGGED_OUT_PARTIAL, DASHBOARD_MENU, DASHBOARD_UTILS_MENU, DASHBOARD_UTILS_SETTINGS_MENU, DRAWER_FOOTER_PARTIAL, inject, provide, registerProvider, registerRoutes } from '@sienar/utils';
+﻿import { MAIN_LAYOUT, MAIN_URL, MAIN_VIEW } from '@sienar/plugins-core';
+import { addLinks, addLinksWithPriority, AUTH_MISSING_ROLES_PARTIAL, AUTH_MUST_BE_LOGGED_IN_PARTIAL, AUTH_MUST_BE_LOGGED_OUT_PARTIAL, DASHBOARD_MENU, DASHBOARD_UTILS_MENU, DASHBOARD_UTILS_SETTINGS_MENU, DRAWER_FOOTER_PARTIAL, inject, provide, registerProvider, registerRoutes } from '@sienar/utils';
 import { Dashboard as DashboardLayout, DashboardNarrow as DashboardNarrowLayout, MUI_DATE_LOCALIZATION_PROVIDER } from '@sienar/ui';
 import { Dashboard, Info, Home, Settings } from '@mui/icons-material';
 import * as KEYS from '@plugins-identity/keys.ts';
@@ -12,13 +13,14 @@ import AboutView from '@plugins-identity/views/About.tsx';
 import { identitySetup } from '@plugins-identity/identity/index.ts';
 import { roles } from '@plugins-identity/constants.ts';
 
-export default function setup() {
+export function plugin() {
 	// Global setup not linked to a specific vertical slice
 
 	// Providers
 	registerProvider(inject(MUI_DATE_LOCALIZATION_PROVIDER));
 
 	// Routes
+	provide(MAIN_URL, '/', false);
 	provide(KEYS.HOME_URL, '/', false);
 	provide(KEYS.DASHBOARD_URL, '/dashboard', false);
 	provide(KEYS.ABOUT_URL, '/dashboard/about', false);
@@ -74,8 +76,11 @@ export default function setup() {
 	// Views
 	provide(DASHBOARD_LAYOUT, <DashboardLayout/>, false);
 	provide(DASHBOARD_NARROW_LAYOUT, <DashboardNarrowLayout/>, false);
+	provide(MAIN_LAYOUT, DASHBOARD_LAYOUT, false);
+
 	provide(KEYS.DASHBOARD_VIEW, <DashboardView/>, false);
 	provide(KEYS.ABOUT_VIEW, <AboutView/>, false);
+	provide(MAIN_VIEW, KEYS.DASHBOARD_VIEW, false);
 
 	registerRoutes(
 		DASHBOARD_LAYOUT,
