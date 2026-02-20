@@ -4,9 +4,8 @@ import { MAIN_LAYOUT } from '@sienar/plugins-core';
 import * as LAYOUTS from '@plugins-identity/layouts.ts';
 
 export function setupIdentityLayouts() {
-	provide(LAYOUTS.DASHBOARD_LAYOUT, <DashboardLayout/>, false);
+	provide(MAIN_LAYOUT, <DashboardLayout/>, false);
 	provide(LAYOUTS.DASHBOARD_NARROW_LAYOUT, <DashboardNarrowLayout/>, false);
-	provide(MAIN_LAYOUT, LAYOUTS.DASHBOARD_LAYOUT, false);
 
 	provide(LAYOUTS.USERS_LAYOUT, MAIN_LAYOUT, false);
 	provide(LAYOUTS.USERS_ADD_LAYOUT, LAYOUTS.DASHBOARD_NARROW_LAYOUT, false);
