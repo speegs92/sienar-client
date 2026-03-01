@@ -65,6 +65,34 @@ export type Themeable = {
 }
 
 /**
+ * Flex <code>justify-content</code> values
+ */
+export type FlexJustify =
+	| 'start'
+	| 'end'
+	| 'center'
+	| 'between'
+	| 'around'
+	| 'evenly'
+
+/**
+ * Flex <code>align-item</code> or <code>align-self</code> values
+ */
+export type FlexAlign =
+	| 'start'
+	| 'end'
+	| 'center'
+	| 'baseline'
+	| 'stretch';
+
+/**
+ * Flex <code>flex-direction</code> values
+ */
+export type FlexDirection =
+	| 'horizontal'
+	| 'vertical';
+
+/**
  * Horizontal alignment
  */
 export type Alignment =

@@ -1,9 +1,9 @@
 ﻿import { classNames } from '@sienar/utils';
 
-import type { HTMLAttributes, PropsWithChildren } from 'react';
+import type { HTMLAttributes } from 'react';
 import type { Alignment, Breakpoint } from '@ui/theme.ts';
 
-export type ContainerProps = {
+export interface ContainerProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * The horizontal alignment of the container
 	 */
@@ -23,7 +23,7 @@ export type ContainerProps = {
 	 * The HTML tag with which to render the container
 	 */
 	tag?: keyof HTMLElementTagNameMap;
-} & PropsWithChildren & HTMLAttributes<HTMLElement>;
+}
 
 export function Container(props: ContainerProps) {
 	const {

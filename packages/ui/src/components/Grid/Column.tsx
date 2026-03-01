@@ -5,7 +5,7 @@ import type { ColumnSize } from '@ui/theme.ts';
 /**
  * The props for the column component
  */
-export type ColumnProps = {
+export interface ColumnProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * The HTML tag with which to render the column
 	 */
@@ -40,7 +40,7 @@ export type ColumnProps = {
 	 * The column size for extra-extra-large screens. There is no default value.
 	 */
 	xxl?: ColumnSize;
-} & HTMLAttributes<HTMLElement>;
+}
 
 export default function Column(props: ColumnProps) {
 	const {
