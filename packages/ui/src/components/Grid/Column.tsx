@@ -42,7 +42,7 @@ export interface ColumnProps extends HTMLAttributes<HTMLElement> {
 	xxl?: ColumnSize;
 }
 
-export default function Column(props: ColumnProps) {
+export function Column(props: ColumnProps) {
 	const {
 		tag: Tag = 'div',
 		col = 12,

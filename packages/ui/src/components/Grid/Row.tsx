@@ -11,7 +11,7 @@ export interface RowProps extends HTMLAttributes<HTMLElement> {
 	tag?: keyof HTMLElementTagNameMap;
 }
 
-export default function Row(props: RowProps) {
+export function Row(props: RowProps) {
 	const {
 		tag:Tag = 'div',
 		className,
