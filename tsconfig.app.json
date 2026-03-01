@@ -30,14 +30,14 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"],
-			"@sienar/utils": ["../utils/src/index.ts"],
-			"@utils/*": ["../utils/src/*"],
-			"@sienar/ui": ["../ui/src/index.ts"],
-			"@ui/*": ["../ui/src/*"],
-			"@sienar/plugins-core": ["../plugins-core/src/index.ts"],
-			"@plugins-core/*": ["../plugins-core/src/*"],
-			"@sienar/plugins-identity": ["../plugins-identity/src/index.ts"],
-			"@plugins-identity/*": ["../plugins-identity/src/*"]
+			"@sienar/utils": ["./packages/utils/src/index.ts"],
+			"@utils/*": ["./packages/utils/src/*"],
+			"@sienar/ui": ["./packages/ui/src/index.ts"],
+			"@ui/*": ["./packages/ui/src/*"],
+			"@sienar/plugins-core": ["./packages/plugins-core/src/index.ts"],
+			"@plugins-core/*": ["./packages/plugins-core/src/*"],
+			"@sienar/plugins-identity": ["./packages/plugins-identity/src/index.ts"],
+			"@plugins-identity/*": ["./packages/plugins-identity/src/*"]
 		}
 	},
 	"include": [

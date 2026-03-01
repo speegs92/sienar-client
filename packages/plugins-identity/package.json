@@ -1,7 +1,7 @@
 {
-	"name": "@sienar/plugins-core",
-	"version": "0.2.0",
-	"description": "The core React client for Sienar applications",
+	"name": "@sienar/plugins-identity",
+	"version": "0.1.0",
+	"description": "The React client for the Sienar Identity Plugin",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -9,7 +9,9 @@
 		"preview": "vite preview"
 	},
 	"peerDependencies": {
-		"@sienar/utils": "^0.2.0",
+		"@sienar/plugins-core": "^0.1.0",
+		"@sienar/ui": "^0.1.0",
+		"@sienar/utils": "^0.1.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"react-router": "^7.12.0",
@@ -29,7 +31,8 @@
 	},
 	"keywords": [
 		"sienar",
-		"react"
+		"react",
+		"identity"
 	],
 	"author": "Christian LeVesque <christian@levesque.dev> (https://levesque.dev)",
 	"license": "Apache-2.0",

@@ -1,7 +1,7 @@
 {
-	"name": "@sienar/utils",
-	"version": "0.2.0",
-	"description": "A library of React utilities for building Sienar client plugins",
+	"name": "@sienar/plugins-core",
+	"version": "0.1.0",
+	"description": "The core React client for Sienar applications",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -9,6 +9,7 @@
 		"preview": "vite preview"
 	},
 	"peerDependencies": {
+		"@sienar/utils": "^0.1.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"react-router": "^7.12.0",
@@ -30,7 +31,7 @@
 		"sienar",
 		"react"
 	],
-	"author":"Christian LeVesque <christian@levesque.dev> (https://levesque.dev)",
+	"author": "Christian LeVesque <christian@levesque.dev> (https://levesque.dev)",
 	"license": "Apache-2.0",
 	"bugs": {
 		"url": "https://github.com/speegs92/sienar-client/issues"

@@ -2,8 +2,8 @@
 import AuthProvider from '@plugins-core/AuthProvider.tsx';
 import InfrastructureProvider from '@plugins-core/InfrastructureProvider.tsx';
 
-import type { InjectionKey, LinkDictionary } from '@sienar/utils';
 import type { ReactNode } from 'react';
+import type { InjectionKey, LinkDictionary } from '@sienar/utils';
 
 /**
  * The main layout DI key

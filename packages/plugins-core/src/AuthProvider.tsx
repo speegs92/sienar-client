@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { authContext } from '@utils/auth.ts';
+import { authContext } from '@sienar/utils';
 
 import type { PropsWithChildren } from 'react';
-import type { LoginPayload } from '@utils/auth.ts';
-import type { WebResult } from '@utils/http.ts';
+import type { LoginPayload, WebResult } from '@sienar/utils';
 
 export default function AuthProvider({ children }: PropsWithChildren) {
 	const [ isLoggedIn, setIsLoggedIn ] = useState(false);
