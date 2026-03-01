@@ -1,1 +1,2 @@
-﻿export * from '@ui/plugin.ts';
+﻿export * from '@ui/components/index.ts';
+export * from '@ui/plugin.ts';

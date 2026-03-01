@@ -1,0 +1,74 @@
+﻿@use 'sass:map';
+@use '../utilities/variables';
+
+.card {
+	--card-border-width: 1px;
+	--card-border-style: solid;
+	--card-border-color: transparent;
+	--card-background-color: transparent;
+	--card-spacing-x: var(--spacer-4);
+	--card-spacing-y: var(--spacer-4);
+	--card-text-color: var(--color-dark);
+
+	border-width: var(--card-border-width);
+	border-style: var(--card-border-style);
+	border-color: var(--card-border-color);
+}
+
+.card__header,
+.card__content,
+.card__actions {
+	padding: var(--card-spacing-x) var(--card-spacing-y);
+	background-color: var(--card-background-color);
+	color: var(--card-text-color);
+	border-color: var(--card-border-color);
+}
+
+.card__header {
+	& h1, & h2, & h3, & h4, & h5, & h6, & p, & span {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.card__content + .card__actions {
+	padding-top: 0;
+}
+
+.card__actions {
+	.button:not(:last-child) {
+		margin-right: var(--card-spacing-x);
+	}
+}
+
+@each $color in map.keys(variables.$theme-colors) {
+	.card--#{$color} {
+		&.card--solid,
+		&.card--outlined{
+			--card-border-color: var(--color-#{$color});
+		}
+
+		&.card--solid {
+			--card-background-color: var(--color-#{$color});
+			--card-text-color: var(--color-#{$color}-lighten);
+		}
+
+		&.card--outlined {
+			--card-text-color: var(--color-#{$color});
+		}
+
+	}
+
+	.card__header--#{$color} {
+		&.card__header--text {
+			--card-text-color: var(--color-#{$color});
+		}
+		&.card__header--outlined {
+			--card-text-color: var(--color-#{$color});
+		}
+		&.card__header--solid {
+			--card-background-color: var(--color-#{$color});
+			--card-text-color: var(--color-#{$color}-lighten);
+		}
+	}
+}

@@ -1,10 +1,11 @@
 ﻿import { Outlet } from 'react-router-dom';
+import { Container } from '@sienar/ui';
 
 export default function MainLayout() {
 	return (
-		<div>
+		<Container>
 			<p>Layout</p>
 			<Outlet/>
-		</div>
+		</Container>
 	)
 }
