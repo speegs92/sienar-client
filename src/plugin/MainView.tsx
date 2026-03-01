@@ -1,4 +1,4 @@
-﻿import { Card, CardHeader, CardContent, CardActions } from '@sienar/ui';
+﻿import { Button, Card, CardHeader, CardContent, CardActions } from '@sienar/ui';
 
 export default function MainView() {
 	return (
@@ -10,8 +10,12 @@ export default function MainView() {
 				<p>Some content</p>
 				<p>Some more content</p>
 			</CardContent>
-			<CardActions color='secondary'>
-				<div>Some actions here</div>
+			<CardActions
+				color='secondary'
+				className='d-flex flex-row justify-content-end'
+			>
+				<Button color='primary' variant='solid'>Click me</Button>
+				<Button>Click me again</Button>
 			</CardActions>
 		</Card>
 	);
