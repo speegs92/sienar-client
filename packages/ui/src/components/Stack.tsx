@@ -36,12 +36,21 @@ export function Stack(props: StackProps) {
 	const {
 		tag: Tag = 'div',
 		direction = 'horizontal',
-		align,
-		justify,
+		align: flexAlign,
+		justify: flexJustify,
 		reverse,
 		className,
 		...rest
 	} = props;
+
+	const align: FlexAlign = flexAlign ??
+		direction === 'horizontal'
+			? 'start'
+			: 'stretch';
+	const justify: FlexJustify = flexJustify ??
+		direction == 'horizontal'
+			? 'between'
+			: 'end';
 
 	const classes = classNames(
 		className,
