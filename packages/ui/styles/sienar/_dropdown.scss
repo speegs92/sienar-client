@@ -1,0 +1,130 @@
+﻿@use 'sass:map';
+@use '../utilities/variables';
+
+$dropdown-item-padding-x: var(--spacer-2) !default;
+$dropdown-item-padding-y: var(--spacer-2) !default;
+
+$theme-colors: map.keys(variables.$theme-colors);
+
+@mixin make-themed-dropdown-item($color) {
+	color: var(--color-#{$color});
+
+	&.dropdown__item--solid {
+		&:hover {
+			color: var(--color-#{$color}-lighten);
+			background-color: var(--color-#{$color});
+		}
+	}
+
+	&.dropdown__item--outlined:hover,
+	&.dropdown__item--text:hover {
+		background-color: var(--color-#{$color}-translucent);
+	}
+
+	&.dropdown__item--divider hr {
+		border-top: 1px solid var(--color-#{$color});
+	}
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+
+	.dropdown__overlay {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		// Stacks overlay above other dropdown activators lower in the document
+		z-index: 1;
+	}
+
+	.dropdown__list-wrapper {
+		display: flex;
+	}
+
+	.dropdown__list {
+		background: variables.$white;
+		border: 1px solid var(--color-dark);
+		display: none;
+		position: absolute;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		width: fit-content;
+		max-width: 600px;
+
+		// Stacks dropdown list above dropdown overlay
+		z-index: 1;
+
+		@each $color in $theme-colors {
+			&.dropdown__list--#{$color} {
+				border-color: var(--color-#{$color});
+			}
+		}
+	}
+
+	&.dropdown--up .dropdown__list {
+		bottom: 100%;
+	}
+
+	&.dropdown--open .dropdown__list {
+		display: block;
+		flex-direction: column;
+	}
+
+	.dropdown__item {
+		cursor: pointer;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		padding: $dropdown-item-padding-y $dropdown-item-padding-x;
+
+		@include make-themed-dropdown-item('dark');
+
+		@each $color in $theme-colors {
+			&.dropdown__item--#{$color} {
+				@include make-themed-dropdown-item($color);
+			}
+		}
+
+		&.dropdown__item--divider {
+			padding: 0;
+
+			hr {
+				margin: 0;
+				border-left: none;
+				border-right: none;
+				border-bottom: none;
+			}
+		}
+
+		.dropdown__item-button {
+			display: contents;
+			// Apparently, display: contents doesn't guarantee the pointer will work as expected
+			cursor: pointer;
+
+			&, &:hover, &:active {
+				color: inherit;
+			}
+		}
+
+		.dropdown__item-icon {
+			display: inline-block;
+			width: 45px;
+			text-align: center;
+
+			.icon {
+				font-size: 20px;
+			}
+		}
+	}
+
+	&.dropdown--child-icons-hidden {
+		.dropdown__item-icon {
+			display: none;
+		}
+	}
+}
