@@ -1,4 +1,4 @@
-﻿import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, DropdownDivider, DropdownItem } from '@sienar/ui';
+﻿import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, DropdownDivider, DropdownItem, TabGroup, TabPane } from '@sienar/ui';
 import { MAIN_URL } from '@sienar/plugins-core';
 
 export default function MainView() {
@@ -9,6 +9,7 @@ export default function MainView() {
 			</CardHeader>
 			<CardContent color='secondary'>
 				<Dropdown
+					className='d-block mb-4'
 					label='Cool dropdown bro'
 					color='primary'
 					variant='text'
@@ -20,6 +21,19 @@ export default function MainView() {
 						href={MAIN_URL}
 					/>
 				</Dropdown>
+
+				<TabGroup color='primary'>
+					<TabPane activatorContent='Tab 1'>
+						<p>Some tab 1 content</p>
+					</TabPane>
+					<TabPane activatorContent='Tab 2'>
+						<p>Some tab 2 content</p>
+					</TabPane>
+					<TabPane activatorContent='Tab 3'>
+						<p>Some tab 3 content</p>
+						<p>And some bonus content</p>
+					</TabPane>
+				</TabGroup>
 			</CardContent>
 			<CardActions
 				color='secondary'

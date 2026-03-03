@@ -5,3 +5,4 @@ export * from './Dropdown/index.ts';
 export * from './Grid/index.ts';
 export * from './Icon.tsx';
 export * from './Stack.tsx';
+export * from './Tab/index.ts';
