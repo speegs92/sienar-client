@@ -24,6 +24,11 @@
 	text-decoration: none;
 	padding: var(--button-padding-y) var(--button-padding-x);
 
+	transition:
+		border-color var(--transition),
+		background-color var(--transition),
+		color var(--transition);
+
 	&.button--icon {
 		height: 40px;
 		aspect-ratio: 1/1;

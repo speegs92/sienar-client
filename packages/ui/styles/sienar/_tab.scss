@@ -19,10 +19,14 @@
 		border-color: var(--tab-border-color);
 		border-style: var(--tab-border-style);
 		border-width: var(--tab-border-width);
-		background: var(--tab-background-color);
+		background-color: var(--tab-background-color);
 		padding: var(--spacer-2);
 		color: var(--tab-text-color);
 		cursor: pointer;
+		transition:
+			border-color var(--transition),
+			background-color var(--transition),
+			color var(--transition);
 	}
 
 	.tab__nav {
