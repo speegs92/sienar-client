@@ -11,7 +11,7 @@ import type { Themeable } from '@ui/theme.ts';
  */
 export interface DropdownItemProps extends
 	Themeable,
-	Omit<HTMLAttributes<HTMLLIElement>, 'children'|'color'>,
+	Omit<HTMLAttributes<HTMLLIElement>, 'color'>,
 	Pick<ButtonBaseProps, 'href'> {
 	/**
 	 * The text to display with the dropdown item, if any
@@ -39,6 +39,7 @@ export function DropdownItem(props: DropdownItemProps) {
 		variant = themeContext.variant,
 		href,
 		className,
+		children,
 		onClick,
 		...rest
 	} = props;
@@ -69,7 +70,7 @@ export function DropdownItem(props: DropdownItemProps) {
 				<span className='dropdown__item-icon'>
 					{icon}
 				</span>
-				{label}
+				{label ?? children}
 			</ButtonBase>
 		</li>
 	);

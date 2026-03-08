@@ -17,14 +17,15 @@ export default function MainView() {
 						className='d-block mb-4'
 						label='Cool dropdown bro'
 						color='primary'
-						variant='text'
+						variant='outlined'
 					>
 						<DropdownItem label='Just an item, does nothing'/>
+						<DropdownItem label='Just an item, does nothing'/>
+						<DropdownItem label='Just an item, does nothing'/>
 						<DropdownDivider/>
-						<DropdownItem
-							label='Another item, which takes you HOME'
-							href={MAIN_URL}
-						/>
+						<DropdownItem href={MAIN_URL}>
+							Another item, which takes you HOME
+						</DropdownItem>
 					</Dropdown>
 				</CardContent>
 				<CardActions
