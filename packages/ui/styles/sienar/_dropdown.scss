@@ -127,9 +127,13 @@ $theme-colors: map.keys(variables.$theme-colors);
 	}
 
 	.dropdown__item--#{$color} {
-		&.dropdown__item--solid:hover {
-			--dropdown-text-color: #{functions.get-contrasting-text-color($color)};
-			--dropdown-background-color: var(--color-#{$color});
+		&.dropdown__item--solid {
+			--dropdown-text-color: var(--color-#{$color});
+
+			&:hover {
+				--dropdown-text-color: #{functions.get-contrasting-text-color($color)};
+				--dropdown-background-color: var(--color-#{$color});
+			}
 		}
 
 		&.dropdown__item--outlined {
