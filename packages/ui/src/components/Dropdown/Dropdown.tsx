@@ -5,12 +5,32 @@ import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
 import { CloseableContext } from '@ui/utils.ts';
 
 import type { HTMLAttributes,  ReactNode } from 'react';
-import type { Themeable } from '@ui/theme.ts';
+import type { Color, Themeable, Variant } from '@ui/theme.ts';
 
 /**
  * The props for the dropdown component
  */
 export interface DropdownProps extends Themeable, Omit<HTMLAttributes<HTMLElement>, 'color'> {
+	/**
+	 * The activator button theme color
+	 */
+	buttonColor?: Color;
+
+	/**
+	 * The activator button variant
+	 */
+	buttonVariant?: Variant;
+
+	/**
+	 * The list color
+	 */
+	listColor?: Color;
+
+	/**
+	 * The list variant
+	 */
+	listVariant?: Variant;
+
 	/**
 	 * The label text to show with the button, if any
 	 */
@@ -45,7 +65,11 @@ export interface DropdownProps extends Themeable, Omit<HTMLAttributes<HTMLElemen
 export function Dropdown(props: DropdownProps) {
 	const {
 		color = 'default',
+		buttonColor,
+		listColor,
 		variant = 'solid',
+		buttonVariant,
+		listVariant,
 		label,
 		leftIcon,
 		rightIcon,
@@ -71,13 +95,13 @@ export function Dropdown(props: DropdownProps) {
 		}
 	);
 
-	const listClasses = createThemedClassNames(color, variant, 'dropdown__list');
+	const listClasses = createThemedClassNames(listColor ?? color, listVariant ?? variant, 'dropdown__list');
 
 	return (
 		<div className={dropdownClasses} {...rest}>
 			<Button
-				color={color}
-				variant={variant}
+				color={buttonColor ?? color}
+				variant={buttonVariant ?? variant}
 				icon={icon}
 				className='dropdown__activator'
 				onClick={toggle}
@@ -92,8 +116,8 @@ export function Dropdown(props: DropdownProps) {
 				close
 			}}>
 				<ThemeContext.Provider value={{
-					color,
-					variant
+					color: listColor ?? color,
+					variant: listVariant ?? variant
 				}}>
 					{isOpen && (
 						<div
