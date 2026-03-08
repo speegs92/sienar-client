@@ -5,7 +5,7 @@ import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
 import { CloseableContext } from '@ui/utils.ts';
 
 import type { HTMLAttributes,  ReactNode } from 'react';
-import type { Color, Themeable, Variant } from '@ui/theme.ts';
+import type { Color, Direction, HorizontalAlignment, Themeable, Variant, VerticalAlignment } from '@ui/theme.ts';
 
 /**
  * The props for the dropdown component
@@ -52,9 +52,14 @@ export interface DropdownProps extends Themeable, Omit<HTMLAttributes<HTMLElemen
 	icon?: ReactNode;
 
 	/**
-	 * Whether the dropdown should open upward instead of downward
+	 * The direction the dropdown should open
 	 */
-	dropup?: boolean;
+	direction?: Direction;
+
+	/**
+	 *
+	 */
+	alignment?: HorizontalAlignment | VerticalAlignment;
 
 	/**
 	 * Whether the dropdown should hide icons on dropdown items
@@ -74,7 +79,8 @@ export function Dropdown(props: DropdownProps) {
 		leftIcon,
 		rightIcon,
 		icon,
-		dropup,
+		direction = 'down',
+		alignment = 'left',
 		hideChildrenIcons,
 		children,
 		className,
@@ -90,12 +96,16 @@ export function Dropdown(props: DropdownProps) {
 		createThemedClassNames(color, variant, 'dropdown'),
 		{
 			'dropdown--open': isOpen,
-			'dropdown--up': !!dropup,
 			'dropdown--child-icons-hidden': !!hideChildrenIcons
 		}
 	);
 
-	const listClasses = createThemedClassNames(listColor ?? color, listVariant ?? variant, 'dropdown__list');
+	const alignInfix = direction === 'up' || direction === 'down' ? 'x' : 'y';
+	const listClasses = classNames(
+		createThemedClassNames(listColor ?? color, listVariant ?? variant, 'dropdown__list'),
+		`dropdown__list--${direction}`,
+		`dropdown__list--align-${alignInfix}-${alignment}`
+	);
 
 	return (
 		<div className={dropdownClasses} {...rest}>

@@ -1,13 +1,13 @@
 ﻿import { classNames } from '@sienar/utils';
 
 import type { HTMLAttributes } from 'react';
-import type { Alignment, Breakpoint } from '@ui/theme.ts';
+import type { HorizontalAlignment, Breakpoint } from '@ui/theme.ts';
 
 export interface ContainerProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * The horizontal alignment of the container
 	 */
-	alignment?: Alignment;
+	alignment?: HorizontalAlignment;
 
 	/**
 	 * The maximum width of the container

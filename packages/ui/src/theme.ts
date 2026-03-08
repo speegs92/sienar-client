@@ -93,17 +93,34 @@ export type FlexDirection =
 	| 'vertical';
 
 /**
+ * Directions
+ */
+export type Direction =
+	| 'up'
+	| 'down'
+	| 'left'
+	| 'right';
+
+/**
  * Horizontal alignment
  */
-export type Alignment =
+export type HorizontalAlignment =
 	| 'left'
 	| 'right'
 	| 'center';
 
 /**
+ * Vertical alignment
+ */
+export type VerticalAlignment =
+	| 'top'
+	| 'bottom'
+	| 'center';
+
+/**
  * Text alignment
  */
-export type TextAlignment = Alignment | 'justify';
+export type TextAlignment = HorizontalAlignment | 'justify';
 
 /**
  * Width breakpoints
