@@ -1,6 +1,7 @@
 ﻿@use 'sass:map';
 @use '../utilities/variables';
 @use '../utilities/functions';
+@use 'mixins';
 
 $theme-colors: map.keys(variables.$theme-colors);
 
@@ -57,31 +58,12 @@ $theme-colors: map.keys(variables.$theme-colors);
 }
 
 .dropdown__item {
-	--dropdown-background-color: transparent;
-	--dropdown-border-color: transparent;
-	--dropdown-border-style: solid;
-	--dropdown-border-width: 1px;
-	--dropdown-item-padding-x: var(--spacer-2);
-	--dropdown-item-padding-y: var(--spacer-2);
-	--dropdown-text-color: var(--color-dark);
-
 	cursor: pointer;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 
-	background-color: var(--dropdown-background-color);
-	border-color: var(--dropdown-border-color);
-	border-radius: var(--dropdown-border-radius);
-	border-style: var(--dropdown-border-style);
-	border-width: var(--dropdown-border-width);
-	color: var(--dropdown-text-color);
-	padding: var(--dropdown-item-padding-y) var(--dropdown-item-padding-x);
-
-	transition:
-		border-color var(--transition),
-		background-color var(--transition),
-		color var(--transition);
+	@include mixins.make-button('dropdown');
 }
 
 .dropdown__item--divider {
@@ -126,35 +108,7 @@ $theme-colors: map.keys(variables.$theme-colors);
 		border-color: var(--color-#{$color});
 	}
 
-	.dropdown__item--#{$color} {
-		&.dropdown__item--solid {
-			--dropdown-text-color: var(--color-#{$color});
-
-			&:hover {
-				--dropdown-text-color: #{functions.get-contrasting-text-color($color)};
-				--dropdown-background-color: var(--color-#{$color});
-			}
-		}
-
-		&.dropdown__item--outlined {
-			--dropdown-text-color: var(--color-#{$color});
-
-			&:hover {
-				--dropdown-background-color: var(--color-#{$color}-transparent);
-				--dropdown-border-color: var(--color-#{$color});
-			}
-		}
-
-		&.dropdown__item--text {
-			--dropdown-text-color: var(--color-#{$color});
-
-			&:hover {
-				--dropdown-background-color: var(--color-#{$color}-transparent);
-			}
-		}
-
-		&.dropdown__item--divider hr {
-			border-top: 1px solid var(--color-#{$color}-lighten);
-		}
+	.dropdown__item--#{$color}.dropdown__item--divider hr {
+		border-top: 1px solid var(--color-#{$color}-lighten);
 	}
 }

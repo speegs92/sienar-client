@@ -1,0 +1,56 @@
+﻿@use 'sass:map';
+@use '../utilities/variables';
+@use '../utilities/functions';
+
+@mixin make-button($var-prefix) {
+	--#{$var-prefix}-background-color: transparent;
+	--#{$var-prefix}-border-color: transparent;
+	--#{$var-prefix}-border-style: solid;
+	--#{$var-prefix}-border-width: 1px;
+	--#{$var-prefix}-padding-x: var(--spacer-2);
+	--#{$var-prefix}-padding-y: var(--spacer-2);
+	--#{$var-prefix}-text-color: var(--color-dark);
+
+	background-color: var(--#{$var-prefix}-background-color);
+	border-color: var(--#{$var-prefix}-border-color);
+	border-radius: var(--#{$var-prefix}-border-radius);
+	border-style: var(--#{$var-prefix}-border-style);
+	border-width: var(--#{$var-prefix}-border-width);
+	color: var(--#{$var-prefix}-text-color);
+	padding: var(--#{$var-prefix}-padding-y) var(--#{$var-prefix}-padding-x);
+
+	transition:
+		border-color var(--transition),
+		background-color var(--transition),
+		color var(--transition);
+
+	@each $color in map.keys(variables.$theme-colors) {
+		@debug #{&};
+		&#{&}--#{$color}#{&}--solid {
+			@debug #{&};
+			--#{$var-prefix}-text-color: var(--color-#{$color});
+
+			&:hover {
+				--#{$var-prefix}-text-color: #{functions.get-contrasting-text-color($color)};
+				--#{$var-prefix}-background-color: var(--color-#{$color});
+			}
+		}
+
+		&#{&}--#{$color}#{&}--outlined {
+			--#{$var-prefix}-text-color: var(--color-#{$color});
+
+			&:hover {
+				--#{$var-prefix}-background-color: var(--color-#{$color}-transparent);
+				--#{$var-prefix}-border-color: var(--color-#{$color});
+			}
+		}
+
+		&#{&}--#{$color}#{&}--text {
+			--#{$var-prefix}-text-color: var(--color-#{$color});
+
+			&:hover {
+				--#{$var-prefix}-background-color: var(--color-#{$color}-transparent);
+			}
+		}
+	}
+}
