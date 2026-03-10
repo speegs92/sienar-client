@@ -1,7 +1,7 @@
 ﻿@use 'sass:map';
-@use '../utilities/variables';
-@use '../utilities/functions';
-@use 'mixins';
+@use '@ui/styles/variables';
+@use '@ui/styles/functions';
+@use '@ui/styles/mixins';
 
 $theme-colors: map.keys(variables.$theme-colors);
 

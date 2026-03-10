@@ -1,6 +1,6 @@
 ﻿@use 'sass:map';
-@use '../utilities/variables';
-@use '../utilities/functions';
+@use 'variables';
+@use 'functions';
 
 @mixin make-button($var-prefix) {
 	--#{$var-prefix}-background-color: transparent;

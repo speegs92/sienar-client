@@ -1,6 +1,6 @@
 ﻿@use 'sass:map';
-@use '../utilities/variables';
-@use '../utilities/functions';
+@use '@ui/styles/variables';
+@use '@ui/styles/functions';
 
 .app__appbar {
 	--appbar-background-color: transparent;

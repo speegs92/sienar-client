@@ -4,6 +4,7 @@ import { createThemedClassNames } from '@ui/theme.ts';
 import { Appbar } from './Appbar.tsx';
 import { Sidebar } from './Sidebar.tsx';
 import { MainContent } from './MainContent.tsx';
+import './Application.scss';
 
 import type { HTMLAttributes } from 'react';
 import type { Themeable } from '@ui/theme.ts'

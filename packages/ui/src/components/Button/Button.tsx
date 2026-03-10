@@ -1,6 +1,8 @@
 ﻿import { classNames } from '@sienar/utils';
 import { ButtonBase } from './ButtonBase.tsx';
 import { createThemedClassNames } from '@ui/theme.ts';
+import './Button.scss';
+
 import type { Themeable } from '@ui/theme.ts';
 import type { ButtonBaseProps } from './ButtonBase.tsx';
 

@@ -1,4 +1,6 @@
 ﻿import { classNames } from '@sienar/utils';
+import './Backdrop.scss';
+
 import type { HTMLAttributes } from 'react';
 
 /**
