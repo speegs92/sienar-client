@@ -1,11 +1,12 @@
 ﻿import { Outlet } from 'react-router-dom';
-import { Container } from '@sienar/ui';
+import { Application, Container } from '@sienar/ui';
 
 export default function MainLayout() {
 	return (
-		<Container>
-			<p>Layout</p>
-			<Outlet/>
-		</Container>
+		<Application color='primary'>
+			<Container className='p-4'>
+				<Outlet/>
+			</Container>
+		</Application>
 	)
 }
