@@ -4,12 +4,12 @@
 
 .tab {
 	--tab-background-color: transparent;
-	--tab-border-color: var(--color-dark);
+	--tab-border-color: var(--color-heavy);
 	--tab-border-radius: var(--border-radius);
 	--tab-border-style: solid;
 	--tab-border-width: 1px;
 	--tab-spacing: var(--spacer-1);
-	--tab-text-color: var(--color-dark);
+	--tab-text-color: var(--color-heavy);
 
 	.tab__activator {
 		--tab-border-color: transparent;

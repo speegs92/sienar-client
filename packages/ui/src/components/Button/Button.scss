@@ -3,13 +3,13 @@
 @use '@ui/styles/functions';
 
 .button {
-	--button-background-color: var(--color-dark);
-	--button-border-color: var(--color-dark);
+	--button-background-color: var(--color-heavy);
+	--button-border-color: var(--color-heavy);
 	--button-border-style: solid;
 	--button-border-width: 1px;
 	--button-padding-x: var(--spacer-2);
 	--button-padding-y: var(--spacer-2);
-	--button-text-color: #{functions.get-contrasting-text-color('dark')};
+	--button-text-color: #{functions.get-contrasting-text-color('heavy')};
 
 	border-width: var(--button-border-width);
 	border-style: var(--button-border-style);

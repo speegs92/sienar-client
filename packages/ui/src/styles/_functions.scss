@@ -5,7 +5,7 @@
 @function get-contrasting-text-color($color, $shade: 'default') {
 	$color-map: map.get(variables.$theme-colors, $color);
 	@if (color.channel(map.get($color-map, $shade), 'lightness', $space: hsl) > 70%) {
-		@return var(--color-dark);
+		@return var(--color-heavy);
 	} @else {
 		@return var(--color-white);
 	}

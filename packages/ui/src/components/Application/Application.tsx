@@ -36,7 +36,7 @@ export interface ApplicationProps extends Themeable, Omit<HTMLAttributes<HTMLEle
 export function Application(props: ApplicationProps) {
 	const {
 		tag: Tag = 'div',
-		color = 'dark',
+		color = 'heavy',
 		variant = 'solid',
 		className,
 		appbarProps,

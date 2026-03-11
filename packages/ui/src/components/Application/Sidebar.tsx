@@ -30,7 +30,7 @@ export interface SidebarProps extends Themeable, Omit<HTMLAttributes<HTMLElement
 export function Sidebar(props: SidebarProps) {
 	const {
 		tag: Tag = 'div',
-		color = 'dark',
+		color = 'heavy',
 		variant = 'solid',
 		open = false,
 		setOpen,
