@@ -1,4 +1,4 @@
-﻿import { ButtonBase } from '@ui/components/Button/ButtonBase.tsx';
+import { ButtonBase } from '@ui/components/Button/ButtonBase.tsx';
 import { useCloseableContext } from '@ui/utils.ts';
 import { createThemedClassNames, useThemeContext } from '@ui/theme.ts';
 
@@ -7,19 +7,19 @@ import type { ButtonBaseProps } from '@ui/components/Button/ButtonBase.tsx';
 import type { Themeable } from '@ui/theme.ts';
 
 /**
- * The props for the dropdown item component
+ * The props for the menu item component
  */
-export interface DropdownItemProps extends
+export interface MenuItemProps extends
 	Themeable,
 	Omit<HTMLAttributes<HTMLLIElement>, 'color'>,
 	Pick<ButtonBaseProps, 'href'> {
 	/**
-	 * The text to display with the dropdown item, if any
+	 * The text to display with the menu item, if any
 	 */
 	label?: string;
 
 	/**
-	 * The icon to display with the dropdown item, if any
+	 * The icon to display with the menu item, if any
 	 */
 	icon?: ReactNode;
 
@@ -29,7 +29,7 @@ export interface DropdownItemProps extends
 	onClick?: MouseEventHandler<HTMLLIElement>
 }
 
-export function DropdownItem(props: DropdownItemProps) {
+export function MenuItem(props: MenuItemProps) {
 	const themeContext = useThemeContext();
 
 	const {
@@ -49,7 +49,7 @@ export function DropdownItem(props: DropdownItemProps) {
 	const classes = createThemedClassNames(
 		color,
 		variant,
-		'dropdown__item'
+		'menu__item'
 	);
 
 	const handleClick: MouseEventHandler<HTMLLIElement> = e => {
@@ -64,10 +64,10 @@ export function DropdownItem(props: DropdownItemProps) {
 			{...rest}
 		>
 			<ButtonBase
-				className='dropdown__item-button'
+				className='menu__item-button'
 				href={href}
 			>
-				<span className='dropdown__item-icon'>
+				<span className='menu__item-icon'>
 					{icon}
 				</span>
 				{label ?? children}

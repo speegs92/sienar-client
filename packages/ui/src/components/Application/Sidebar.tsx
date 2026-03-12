@@ -41,7 +41,6 @@ export function Sidebar(props: SidebarProps) {
 	const classes = classNames(
 		className,
 		createThemedClassNames(color, variant, 'app__sidebar'),
-		'flex-shrink-0',
 		{
 			'app__sidebar--open': open
 		}

@@ -1,4 +1,4 @@
-﻿import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, DropdownDivider, DropdownItem, TabGroup, TabPane } from '@sienar/ui';
+﻿import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, MenuDivider, Menu, MenuItem, TabGroup, TabPane } from '@sienar/ui';
 import { MAIN_URL } from '@sienar/plugins-core';
 
 export default function MainView() {
@@ -14,18 +14,22 @@ export default function MainView() {
 				</CardHeader>
 				<CardContent color='secondary'>
 					<Dropdown
-						className='d-block mb-4'
+						className='mb-4'
 						label='Cool dropdown bro'
 						color='primary'
 						variant='outlined'
+						direction='right'
+						alignment='bottom'
 					>
-						<DropdownItem label='Just an item, does nothing'/>
-						<DropdownItem label='Just an item, does nothing'/>
-						<DropdownItem label='Just an item, does nothing'/>
-						<DropdownDivider/>
-						<DropdownItem href={MAIN_URL}>
-							Another item, which takes you HOME
-						</DropdownItem>
+						<Menu>
+							<MenuItem label='Just an item, does nothing'/>
+							{/*<MenuItem label='Just an item, does nothing'/>*/}
+							{/*<MenuItem label='Just an item, does nothing'/>*/}
+							<MenuDivider/>
+							<MenuItem href={MAIN_URL}>
+								Another item, which takes you HOME
+							</MenuItem>
+						</Menu>
 					</Dropdown>
 				</CardContent>
 				<CardActions

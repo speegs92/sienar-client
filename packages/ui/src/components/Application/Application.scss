@@ -2,6 +2,11 @@
 @use '@ui/styles/variables';
 @use '@ui/styles/functions';
 
+.app {
+	width: 100%;
+	overflow-x: hidden;
+}
+
 .app__appbar {
 	--appbar-background-color: transparent;
 	--appbar-border-color: transparent;
@@ -67,6 +72,9 @@ $width: 250px;
 	flex-direction: column;
 	flex-grow: 1;
 	min-height: 100vh;
+
+	// Without this line, .app__window will probably overflow the window and take up however much width it wants because flex children have min-width: auto by default
+	min-width: 0;
 }
 
 .app__main--sidebar-open {
@@ -114,9 +122,5 @@ $width: 250px;
 	.app__sidebar {
 		position: relative;
 		transform: translateX(0);
-	}
-
-	.app__main {
-		width: calc(100vw - #{$width});
 	}
 }

@@ -102,10 +102,10 @@ export function Dropdown(props: DropdownProps) {
 	);
 
 	const alignInfix = direction === 'up' || direction === 'down' ? 'x' : 'y';
-	const listClasses = classNames(
-		createThemedClassNames(listColor ?? color, listVariant ?? variant, 'dropdown__list'),
-		`dropdown__list--${direction}`,
-		`dropdown__list--align-${alignInfix}-${alignment}`
+	const contentClasses = classNames(
+		createThemedClassNames(listColor ?? color, listVariant ?? variant, 'dropdown__content'),
+		`dropdown__content--${direction}`,
+		`dropdown__content--align-${alignInfix}-${alignment}`
 	);
 
 	return (
@@ -136,10 +136,8 @@ export function Dropdown(props: DropdownProps) {
 							onClick={close}
 						/>
 					)}
-					<div className='dropdown__list-wrapper'>
-						<ul className={listClasses}>
-							{children}
-						</ul>
+					<div className={contentClasses}>
+						{children}
 					</div>
 				</ThemeContext.Provider>
 			</CloseableContext.Provider>

@@ -5,5 +5,6 @@ export * from './Container.tsx';
 export * from './Dropdown/index.ts';
 export * from './Grid/index.ts';
 export * from './Icon.tsx';
+export * from './Menu/index.ts';
 export * from './Stack.tsx';
 export * from './Tab/index.ts';
