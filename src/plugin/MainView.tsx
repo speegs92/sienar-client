@@ -1,7 +1,8 @@
-﻿import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, MenuDivider, Menu, MenuItem, TabGroup, TabPane } from '@sienar/ui';
-import { MAIN_URL } from '@sienar/plugins-core';
+﻿import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, Icon, MenuDivider, Menu, MenuItem, TabGroup, TabPane } from '@sienar/ui';
+import { MAIN_URL, MAIN_VIEW } from '@sienar/plugins-core';
+import type { ViewModule } from '@sienar/plugins-core';
 
-export default function MainView() {
+function MainView() {
 	return (
 		<>
 			<Card
@@ -59,3 +60,17 @@ export default function MainView() {
 		</>
 	);
 }
+
+const module: ViewModule = {
+	path: '/',
+	pathKey: MAIN_URL,
+	view: <MainView/>,
+	viewKey: MAIN_VIEW,
+	menu: {
+		text: 'Home',
+		href: MAIN_URL,
+		icon: <Icon icon='home'/>
+	}
+}
+
+export default module;

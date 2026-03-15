@@ -1,4 +1,4 @@
-﻿import { registerProvider, registerRoutes } from '@sienar/utils';
+﻿import { registerProvider } from '@sienar/utils';
 import AuthProvider from '@plugins-core/AuthProvider.tsx';
 import InfrastructureProvider from '@plugins-core/InfrastructureProvider.tsx';
 
@@ -28,12 +28,4 @@ export const MAIN_URL = Symbol() as InjectionKey<string>;
 export function plugin() {
 	registerProvider(AuthProvider);
 	registerProvider(InfrastructureProvider);
-
-	registerRoutes(
-		MAIN_LAYOUT,
-		{
-			path: MAIN_URL,
-			element: MAIN_VIEW
-		}
-	);
 }
