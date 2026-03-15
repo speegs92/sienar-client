@@ -1,5 +1,5 @@
 ﻿import { classNames } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
+import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
 import { Backdrop } from '../Backdrop.tsx';
 
 import type { HTMLAttributes } from 'react';
@@ -47,12 +47,12 @@ export function Sidebar(props: SidebarProps) {
 	);
 
 	return (
-		<>
+		<ThemeContext.Provider value={{ color, variant }}>
 			<Backdrop
 				visible={open}
 				onClick={() => setOpen?.(false)}
 			/>
 			<Tag className={classes} {...rest} />
-		</>
+		</ThemeContext.Provider>
 	);
 }

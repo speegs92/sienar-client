@@ -21,10 +21,10 @@ export default function MainView() {
 						direction='right'
 						alignment='bottom'
 					>
-						<Menu>
+						<Menu color='primary' variant='solid'>
 							<MenuItem label='Just an item, does nothing'/>
-							{/*<MenuItem label='Just an item, does nothing'/>*/}
-							{/*<MenuItem label='Just an item, does nothing'/>*/}
+							<MenuItem label='Just an item, does nothing'/>
+							<MenuItem label='Just an item, does nothing'/>
 							<MenuDivider/>
 							<MenuItem href={MAIN_URL}>
 								Another item, which takes you HOME

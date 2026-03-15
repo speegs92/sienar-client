@@ -1,10 +1,6 @@
-﻿@use 'sass:map';
-@use '@ui/styles/variables';
-@use '@ui/styles/functions';
-@use '@ui/styles/mixins';
-
-.dropdown {
+﻿.dropdown {
 	--dropdown-border-radius: var(--border-radius);
+	--dropdown-content-shadow-color: var(--color-heavy);
 
 	position: relative;
 	display: inline-block;
@@ -22,7 +18,7 @@
 }
 
 .dropdown__content {
-	box-shadow: var(--box-shadow);
+	box-shadow: var(--box-shadow) var(--dropdown-content-shadow-color);
 	display: none;
 	position: absolute;
 	width: fit-content;

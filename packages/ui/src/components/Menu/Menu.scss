@@ -1,15 +1,27 @@
 @use 'sass:map';
-@use '@ui/styles/variables';
+@use '@ui/styles/functions';
 @use '@ui/styles/mixins';
+@use '@ui/styles/variables';
 
 $theme-colors: map.keys(variables.$theme-colors);
 
 .menu {
+	--menu-background-color: var(--color-white);
+	--menu-border-color: transparent;
+	--menu-border-radius: var(--border-radius);
+	--menu-border-style: solid;
+	--menu-border-width: 1px;
+	--menu-text-color: #{variables.$black};
 	--menu-list-padding-x: var(--spacer-1);
 	--menu-list-padding-y: var(--spacer-1);
 
-	background: #{variables.$white};
+	background-color: var(--menu-background-color);
+	border-color: var(--menu-border-color);
+	border-style: var(--menu-border-style);
+	border-width: var(--menu-border-width);
 	border-radius: var(--menu-border-radius);
+	color: var(--menu-text-color);
+
 	margin: 0;
 	padding: var(--menu-list-padding-y) var(--menu-list-padding-x);
 	list-style: none;
@@ -58,6 +70,14 @@ $theme-colors: map.keys(variables.$theme-colors);
 }
 
 @each $color in $theme-colors {
+	.menu.menu--#{$color} {
+		&.menu--solid {
+			--menu-background-color: var(--color-#{$color});
+			--menu-border-color: var(--color-#{$color});
+			--menu-text-color: functions.get-contrasting-text-color($color);
+		}
+	}
+
 	.menu__list--#{$color} {
 		border-color: var(--color-#{$color});
 	}

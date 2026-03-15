@@ -25,14 +25,13 @@
 		color var(--transition);
 
 	@each $color in map.keys(variables.$theme-colors) {
-		@debug #{&};
 		&#{&}--#{$color}#{&}--solid {
-			@debug #{&};
-			--#{$var-prefix}-text-color: var(--color-#{$color});
+			--#{$var-prefix}-background-color: var(--color-#{$color});
+			--#{$var-prefix}-text-color: #{functions.get-contrasting-text-color($color)};
 
 			&:hover {
-				--#{$var-prefix}-text-color: #{functions.get-contrasting-text-color($color)};
-				--#{$var-prefix}-background-color: var(--color-#{$color});
+				--#{$var-prefix}-background-color: var(--color-#{$color}-darken);
+				--#{$var-prefix}-text-color: #{functions.get-contrasting-text-color($color, 'darken')};
 			}
 		}
 
