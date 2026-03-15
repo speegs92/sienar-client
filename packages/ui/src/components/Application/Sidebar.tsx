@@ -1,5 +1,6 @@
 ﻿import { classNames } from '@sienar/utils';
 import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
+import { CloseableContext } from '@ui/utils.ts';
 import { Backdrop } from '../Backdrop.tsx';
 
 import type { HTMLAttributes } from 'react';
@@ -47,12 +48,17 @@ export function Sidebar(props: SidebarProps) {
 	);
 
 	return (
-		<ThemeContext.Provider value={{ color, variant }}>
-			<Backdrop
-				visible={open}
-				onClick={() => setOpen?.(false)}
-			/>
-			<Tag className={classes} {...rest} />
-		</ThemeContext.Provider>
+		<CloseableContext.Provider value={{
+			isOpen: open,
+			close: () => setOpen?.(false)
+		}}>
+			<ThemeContext.Provider value={{ color, variant }}>
+				<Backdrop
+					visible={open}
+					onClick={() => setOpen?.(false)}
+				/>
+				<Tag className={classes} {...rest} />
+			</ThemeContext.Provider>
+		</CloseableContext.Provider>
 	);
 }
