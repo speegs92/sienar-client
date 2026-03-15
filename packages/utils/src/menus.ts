@@ -1,5 +1,5 @@
-﻿import { useSyncExternalStore } from 'react';
-import { provide, inject } from './di.ts';
+﻿import { provide, inject } from './di.ts';
+import { createState } from './state.ts';
 
 import type { ReactNode } from 'react';
 import type { InjectionKey } from './di.ts';
@@ -159,44 +159,24 @@ export function userIsAuthorized(
 	return link.allRolesRequired as boolean;
 }
 
-type Listener = () => void;
-
-export let activeMenu: InjectionKey<LinkDictionary> = Symbol() as InjectionKey<LinkDictionary>;
-const listeners = new Set<Listener>();
+const activeMenu = createState<InjectionKey<LinkDictionary>>(Symbol() as InjectionKey<LinkDictionary>);
 
 /**
  * Sets the app's active menu
  *
  * @param newMenu The menu to set as active
  */
-export function setActiveMenu(newMenu: InjectionKey<LinkDictionary>) {
-	activeMenu = newMenu;
-	notifyChanges();
-}
+export const setActiveMenu = activeMenu.setter;
+
+/**
+ * Gets the app's active menu
+ */
+export const getActiveMenu = activeMenu.getter;
 
 /**
  * Provides React components access to the active menu state
  */
-export function useActiveMenu() {
-	return useSyncExternalStore(
-		subscribe,
-		getSnapshot,
-		getSnapshot
-	);
-}
-
-function notifyChanges() {
-	listeners.forEach(l => l());
-}
-
-function subscribe(listener: Listener) {
-	listeners.add(listener);
-	return () => listeners.delete(listener);
-}
-
-function getSnapshot() {
-	return activeMenu;
-}
+export const useActiveMenu = activeMenu.hook;
 
 /**
  * A container for {@link MenuLink} arrays with a {@link MenuPriority} key representing the render order of that key's links

@@ -22,6 +22,7 @@ export * from '@utils/rendering.tsx';
 export * from '@utils/routing.ts';
 export * from '@utils/infrastructure.ts';
 export * from '@utils/services.ts';
+export * from '@utils/state.ts';
 export * from '@utils/urls.ts';
 export * from '@utils/utils.ts';
 export * from '@utils/validation.ts';
