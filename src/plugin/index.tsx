@@ -7,10 +7,12 @@ import '@mdi/font/css/materialdesignicons.min.css';
 import { provide } from '@sienar/utils';
 import { MAIN_LAYOUT } from '@sienar/plugins-core';
 import { addViewModules } from '@sienar/plugins-core';
+
 import MainLayout from './MainLayout.tsx';
 import MainView from './MainView.tsx';
+import AboutView from './AboutView.tsx';
 
 export default function plugin() {
 	provide(MAIN_LAYOUT, <MainLayout/>);
-	addViewModules(MainView);
+	addViewModules(MainView, AboutView);
 }

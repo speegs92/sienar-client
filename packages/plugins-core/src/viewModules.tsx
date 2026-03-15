@@ -1,4 +1,4 @@
-﻿import { addLinksWithPriority, provide, registerRoutes } from '@sienar/utils';
+﻿import { addLinksWithPriority, provide, registerRoutes, setActiveMenu } from '@sienar/utils';
 import { MAIN_LAYOUT, MAIN_MENU } from './plugin.ts';
 
 import type { ReactNode } from 'react';
@@ -31,7 +31,13 @@ export function addViewModules(...viewModules: ViewModule[]) {
 			module.layout ?? MAIN_LAYOUT,
 			{
 				path: module.pathKey ?? module.path,
-				element: module.viewKey ?? module.view
+				element: module.viewKey ?? module.view,
+				middleware: [
+					() => {
+						console.log('Switching menus');
+						setActiveMenu(module.layoutMenu ?? MAIN_MENU);
+					}
+				]
 			}
 		);
 	}
@@ -80,4 +86,9 @@ export interface ViewModule {
 	 * The menu key associated with the view
 	 */
 	menuKey?: InjectionKey<LinkDictionary>;
+
+	/**
+	 * The menu to display in the layout when this page is active
+	 */
+	layoutMenu?: InjectionKey<LinkDictionary>;
 }

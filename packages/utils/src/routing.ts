@@ -4,7 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { inject } from './di.ts';
 
 import type { ReactNode } from 'react'
-import type { RouteObject } from 'react-router-dom';
+import type { MiddlewareFunction, RouteObject } from 'react-router-dom';
 import type { InjectionKey } from './di.ts';
 
 const routes = new Map<(InjectionKey<InjectionKey<ReactNode>>|InjectionKey<ReactNode>), Route[]>();
@@ -68,6 +68,7 @@ export function convertSienarRoutesToReactRoutes(sienarRoutes: Route[]): RouteOb
 		const reactRouterRoute: RouteObject = {
 			path,
 			element,
+			middleware: route.middleware,
 			children: route.children ? convertSienarRoutesToReactRoutes(route.children) : undefined
 		}
 		reactRouterRoutes.push(reactRouterRoute);
@@ -94,4 +95,9 @@ export interface Route {
 	 * The child routes to render, if any
 	 */
 	children?: Route[];
+
+	/**
+	 * The middlewares to execute on navigation, if any
+	 */
+	middleware?: MiddlewareFunction[];
 }

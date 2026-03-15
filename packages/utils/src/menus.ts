@@ -1,4 +1,5 @@
-﻿import { provide, inject } from './di.ts';
+﻿import { useSyncExternalStore } from 'react';
+import { provide, inject } from './di.ts';
 
 import type { ReactNode } from 'react';
 import type { InjectionKey } from './di.ts';
@@ -156,6 +157,45 @@ export function userIsAuthorized(
 
 	// Default is added when the links are added, so this is guaranteed not to be undefined
 	return link.allRolesRequired as boolean;
+}
+
+type Listener = () => void;
+
+export let activeMenu: InjectionKey<LinkDictionary> = Symbol() as InjectionKey<LinkDictionary>;
+const listeners = new Set<Listener>();
+
+/**
+ * Sets the app's active menu
+ *
+ * @param newMenu The menu to set as active
+ */
+export function setActiveMenu(newMenu: InjectionKey<LinkDictionary>) {
+	activeMenu = newMenu;
+	notifyChanges();
+}
+
+/**
+ * Provides React components access to the active menu state
+ */
+export function useActiveMenu() {
+	return useSyncExternalStore(
+		subscribe,
+		getSnapshot,
+		getSnapshot
+	);
+}
+
+function notifyChanges() {
+	listeners.forEach(l => l());
+}
+
+function subscribe(listener: Listener) {
+	listeners.add(listener);
+	return () => listeners.delete(listener);
+}
+
+function getSnapshot() {
+	return activeMenu;
 }
 
 /**

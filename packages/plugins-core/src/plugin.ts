@@ -1,6 +1,5 @@
-﻿import { registerProvider } from '@sienar/utils';
+﻿import { registerProvider, setActiveMenu } from '@sienar/utils';
 import AuthProvider from '@plugins-core/AuthProvider.tsx';
-import InfrastructureProvider from '@plugins-core/InfrastructureProvider.tsx';
 
 import type { ReactNode } from 'react';
 import type { InjectionKey, LinkDictionary } from '@sienar/utils';
@@ -27,5 +26,5 @@ export const MAIN_URL = Symbol() as InjectionKey<string>;
 
 export function plugin() {
 	registerProvider(AuthProvider);
-	registerProvider(InfrastructureProvider);
+	setActiveMenu(MAIN_MENU);
 }
