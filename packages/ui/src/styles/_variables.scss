@@ -118,3 +118,9 @@ $default-width-height-percentages: (
 $width-height-percentages: map.merge($default-width-height-percentages, $width-height-percentages);
 
 // endregion
+
+// region Typography
+
+$font-family: Montserrat, sans-serif !default;
+
+// endregion
