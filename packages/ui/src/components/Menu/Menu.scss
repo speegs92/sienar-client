@@ -50,9 +50,10 @@ $theme-colors: map.keys(variables.$theme-colors);
 }
 
 .menu__item-button {
-	display: contents;
-	// Apparently, display: contents doesn't guarantee the pointer will work as expected
-	cursor: pointer;
+	display: block;
+	text-decoration: none;
+	background: transparent;
+	border: none;
 
 	&, &:hover, &:active {
 		color: inherit;
