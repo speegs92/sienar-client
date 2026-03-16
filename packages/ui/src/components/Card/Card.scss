@@ -1,10 +1,12 @@
 ﻿@use 'sass:map';
 @use '@ui/styles/variables';
+@use '@ui/styles/functions';
 
 .card {
 	--card-border-width: 1px;
 	--card-border-style: solid;
 	--card-border-color: transparent;
+	--card-border-radius: var(--border-radius);
 	--card-background-color: transparent;
 	--card-spacing-x: var(--spacer-4);
 	--card-spacing-y: var(--spacer-4);
@@ -13,6 +15,7 @@
 	border-width: var(--card-border-width);
 	border-style: var(--card-border-style);
 	border-color: var(--card-border-color);
+	border-radius: var(--card-border-radius);
 }
 
 .card__header,
@@ -50,7 +53,7 @@
 
 		&.card--solid {
 			--card-background-color: var(--color-#{$color});
-			--card-text-color: var(--color-#{$color}-lighten);
+			--card-text-color: #{functions.get-contrasting-text-color($color)};
 		}
 
 		&.card--outlined {
@@ -68,7 +71,7 @@
 		}
 		&.card__header--solid {
 			--card-background-color: var(--color-#{$color});
-			--card-text-color: var(--color-#{$color}-lighten);
+			--card-text-color:  #{functions.get-contrasting-text-color($color)};
 		}
 	}
 }
