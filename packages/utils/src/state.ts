@@ -22,8 +22,10 @@ export function createState<T>(initial: T) {
 
 	const getter = () => value;
 
-	const setter = (newValue: T) => {
-		value = newValue;
+	const setter = (arg: T|Setter<T>) => {
+		value = typeof arg === 'function'
+			? (arg as Setter<T>)(value)
+			: arg;
 		notifyListeners();
 	};
 
@@ -37,4 +39,11 @@ export function createState<T>(initial: T) {
  */
 export interface StateChangeListener {
 	(): void;
+}
+
+/**
+ * A function to set the new value of a piece of state based on the old value
+ */
+interface Setter<T> {
+	(oldValue: T): T
 }
