@@ -1,63 +1,146 @@
-import type { InjectionKey } from '@utils/di.ts';
-import type { ComponentType, PropsWithChildren } from 'react';
+import { createState } from './state.ts';
 
-export const NOTIFICATION_PROVIDER_COMPONENT = Symbol() as InjectionKey<ComponentType<PropsWithChildren>>;
-export const NOTIFIER = Symbol() as InjectionKey<Notifier>;
+import type { ReactNode } from 'react';
 
-export type Notification = {
-	message: string
-	type: NotificationType
+let nextNotificationId = 0;
+const notificationState = createState<NotificationData[]>([]);
+
+/**
+ * Provides React components access to the notification system state
+ */
+export const useNotifications = notificationState.hook;
+
+/**
+ * Creates a notification in the UI
+ *
+ * @param message The notification message
+ * @param notificationType The notification type
+ * @param configuration The notification configuration
+ *
+ * @returns The ID of the notification
+ */
+export function notify(
+	message: string,
+	notificationType: NotificationType,
+	configuration?: NotificationConfiguration): CloseNotificationFunction;
+
+/**
+ * Creates a notification in the UI
+ *
+ * @param notification The notification
+ * @param configuration The notification configuration
+ *
+ * @returns The ID of the notification
+ */
+export function notify(
+	notification: Notification,
+	configuration?: NotificationConfiguration
+): CloseNotificationFunction;
+
+export function notify(
+	arg1: string|Notification,
+	arg2?: NotificationType|NotificationConfiguration,
+	arg3?: NotificationConfiguration
+): CloseNotificationFunction {
+	const notification: Notification = typeof arg1 === 'string'
+		? { message: arg1, type: arg2 as NotificationType }
+		: arg1;
+	const configuration: NotificationConfiguration|undefined = typeof arg2 === 'string'
+		? arg3!
+		: arg2;
+
+	return notifyRaw(notification, configuration);
+}
+
+function notifyRaw(
+	notification: Notification,
+	configuration: NotificationConfiguration|undefined
+): CloseNotificationFunction {
+	configuration = Object.assign({
+		visibleDuration: notification.type === 'error' || notification.type === 'warning' ? 0 : 5000
+	}, configuration);
+
+	const id = ++nextNotificationId;
+
+	const closeFunc = () => closeNotification(id);
+
+	const data: NotificationData = {
+		id,
+		notification,
+		configuration,
+		close: closeFunc
+	};
+
+	notificationState.setter(n => [...n, data]);
+
+	if (configuration.visibleDuration !== 0) {
+		setTimeout(closeFunc, configuration.visibleDuration);
+	}
+
+	return closeFunc;
+}
+
+function closeNotification(id: number) {
+	notificationState.setter(
+		notifications => notifications.filter(
+			n => n.id !== id));
 }
 
 /**
- * Renders a notification in the UI
- *
- * @param message The message to render
- * @param type The type of the notification to render
+ * The data describing a notification
  */
-export interface Notifier {
+export interface Notification {
 	/**
-	 * Renders a success notification
-	 *
-	 * @param message The message to render
+	 * The notification message
 	 */
-	success(message: string): void
+	message: string;
 
 	/**
-	 * Renders a warning notification
-	 *
-	 * @param message The message to render
+	 * The type of the notification
 	 */
-	warning(message: string): void
+	type: NotificationType
+}
+
+export interface NotificationData {
+	/**
+	 * The notification ID
+	 */
+	id: number;
 
 	/**
-	 * Renders an informational notification
-	 *
-	 * @param message The message to render
+	 * The notification data
 	 */
-	info(message: string): void
+	notification: Notification;
 
 	/**
-	 * Renders an error notification
-	 *
-	 * @param message The message to render
+	 * The notification configuration data
 	 */
-	error(message: string): void
+	configuration: NotificationConfiguration;
 
 	/**
-	 * Renders a warning notification
-	 *
-	 * @param message The message to render
-	 * @param type The type of the notification
+	 * The function to close the notification
 	 */
-	notify(message: string, type: NotificationType): void
+	close: CloseNotificationFunction;
+}
+
+/**
+ * The available notification configuration settings
+ */
+export interface NotificationConfiguration {
+	/**
+	 * The amount of time (in ms) for which the notification is visible. To require the user to manually close the notification, set to <code>0</code>
+	 */
+	visibleDuration?: number;
 
 	/**
-	 * Renders a warning notification
-	 *
-	 * @param notification The notification to render
+	 * The icon to display with the notification
 	 */
-	notify(notification: Notification): void
+	icon?: ReactNode;
+
+	/**
+	 * The dismiss button to display with the notification
+	 */
+	dismissButton?: ReactNode;
 }
 
 /**
@@ -68,3 +151,10 @@ export type NotificationType =
 	| 'info'
 	| 'warning'
 	| 'error';
+
+/**
+ * A function which closes a notification
+ */
+export interface CloseNotificationFunction {
+	(): void
+}

@@ -2,7 +2,7 @@
 import { aggregateLinks, classNames, filterLinks, useAuthContext, useActiveMenu } from '@sienar/utils';
 import { createThemedClassNames } from '@ui/theme.ts';
 import { useScrollLock } from '@ui/utils.ts';
-import { Button, Icon, Menu, MenuItem } from '@ui/components';
+import { Button, Icon, Menu, MenuItem, Notifications } from '@ui/components';
 import { Appbar } from './Appbar.tsx';
 import { Sidebar } from './Sidebar.tsx';
 import { MainContent } from './MainContent.tsx';
@@ -65,50 +65,53 @@ export function Application(props: ApplicationProps) {
 	);
 
 	return (
-		<Tag className={appClasses} {...rest}>
-			<Sidebar
-				color={color}
-				variant={variant}
-				open={open}
-				setOpen={setOpen}
-				{...sidebarProps}
-			>
-				<Menu
+		<>
+			<Tag className={appClasses} {...rest}>
+				<Sidebar
 					color={color}
 					variant={variant}
+					open={open}
+					setOpen={setOpen}
+					{...sidebarProps}
 				>
-					{menuItems.map(item => (
-						<MenuItem
-							key={item.text}
-							label={item.text}
-							href={item.href}
-							icon={item.icon}
-						/>
-					))}
-				</Menu>
-			</Sidebar>
-
-			<div className='app__window'>
-				<Appbar
-					color={color}
-					variant={variant}
-					{...appbarProps}
-				>
-					<Button
-						className='d-lg-none'
+					<Menu
 						color={color}
-						icon={<Icon icon='menu'/>}
-						onClick={() => setOpen(!open)}
-					/>
-				</Appbar>
+						variant={variant}
+					>
+						{menuItems.map(item => (
+							<MenuItem
+								key={item.text}
+								label={item.text}
+								href={item.href}
+								icon={item.icon}
+							/>
+						))}
+					</Menu>
+				</Sidebar>
 
-				<MainContent
-					sidebarOpen={open}
-					className='bg-light flex-grow-1'
-				>
-					{children}
-				</MainContent>
-			</div>
-		</Tag>
+				<div className='app__window'>
+					<Appbar
+						color={color}
+						variant={variant}
+						{...appbarProps}
+					>
+						<Button
+							className='d-lg-none'
+							color={color}
+							icon={<Icon icon='menu'/>}
+							onClick={() => setOpen(!open)}
+						/>
+					</Appbar>
+
+					<MainContent
+						sidebarOpen={open}
+						className='bg-light flex-grow-1'
+					>
+						{children}
+					</MainContent>
+				</div>
+			</Tag>
+			<Notifications/>
+		</>
 	);
 }

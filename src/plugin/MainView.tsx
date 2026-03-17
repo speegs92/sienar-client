@@ -1,4 +1,5 @@
-﻿import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, Icon, MenuDivider, Menu, MenuItem, TabGroup, TabPane } from '@sienar/ui';
+﻿import { notify } from '@sienar/utils';
+import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, Icon, MenuDivider, Menu, MenuItem, TabGroup, TabPane } from '@sienar/ui';
 import { MAIN_MENU, MAIN_URL, MAIN_VIEW } from '@sienar/plugins-core';
 import { ALT_MENU } from './utils.ts';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -38,8 +39,34 @@ function MainView() {
 					color='secondary'
 					className='d-flex flex-row justify-content-end'
 				>
-					<Button color='primary' variant='solid'>Click me</Button>
-					<Button>Click me again</Button>
+					<Button
+						color='success'
+						variant='solid'
+						onClick={() => notify('Just a really, really big success notification', 'success')}
+					>
+						Pop success
+					</Button>
+					<Button
+						color='info'
+						variant='outlined'
+						onClick={() => notify('Just a really big info notification', 'info')}
+					>
+						Pop info
+					</Button>
+					<Button
+						color='warning'
+						variant='text'
+						onClick={() => notify('Just a big warning notification', 'warning')}
+					>
+						Pop warning
+					</Button>
+					<Button
+						color='error'
+						variant='solid'
+						onClick={() => notify('Just an error notification', 'error')}
+					>
+						Pop error
+					</Button>
 				</CardActions>
 			</Card>
 

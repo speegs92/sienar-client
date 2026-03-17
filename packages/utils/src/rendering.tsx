@@ -1,9 +1,7 @@
 ﻿import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
-import { inject } from '@utils/di.ts';
-import { NOTIFICATION_PROVIDER_COMPONENT } from '@utils/notifications.ts';
-import { buildProviderTree, registerProvider } from '@utils/providers.tsx';
+import { buildProviderTree } from '@utils/providers.tsx';
 import { executePlugins } from '@utils/plugins.ts';
 import { createRouter } from '@utils/routing.ts';
 
@@ -22,11 +20,5 @@ export function createApp(rootId: string = 'root') {
 }
 
 function createSienarRoot(): ReactElement {
-	const notificationProvider = inject(NOTIFICATION_PROVIDER_COMPONENT, true);
-
-	if (notificationProvider) {
-		registerProvider(notificationProvider);
-	}
-
 	return <RouterProvider router={ createRouter() }/>;
 }

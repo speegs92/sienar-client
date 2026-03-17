@@ -6,5 +6,6 @@ export * from './Dropdown.tsx';
 export * from './Grid/index.ts';
 export * from './Icon.tsx';
 export * from './Menu/index.ts';
+export * from './Notification/index.ts';
 export * from './Stack.tsx';
 export * from './Tab/index.ts';

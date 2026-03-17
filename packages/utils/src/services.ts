@@ -1,5 +1,4 @@
-﻿import { inject } from '@utils/di.ts';
-import { NOTIFIER } from '@utils/notifications.ts';
+﻿import { notify } from '@utils/notifications.ts';
 import { sendRequest } from '@utils/utils.ts';
 import { appendSearchParams } from '@utils/http.ts';
 import type { ApiCallerOptions, HttpMethod } from '@utils/http.ts';
@@ -168,10 +167,9 @@ export function mapServiceConfigurationToApiCallerOptions(
 		}
 	} else {
 		apiCallerOptions.onUnprocessable = e => {
-			const notifier = inject(NOTIFIER);
 			for (let errored in e.errors) {
 				for (let error of e.errors[errored]) {
-					notifier.error(`${errored}: ${error}`);
+					notify(`${errored}: ${error}`, 'error');
 				}
 			}
 		}
