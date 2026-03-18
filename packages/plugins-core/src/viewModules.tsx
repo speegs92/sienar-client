@@ -33,10 +33,7 @@ export function addViewModules(...viewModules: ViewModule[]) {
 				path: module.pathKey ?? module.path,
 				element: module.viewKey ?? module.view,
 				middleware: [
-					() => {
-						console.log('Switching menus');
-						setActiveMenu(module.layoutMenu ?? MAIN_MENU);
-					}
+					() => setActiveMenu(module.layoutMenu ?? MAIN_MENU)
 				]
 			}
 		);
