@@ -9,14 +9,19 @@ import { MainContent } from './MainContent.tsx';
 import './Application.scss';
 
 import type { HTMLAttributes } from 'react';
-import type { Themeable } from '@ui/theme.ts'
+import type { Color } from '@ui/theme.ts';
 import type { SidebarProps } from './Sidebar.tsx';
 import type { AppbarProps } from './Appbar.tsx';
 
 /**
  * The props of the application component
  */
-export interface ApplicationProps extends Themeable, Omit<HTMLAttributes<HTMLElement>, 'color'> {
+export interface ApplicationProps extends Omit<HTMLAttributes<HTMLElement>, 'color'> {
+	/**
+	 * The color of the application
+	 */
+	color?: Color;
+
 	/**
 	 * The HTML tag with which to render the application
 	 */
@@ -37,7 +42,6 @@ export function Application(props: ApplicationProps) {
 	const {
 		tag: Tag = 'div',
 		color = 'heavy',
-		variant = 'solid',
 		className,
 		appbarProps,
 		sidebarProps,
@@ -57,7 +61,7 @@ export function Application(props: ApplicationProps) {
 
 	const appClasses = classNames(
 		className,
-		createThemedClassNames(color, variant, 'app'),
+		createThemedClassNames(color, undefined, 'app'),
 		'd-flex flex-row',
 		{
 			'app--open': open
@@ -68,16 +72,11 @@ export function Application(props: ApplicationProps) {
 		<>
 			<Tag className={appClasses} {...rest}>
 				<Sidebar
-					color={color}
-					variant={variant}
 					open={open}
 					setOpen={setOpen}
 					{...sidebarProps}
 				>
-					<Menu
-						color={color}
-						variant={variant}
-					>
+					<Menu color={color}>
 						{menuItems.map(item => (
 							<MenuItem
 								key={item.text}
@@ -90,11 +89,7 @@ export function Application(props: ApplicationProps) {
 				</Sidebar>
 
 				<div className='app__window'>
-					<Appbar
-						color={color}
-						variant={variant}
-						{...appbarProps}
-					>
+					<Appbar {...appbarProps}>
 						<Button
 							className='d-lg-none'
 							color={color}

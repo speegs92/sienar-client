@@ -28,7 +28,7 @@ export function Notification(props: NotificationProps) {
 		createThemedClassNames(
 			// Sienar names these such that notification types map one-to-one to theme colors
 			data.notification.type as Color,
-			context.variant,
+			undefined,
 			'notifications__notification'
 		)
 	);

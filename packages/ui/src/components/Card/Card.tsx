@@ -3,12 +3,17 @@ import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
 import './Card.scss';
 
 import type { HTMLAttributes } from 'react';
-import type { Themeable } from '@ui/theme.ts';
+import type { Color } from '@ui/theme.ts';
 
 /**
  * The props for the card component
  */
-export interface CardProps extends Themeable, Omit<HTMLAttributes<HTMLElement>, 'color'> {
+export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, 'color'> {
+	/**
+	 * The color of the card
+	 */
+	color?: Color;
+
 	/**
 	 * The HTML tag with which to render the card
 	 */
@@ -18,7 +23,6 @@ export interface CardProps extends Themeable, Omit<HTMLAttributes<HTMLElement>, 
 export function Card(props: CardProps) {
 	const {
 		color,
-		variant,
 		tag: Tag = 'article',
 		className,
 		...rest
@@ -26,11 +30,11 @@ export function Card(props: CardProps) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, variant, 'card')
+		createThemedClassNames(color, undefined, 'card')
 	);
 
 	return (
-		<ThemeContext.Provider value={{ color, variant }}>
+		<ThemeContext.Provider value={{ color }}>
 			<Tag className={classes} {...rest} />
 		</ThemeContext.Provider>
 	);

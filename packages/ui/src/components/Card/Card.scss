@@ -46,32 +46,11 @@
 
 @each $color in map.keys(variables.$theme-colors) {
 	.card--#{$color} {
-		&.card--solid,
-		&.card--outlined{
-			--card-border-color: var(--color-#{$color});
-		}
-
-		&.card--solid {
-			--card-background-color: var(--color-#{$color});
-			--card-text-color: #{functions.get-contrasting-text-color($color)};
-		}
-
-		&.card--outlined {
-			--card-text-color: var(--color-#{$color});
-		}
-
+		--card-border-color: var(--color-#{$color});
 	}
 
 	.card__header--#{$color} {
-		&.card__header--text {
-			--card-text-color: var(--color-#{$color});
-		}
-		&.card__header--outlined {
-			--card-text-color: var(--color-#{$color});
-		}
-		&.card__header--solid {
-			--card-background-color: var(--color-#{$color});
-			--card-text-color:  #{functions.get-contrasting-text-color($color)};
-		}
+		--card-background-color: var(--color-#{$color});
+		--card-text-color:  #{functions.get-contrasting-text-color($color)};
 	}
 }

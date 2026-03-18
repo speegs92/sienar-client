@@ -9,10 +9,9 @@ function MainView() {
 		<>
 			<Card
 				color='primary'
-				variant='outlined'
 				className='mb-4'
 			>
-				<CardHeader variant='solid'>
+				<CardHeader>
 					<h1>Just a card header</h1>
 				</CardHeader>
 				<CardContent color='secondary'>
@@ -20,11 +19,10 @@ function MainView() {
 						className='mb-4'
 						label='Cool dropdown bro'
 						color='primary'
-						variant='outlined'
 						direction='right'
 						alignment='bottom'
 					>
-						<Menu color='primary' variant='solid'>
+						<Menu color='primary'>
 							<MenuItem label='Just an item, does nothing'/>
 							<MenuItem label='Just an item, does nothing'/>
 							<MenuItem label='Just an item, does nothing'/>
@@ -70,10 +68,7 @@ function MainView() {
 				</CardActions>
 			</Card>
 
-			<TabGroup
-				color='primary'
-				variant='text'
-			>
+			<TabGroup color='primary'>
 				<TabPane activatorContent='Tab 1'>
 					<p>Some tab 1 content</p>
 				</TabPane>

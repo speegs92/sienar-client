@@ -4,15 +4,19 @@ import { createThemedClassNames, useThemeContext } from '@ui/theme.ts';
 
 import type { HTMLAttributes, MouseEventHandler, ReactNode } from 'react';
 import type { ButtonBaseProps } from '@ui/components/Button/ButtonBase.tsx';
-import type { Themeable } from '@ui/theme.ts';
+import type { Color } from '@ui/theme.ts';
 
 /**
  * The props for the menu item component
  */
 export interface MenuItemProps extends
-	Themeable,
 	Omit<HTMLAttributes<HTMLLIElement>, 'color'>,
 	Pick<ButtonBaseProps, 'href'> {
+	/**
+	 * The color of the menu item
+	 */
+	color?: Color;
+
 	/**
 	 * The text to display with the menu item, if any
 	 */
@@ -36,7 +40,6 @@ export function MenuItem(props: MenuItemProps) {
 		label,
 		icon,
 		color = themeContext.color,
-		variant = themeContext.variant,
 		href,
 		className,
 		children,
@@ -48,7 +51,7 @@ export function MenuItem(props: MenuItemProps) {
 
 	const classes = createThemedClassNames(
 		color,
-		variant,
+		undefined,
 		'menu__item'
 	);
 

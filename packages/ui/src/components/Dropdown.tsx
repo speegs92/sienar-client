@@ -6,12 +6,17 @@ import { CloseableContext } from '@ui/utils.ts';
 import './Dropdown.scss';
 
 import type { HTMLAttributes,  ReactNode } from 'react';
-import type { Color, Direction, HorizontalAlignment, Themeable, Variant, VerticalAlignment } from '@ui/theme.ts';
+import type { Color, Direction, HorizontalAlignment, Variant, VerticalAlignment } from '@ui/theme.ts';
 
 /**
  * The props for the dropdown component
  */
-export interface DropdownProps extends Themeable, Omit<HTMLAttributes<HTMLElement>, 'color'> {
+export interface DropdownProps extends Omit<HTMLAttributes<HTMLElement>, 'color'> {
+	/**
+	 * The global color of the dropdown
+	 */
+	color?: Color;
+
 	/**
 	 * The activator button theme color
 	 */
@@ -26,11 +31,6 @@ export interface DropdownProps extends Themeable, Omit<HTMLAttributes<HTMLElemen
 	 * The list color
 	 */
 	listColor?: Color;
-
-	/**
-	 * The list variant
-	 */
-	listVariant?: Variant;
 
 	/**
 	 * The label text to show with the button, if any
@@ -73,9 +73,7 @@ export function Dropdown(props: DropdownProps) {
 		color = 'default',
 		buttonColor,
 		listColor,
-		variant = 'solid',
 		buttonVariant,
-		listVariant,
 		label,
 		leftIcon,
 		rightIcon,
@@ -94,7 +92,7 @@ export function Dropdown(props: DropdownProps) {
 
 	const dropdownClasses = classNames(
 		className,
-		createThemedClassNames(color, variant, 'dropdown'),
+		createThemedClassNames(color, undefined, 'dropdown'),
 		{
 			'dropdown--open': isOpen,
 			'dropdown--child-icons-hidden': !!hideChildrenIcons
@@ -103,7 +101,7 @@ export function Dropdown(props: DropdownProps) {
 
 	const alignInfix = direction === 'up' || direction === 'down' ? 'x' : 'y';
 	const contentClasses = classNames(
-		createThemedClassNames(listColor ?? color, listVariant ?? variant, 'dropdown__content'),
+		createThemedClassNames(listColor ?? color, undefined, 'dropdown__content'),
 		`dropdown__content--${direction}`,
 		`dropdown__content--align-${alignInfix}-${alignment}`
 	);
@@ -112,7 +110,7 @@ export function Dropdown(props: DropdownProps) {
 		<div className={dropdownClasses} {...rest}>
 			<Button
 				color={buttonColor ?? color}
-				variant={buttonVariant ?? variant}
+				variant={buttonVariant}
 				icon={icon}
 				className='dropdown__activator'
 				onClick={toggle}
@@ -126,10 +124,7 @@ export function Dropdown(props: DropdownProps) {
 				isOpen,
 				close
 			}}>
-				<ThemeContext.Provider value={{
-					color: listColor ?? color,
-					variant: listVariant ?? variant
-				}}>
+				<ThemeContext.Provider value={{ color: listColor ?? color }}>
 					{isOpen && (
 						<div
 							className='dropdown__overlay'

@@ -5,7 +5,6 @@ import { notificationContext } from './utils.ts';
 
 import type { ReactNode } from 'react';
 import type { NotificationType } from '@sienar/utils';
-import type { Variant } from '@ui/theme.ts';
 
 import './Notifications.scss';
 
@@ -14,18 +13,12 @@ import './Notifications.scss';
  */
 export interface NotificationsProps {
 	/**
-	 * The notification variant
-	 */
-	variant?: Variant;
-
-	/**
 	 * The default icon to use with each notification type
 	 */
 	icons?: { [id in NotificationType]: ReactNode };
 }
 
 export function Notifications(props: NotificationsProps) {
-	const { variant = 'solid' } = props;
 	const icons: Record<NotificationType, ReactNode> = Object.assign({
 		success: <Icon icon='checkbox-marked-circle-outline'/>,
 		info: <Icon icon='information'/>,
@@ -36,7 +29,7 @@ export function Notifications(props: NotificationsProps) {
 	const notifications = useNotifications();
 
 	return (
-		<notificationContext.Provider value={{ variant, icons }}>
+		<notificationContext.Provider value={{ icons }}>
 			<div className='notifications'>
 				{notifications.map(n => (
 					<Notification

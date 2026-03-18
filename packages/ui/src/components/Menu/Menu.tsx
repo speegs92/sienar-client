@@ -3,20 +3,24 @@ import { createThemedClassNames, ThemeContext, useThemeContext } from '@ui/theme
 import './Menu.scss';
 
 import type { ComponentPropsWithoutRef, ElementType } from 'react';
-import type { Themeable } from '@ui/theme.ts';
+import type { Color } from '@ui/theme.ts';
 
 export type MenuProps<T extends ElementType> = {
+	/**
+	 * The color of the menu
+	 */
+	color?: Color;
+
 	/**
 	 * The HTML element with which to render the menu
 	 */
 	tag?: T;
-} & Themeable & ComponentPropsWithoutRef<T>
+} & ComponentPropsWithoutRef<T>
 
 export function Menu<T extends ElementType = 'ul'>(props: MenuProps<T>) {
 	const {
 		tag: Tag = 'ul',
 		color,
-		variant,
 		className,
 		...rest
 	} = props;
@@ -25,14 +29,11 @@ export function Menu<T extends ElementType = 'ul'>(props: MenuProps<T>) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, variant, 'menu')
+		createThemedClassNames(color, undefined, 'menu')
 	);
 
 	return (
-		<ThemeContext.Provider value={{
-			color: color ?? parentTheme.color ?? 'heavy',
-			variant: variant ?? parentTheme.variant ?? 'solid'
-		}}>
+		<ThemeContext.Provider value={{ color: color ?? parentTheme.color ?? 'heavy' }}>
 			<Tag className={classes} {...rest} />
 		</ThemeContext.Provider>
 	);

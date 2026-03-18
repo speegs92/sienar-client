@@ -5,13 +5,18 @@ import { TabContext } from './utils.ts';
 import './TabGroup.scss';
 
 import type { HTMLAttributes } from 'react';
-import type { Themeable } from '@ui/theme.ts';
+import type { Color } from '@ui/theme.ts';
 import type { TabData } from './utils.ts';
 
 /**
  * The props for the tab group component
  */
-export interface TabGroupProps extends Themeable, Omit<HTMLAttributes<HTMLElement>, 'color'> {
+export interface TabGroupProps extends Omit<HTMLAttributes<HTMLElement>, 'color'> {
+	/**
+	 * The color of the tab group
+	 */
+	color?: Color;
+
 	/**
 	 * The HTML tag with which to render the tab group
 	 */
@@ -26,7 +31,6 @@ export interface TabGroupProps extends Themeable, Omit<HTMLAttributes<HTMLElemen
 export function TabGroup(props: TabGroupProps) {
 	const {
 		color = 'default',
-		variant = 'solid',
 		tag: Tag = 'div',
 		paneClassName,
 		className,
@@ -39,14 +43,14 @@ export function TabGroup(props: TabGroupProps) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, variant, 'tab')
+		createThemedClassNames(color, undefined, 'tab')
 	);
 
-	const navClasses = createThemedClassNames(color, variant, 'tab__nav');
+	const navClasses = createThemedClassNames(color, undefined, 'tab__nav');
 
 	const paneClasses = classNames(
 		paneClassName,
-		createThemedClassNames(color, variant, 'tab__pane')
+		createThemedClassNames(color, undefined, 'tab__pane')
 	);
 
 	const registerTab = (tab: TabData) => {
@@ -80,7 +84,7 @@ export function TabGroup(props: TabGroupProps) {
 					const buttonClasses = classNames(
 						createThemedClassNames(
 							color,
-							variant,
+							undefined,
 							'tab__activator'
 						),
 						{

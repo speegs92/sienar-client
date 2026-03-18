@@ -36,28 +36,9 @@
 
 @each $color in map.keys(variables.$theme-colors) {
 	.notifications__notification--#{$color} {
-		&.notifications__notification--solid {
-			--notification-background-color: var(--color-#{$color});
-			--notification-border-color: var(--color-#{$color});
-			--notification-text-color: #{functions.get-contrasting-text-color($color)};
-		}
-
-		&.notifications__notification--outlined,
-		&.notifications__notification--text {
-			--notification-background-color: #{variables.$white};
-			--notification-border-color: var(--color-#{$color});
-			--notification-text-color: var(--color-#{$color});
-
-			.notifications__notification-close-button {
-				&:hover {
-					--notification-close-button-background-color: var(--color-#{$color}-transparent);
-				}
-			}
-		}
-
-		&.notifications__notification--text {
-			--notification-border-color: transparent;
-		}
+		--notification-background-color: var(--color-#{$color});
+		--notification-border-color: var(--color-#{$color});
+		--notification-text-color: #{functions.get-contrasting-text-color($color)};
 	}
 }
 

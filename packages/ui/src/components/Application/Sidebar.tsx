@@ -4,12 +4,17 @@ import { CloseableContext } from '@ui/utils.ts';
 import { Backdrop } from '../Backdrop.tsx';
 
 import type { HTMLAttributes } from 'react';
-import type { Themeable } from '@ui/theme.ts';
+import type { Color } from '@ui/theme.ts';
 
 /**
  * The props for the sidebar component
  */
-export interface SidebarProps extends Themeable, Omit<HTMLAttributes<HTMLElement>, 'color'> {
+export interface SidebarProps extends Omit<HTMLAttributes<HTMLElement>, 'color'> {
+	/**
+	 * The color of the sidebar
+	 */
+	color?: Color;
+
 	/**
 	 * Whether the sidebar should be open
 	 */
@@ -31,8 +36,7 @@ export interface SidebarProps extends Themeable, Omit<HTMLAttributes<HTMLElement
 export function Sidebar(props: SidebarProps) {
 	const {
 		tag: Tag = 'div',
-		color = 'heavy',
-		variant = 'solid',
+		color,
 		open = false,
 		setOpen,
 		className,
@@ -41,7 +45,7 @@ export function Sidebar(props: SidebarProps) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, variant, 'app__sidebar'),
+		createThemedClassNames(color, undefined, 'app__sidebar'),
 		{
 			'app__sidebar--open': open
 		}
@@ -52,7 +56,7 @@ export function Sidebar(props: SidebarProps) {
 			isOpen: open,
 			close: () => setOpen?.(false)
 		}}>
-			<ThemeContext.Provider value={{ color, variant }}>
+			<ThemeContext.Provider value={{ color }}>
 				<Backdrop
 					visible={open}
 					onClick={() => setOpen?.(false)}

@@ -2,12 +2,17 @@
 import { createThemedClassNames, useThemeContext } from '@ui/theme.ts';
 
 import type { HTMLAttributes } from 'react';
-import type { Themeable } from '@ui/theme.ts';
+import type { Color } from '@ui/theme.ts';
 
 /**
  * The props for the card actions component
  */
-export interface CardActionsProps extends Themeable, Omit<HTMLAttributes<HTMLElement>, 'color'> {
+export interface CardActionsProps extends Omit<HTMLAttributes<HTMLElement>, 'color'> {
+	/**
+	 * The color of the card actions
+	 */
+	color?: Color;
+
 	/**
 	 * The HTML tag with which to render the card actions
 	 */
@@ -20,14 +25,13 @@ export function CardActions(props: CardActionsProps) {
 	const {
 		tag: Tag = 'section',
 		color = themeContext.color,
-		variant = themeContext.variant,
 		className,
 		...rest
 	} = props;
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, variant, 'card__actions')
+		createThemedClassNames(color, undefined, 'card__actions')
 	);
 
 	return (

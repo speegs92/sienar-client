@@ -84,37 +84,15 @@ $width: 250px;
 
 @each $color in map.keys(variables.$theme-colors) {
 	.app__appbar--#{$color} {
-		&.app__appbar--solid {
-			--appbar-background-color: var(--color-#{$color});
-			--appbar-border-color: var(--color-#{$color});
-			--appbar-text-color: #{functions.get-contrasting-text-color($color)};
-		}
-
-		&.app__appbar--outlined {
-			--appbar-border-color: var(--color-#{$color}-lighten);
-			--appbar-text-color: var(--color-#{$color});
-		}
-
-		&.app__appbar--text {
-			--appbar-text-color: var(--color-#{$color});
-		}
+		--appbar-background-color: var(--color-#{$color});
+		--appbar-border-color: var(--color-#{$color});
+		--appbar-text-color: #{functions.get-contrasting-text-color($color)};
 	}
 
 	.app__sidebar--#{$color} {
-		&.app__sidebar--solid {
-			--sidebar-background-color: var(--color-#{$color});
-			--sidebar-border-color: var(--color-#{$color});
-			--sidebar-text-color: #{functions.get-contrasting-text-color($color)};
-		}
-
-		&.app__sidebar--outlined {
-			--sidebar-border-color: var(--color-#{$color}-lighten);
-			--sidebar-text-color: var(--color-#{$color});
-		}
-
-		&.app__sidebar--text {
-			--sidebar-text-color: var(--color-#{$color});
-		}
+		--sidebar-background-color: var(--color-#{$color});
+		--sidebar-border-color: var(--color-#{$color});
+		--sidebar-text-color: #{functions.get-contrasting-text-color($color)};
 	}
 }
 
