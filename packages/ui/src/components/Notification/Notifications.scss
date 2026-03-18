@@ -39,6 +39,13 @@
 		--notification-background-color: var(--color-#{$color});
 		--notification-border-color: var(--color-#{$color});
 		--notification-text-color: #{functions.get-contrasting-text-color($color)};
+
+		& .dismiss-button--#{$color} {
+			--dismiss-button-text-color: #{functions.get-contrasting-text-color($color)};
+			&:hover {
+				--dismiss-button-background-color: var(--color-light-transparent);
+			}
+		}
 	}
 }
 
@@ -55,19 +62,4 @@
 
 .notifications__notification-message {
 	padding: 0 var(--notification-padding-x);
-}
-
-.notifications__notification-close-button {
-	--notification-close-button-background-color: transparent;
-
-	background: var(--notification-close-button-background-color);color: var(--notification-text-color);
-
-	border: none;
-	cursor: pointer;
-	aspect-ratio: 1/1;
-	border-radius: 9999px;
-
-	&:hover {
-		--notification-close-button-background-color: var(--color-heavy-transparent);
-	}
 }
