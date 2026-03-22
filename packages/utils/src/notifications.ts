@@ -3,7 +3,7 @@ import { createState } from './state.ts';
 import type { ReactNode } from 'react';
 
 let nextNotificationId = 0;
-const notificationState = createState<NotificationData[]>([]);
+const notificationState = createState<NotificationInstance[]>([]);
 
 /**
  * Provides React components access to the notification system state
@@ -64,7 +64,7 @@ function notifyRaw(
 
 	const closeFunc = () => closeNotification(id);
 
-	const data: NotificationData = {
+	const data: NotificationInstance = {
 		id,
 		notification,
 		configuration,
@@ -87,7 +87,7 @@ function closeNotification(id: number) {
 }
 
 /**
- * The data describing a notification
+ * A notification
  */
 export interface Notification {
 	/**
@@ -101,7 +101,10 @@ export interface Notification {
 	type: NotificationType
 }
 
-export interface NotificationData {
+/**
+ * The data describing a notification instance
+ */
+export interface NotificationInstance {
 	/**
 	 * The notification ID
 	 */
@@ -124,9 +127,14 @@ export interface NotificationData {
 }
 
 /**
+ * The extensibility point for notification configuration
+ */
+export interface ExtensibleNotificationConfiguration {}
+
+/**
  * The available notification configuration settings
  */
-export interface NotificationConfiguration {
+export interface NotificationConfiguration extends ExtensibleNotificationConfiguration {
 	/**
 	 * The amount of time (in ms) for which the notification is visible. To require the user to manually close the notification, set to <code>0</code>
 	 */
@@ -156,5 +164,5 @@ export type NotificationType =
  * A function which closes a notification
  */
 export interface CloseNotificationFunction {
-	(): void
+	(): void;
 }

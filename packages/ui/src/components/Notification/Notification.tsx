@@ -4,14 +4,14 @@ import { useNotificationContext } from './utils.ts';
 import { DismissButton } from '@ui/components';
 
 import type { HTMLAttributes } from 'react';
-import type { NotificationData } from '@sienar/utils';
+import type { NotificationInstance } from '@sienar/utils';
 import type { Color } from '@ui/theme.ts';
 
 export interface NotificationProps extends Omit<HTMLAttributes<HTMLDivElement>, 'color'> {
 	/**
 	 * The notification data
 	 */
-	data: NotificationData;
+	data: NotificationInstance;
 }
 
 export function Notification(props: NotificationProps) {
