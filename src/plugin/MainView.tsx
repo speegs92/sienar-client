@@ -1,10 +1,53 @@
-﻿import { notify } from '@sienar/utils';
+﻿import { useState } from 'react';
+import { notify, showModal, useModalContext } from '@sienar/utils';
 import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, Icon, MenuDivider, Menu, MenuItem, TabGroup, TabPane } from '@sienar/ui';
 import { MAIN_MENU, MAIN_URL, MAIN_VIEW } from '@sienar/plugins-core';
 import { ALT_MENU } from './utils.ts';
+
 import type { ViewModule } from '@sienar/plugins-core';
+import type { ModalStatus } from '@sienar/utils';
+
+function TestModal() {
+	const modal = useModalContext<string>();
+
+	return (
+		<>
+			<CardContent>
+				Just some test content here, ignore me
+			</CardContent>
+			<CardActions>
+				<Button
+					color='primary'
+					onClick={() => modal.close('accepted', 'go!')}
+				>
+					Go!
+				</Button>
+				<Button
+					color='secondary'
+					variant='outlined'
+					onClick={() => modal.close('rejected')}
+				>
+					Never mind
+				</Button>
+			</CardActions>
+		</>
+	)
+}
 
 function MainView() {
+	const [lastStatus, setlastStatus] = useState<ModalStatus|undefined>(undefined);
+
+	const handleModal = async () => {
+		const result = await showModal(
+			<TestModal/>,
+			{
+				title: 'My modal title'
+			}
+		);
+
+		setlastStatus(result.status);
+	};
+
 	return (
 		<>
 			<Card
@@ -15,6 +58,9 @@ function MainView() {
 					<h1>Just a card header</h1>
 				</CardHeader>
 				<CardContent color='secondary'>
+					<p className='my-4'>
+						Last modal status: {lastStatus ?? 'undefined'}
+					</p>
 					<Dropdown
 						className='mb-4'
 						label='Cool dropdown bro'
@@ -37,6 +83,13 @@ function MainView() {
 					color='secondary'
 					className='d-flex flex-row justify-content-end'
 				>
+					<Button
+						color='secondary'
+						variant='text'
+						onClick={handleModal}
+					>
+						Pop modal
+					</Button>
 					<Button
 						color='success'
 						variant='solid'

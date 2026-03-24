@@ -1,4 +1,5 @@
 ﻿export * from './Application/index.ts';
+export * from './Backdrop.tsx';
 export * from './Button/index.ts';
 export * from './Card/index.tsx';
 export * from './Container.tsx';
@@ -6,6 +7,7 @@ export * from './Dropdown.tsx';
 export * from './Grid/index.ts';
 export * from './Icon.tsx';
 export * from './Menu/index.ts';
+export * from './Modal/index.ts';
 export * from './Notification/index.ts';
 export * from './Stack.tsx';
 export * from './Tab/index.ts';

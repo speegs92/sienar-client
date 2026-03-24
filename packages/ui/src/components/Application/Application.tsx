@@ -2,7 +2,7 @@
 import { aggregateLinks, classNames, filterLinks, useAuthContext, useActiveMenu } from '@sienar/utils';
 import { createThemedClassNames } from '@ui/theme.ts';
 import { useScrollLock } from '@ui/utils.ts';
-import { Button, Icon, Menu, MenuItem, Notifications } from '@ui/components';
+import { Button, Icon, Menu, MenuItem, ModalContainer, Notifications } from '@ui/components';
 import { Appbar } from './Appbar.tsx';
 import { Sidebar } from './Sidebar.tsx';
 import { MainContent } from './MainContent.tsx';
@@ -107,6 +107,7 @@ export function Application(props: ApplicationProps) {
 				</div>
 			</Tag>
 			<Notifications/>
+			<ModalContainer maxWidth='md'/>
 		</>
 	);
 }
