@@ -1,42 +1,13 @@
-﻿.backdrop {
+﻿@use '@ui/styles/mixins';
+
+.backdrop {
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	background-color: var(--color-heavy);
-	opacity: 0;
 	z-index: 1;
-	display: none;
-	animation: backdrop-fade-out var(--transition) forwards;
-}
 
-.backdrop--visible {
-	display: block;
-	opacity: .5;
-	animation: backdrop-fade-in var(--transition) forwards;
-}
-
-@keyframes backdrop-fade-in {
-	from {
-		opacity: 0;
-		display: none;
-	}
-
-	to {
-		opacity: .5;
-		display: block;
-	}
-}
-
-@keyframes backdrop-fade-out {
-	from {
-		opacity: .5;
-		display: block;
-	}
-
-	to {
-		opacity: 0;
-		display: none;
-	}
+	@include mixins.fade-in('backdrop', .5);
 }
