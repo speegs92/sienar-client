@@ -3,12 +3,16 @@
 @use '@ui/styles/functions';
 
 .app {
+	--app-background-color: var(--color-light);
+
+	background-color: var(--app-background-color);
+
 	width: 100%;
 	overflow-x: hidden;
 }
 
 .app__appbar {
-	--appbar-background-color: transparent;
+	--appbar-background-color: var(--color-white);
 	--appbar-border-color: transparent;
 	--appbar-border-style: solid;
 	--appbar-border-width: 1px;
@@ -34,7 +38,7 @@
 $width: 250px;
 
 .app__sidebar {
-	--sidebar-background-color: transparent;
+	--sidebar-background-color: var(--color-white);
 	--sidebar-border-color: transparent;
 	--sidebar-border-style: solid;
 	--sidebar-border-width: 1px;

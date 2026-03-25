@@ -100,7 +100,7 @@ export function Application(props: ApplicationProps) {
 
 					<MainContent
 						sidebarOpen={open}
-						className='bg-light flex-grow-1'
+						className='flex-grow-1'
 					>
 						{children}
 					</MainContent>
