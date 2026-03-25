@@ -1,7 +1,11 @@
 import { createContext, useContext } from 'react';
+import { inject } from './di.ts';
 import { createState } from './state.ts';
 
-import type { ReactNode } from 'react';
+import type { ComponentType, ReactNode } from 'react';
+import type { InjectionKey } from './di.ts';
+
+export const CONFIRM_MODAL = Symbol() as InjectionKey<ComponentType<ConfirmConfiguration>>;
 
 const modalState = createState<ModalInstance<any>[]>([]);
 
@@ -36,6 +40,41 @@ export function showModal<T>(
 	});
 }
 
+export async function confirm(
+	confirmConfig: ConfirmConfiguration,
+	modalConfig?: ModalConfiguration
+): Promise<ModalStatus>;
+
+export async function confirm(
+	question: string,
+	confirmConfig?: Omit<ConfirmConfiguration, 'question'>,
+	modalConfig?: ModalConfiguration
+): Promise<ModalStatus>;
+
+export async function confirm(
+	arg1: string|ConfirmConfiguration,
+	arg2?: Omit<ConfirmConfiguration, 'question'>|ModalConfiguration,
+	arg3?: ModalConfiguration
+): Promise<ModalStatus> {
+	const question = typeof arg1 === 'string' ? arg1 : arg1.question;
+
+	const finalConfirmConfig: ConfirmConfiguration = Object.assign(
+		{ question },
+		typeof arg1 === 'string' ? arg2 : arg1
+	);
+
+	const finalModalConfig = Object.assign({}, typeof arg1 === 'string' ? arg3 : arg2) as ModalConfiguration;
+
+	const ConfirmModal = inject(CONFIRM_MODAL);
+
+	const result = await showModal(
+		<ConfirmModal {...finalConfirmConfig}/>,
+		finalModalConfig
+	);
+
+	return result.status;
+}
+
 export const modalContext = createContext<ModalContext<any>>({close: () => ({ status: 'canceled' })});
 
 /**
@@ -68,6 +107,31 @@ export interface ModalConfiguration extends ExtensibleModalConfiguration {
 	 * The modal title
 	 */
 	title?: string;
+}
+
+/**
+ * The extensibility point for confirm modal configuration
+ */
+export interface ExtensibleConfirmConfiguration {}
+
+/**
+ * The available confirm modal configuration options
+ */
+export interface ConfirmConfiguration extends ExtensibleConfirmConfiguration {
+	/**
+	 * The question to ask the user
+	 */
+	question: string;
+
+	/**
+	 * The text to display for the <code>accepted</code> option
+	 */
+	acceptedText?: string;
+
+	/**
+	 * The text to display for the <code>rejected</code> option
+	 */
+	rejectedText?: string;
 }
 
 /**

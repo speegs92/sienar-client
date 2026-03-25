@@ -14,7 +14,7 @@ export * from '@utils/di.ts';
 export * from '@utils/entities.ts';
 export * from '@utils/http.ts';
 export * from '@utils/menus.ts';
-export * from '@utils/modals.ts';
+export * from '@utils/modals.tsx';
 export * from '@utils/notifications.ts';
 export * from '@utils/partials.ts';
 export * from '@utils/plugins.ts';
