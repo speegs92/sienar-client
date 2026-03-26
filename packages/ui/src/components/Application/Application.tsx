@@ -93,6 +93,7 @@ export function Application(props: ApplicationProps) {
 						<Button
 							className='d-lg-none'
 							color={color}
+							variant='text'
 							icon={<Icon icon='menu'/>}
 							onClick={() => setOpen(!open)}
 						/>
