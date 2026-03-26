@@ -1,11 +1,21 @@
 import { useFormFieldValidation } from '@sienar/utils';
 
+/**
+ * The props for the hidden input component
+ */
 export type HiddenInputProps = {
-	name: string
+	/**
+	 * The name of the form field
+	 */
+	name: string;
+
+	/**
+	 * The value of the form field
+	 */
 	value: string|number|boolean
 }
 
-export default function HiddenInput({ name, value }: HiddenInputProps) {
+export function HiddenInput({ name, value }: HiddenInputProps) {
 	useFormFieldValidation(name, undefined, value, () => {}, []);
 
 	return (

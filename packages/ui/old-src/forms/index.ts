@@ -4,8 +4,6 @@ export * from './DatePicker.tsx';
 export { default as DatePicker } from './DatePicker.tsx';
 export * from './Form.tsx';
 export { default as Form } from './Form.tsx';
-export * from './HiddenInput.tsx';
-export { default as HiddenInput } from './HiddenInput.tsx';
 export * from './Textbox.tsx';
 export { default as Textbox } from './Textbox.tsx';
 export * from './StandaloneCheckbox.tsx';
