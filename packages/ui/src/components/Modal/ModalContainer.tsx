@@ -24,7 +24,7 @@ export function ModalContainer(props: ModalContainerProps) {
 
 	const modals = useModals();
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
-	const [currentModal, setCurrentModal] = useState<ModalInstance|undefined>(undefined);
+	const [currentModal, setCurrentModal] = useState<ModalInstance<any>|undefined>(undefined);
 
 	useEffect(() => {
 		if (modals[0] === undefined) {
