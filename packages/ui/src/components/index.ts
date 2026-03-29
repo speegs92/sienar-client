@@ -7,6 +7,7 @@ export * from './Dropdown.tsx';
 export * from './Form/index.ts';
 export * from './Grid/index.ts';
 export * from './Icon.tsx';
+export * from './Link.tsx';
 export * from './Menu/index.ts';
 export * from './Modal/index.ts';
 export * from './Notification/index.ts';
