@@ -3,6 +3,7 @@
 // import { CHANGE_PASSWORD_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
 // import { CHANGE_PASSWORD_SERVICE } from '@plugins-identity/services.ts';
 import { CHANGE_PASSWORD_URL } from '@plugins-identity/urls.ts';
+import { CHANGE_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -58,6 +59,7 @@ function Index() {
 const module: ViewModule = {
 	path: '/dashboard/account/change-password',
 	pathKey: CHANGE_PASSWORD_URL,
+	layout: CHANGE_PASSWORD_LAYOUT,
 	view: <Index/>,
 	viewKey: CHANGE_PASSWORD_VIEW
 };

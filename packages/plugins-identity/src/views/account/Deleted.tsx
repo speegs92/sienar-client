@@ -2,6 +2,7 @@
 import { useDocumentTitle } from '@sienar/utils';
 import { REGISTER_URL } from '@plugins-identity/urls.ts';
 import { ACCOUNT_DELETED_URL } from '@plugins-identity/urls.ts';
+import { DELETED_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -28,6 +29,7 @@ function Deleted() {
 const module: ViewModule = {
 	path: '/dashboard/account/deleted',
 	pathKey: ACCOUNT_DELETED_URL,
+	layout: DELETED_LAYOUT,
 	view: <Deleted/>,
 	viewKey: ACCOUNT_DELETED_VIEW
 };

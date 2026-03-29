@@ -29,4 +29,4 @@ export const REGISTER_LAYOUT = Symbol() as InjectionKey<InjectionKey<ReactNode>>
 export const REGISTER_SUCCESSFUL_LAYOUT = Symbol() as InjectionKey<InjectionKey<ReactNode>>;
 export const RESET_PASSWORD_LAYOUT = Symbol() as InjectionKey<InjectionKey<ReactNode>>;
 export const RESET_PASSWORD_SUCCESSFUL_LAYOUT = Symbol() as InjectionKey<InjectionKey<ReactNode>>;
-export const ACCOUNT_LOCKOUT_LAYOUT = Symbol() as InjectionKey<InjectionKey<ReactNode>>;
+export const ACCOUNT_LOCKED_LAYOUT = Symbol() as InjectionKey<InjectionKey<ReactNode>>;

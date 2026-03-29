@@ -4,6 +4,7 @@
 // import { REGISTER_SERVICE } from '@plugins-identity/services.ts';
 // import { PRIVACY_POLICY_URL, REGISTER_SUCCESSFUL_URL, TOS_URL } from '@plugins-identity/urls.ts';
 import { REGISTER_URL } from '@plugins-identity/urls.ts';
+import { REGISTER_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -104,6 +105,7 @@ function Index() {
 const module: ViewModule = {
 	path: '/dashboard/account/register',
 	pathKey: REGISTER_URL,
+	layout: REGISTER_LAYOUT,
 	view: <Index/>,
 	viewKey: REGISTER_VIEW
 };

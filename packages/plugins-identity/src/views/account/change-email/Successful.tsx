@@ -1,5 +1,6 @@
 ﻿import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { CHANGE_EMAIL_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
+import { CHANGE_EMAIL_SUCCESSFUL_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -26,6 +27,7 @@ function Successful() {
 const module: ViewModule = {
 	path: '/dashboard/account/change-email/successful',
 	pathKey: CHANGE_EMAIL_SUCCESSFUL_URL,
+	layout: CHANGE_EMAIL_SUCCESSFUL_LAYOUT,
 	view: <Successful/>,
 	viewKey: CHANGE_EMAIL_SUCCESSFUL_VIEW
 };

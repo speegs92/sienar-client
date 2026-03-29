@@ -102,7 +102,7 @@ export function setupIdentityRoutes() {
 	);
 
 	registerRoutes(
-		LAYOUTS.ACCOUNT_LOCKOUT_LAYOUT,
+		LAYOUTS.ACCOUNT_LOCKED_LAYOUT,
 		{
 			path: URLS.ACCOUNT_LOCKED_URL,
 			element: VIEWS.ACCOUNT_LOCKOUT_VIEW

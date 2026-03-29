@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { useDocumentTitle } from '@sienar/utils';
 import { REGISTER_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
+import { REGISTER_SUCCESSFUL_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -31,6 +32,7 @@ function Successful() {
 const module: ViewModule = {
 	path: '/dashboard/account/register/successful',
 	pathKey: REGISTER_SUCCESSFUL_URL,
+	layout: REGISTER_SUCCESSFUL_LAYOUT,
 	view: <Successful/>,
 	viewKey: REGISTER_SUCCESSFUL_VIEW
 };

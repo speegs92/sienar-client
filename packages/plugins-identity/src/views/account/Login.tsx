@@ -7,6 +7,7 @@
 // import type { RequestResult } from '@sienar/utils';
 // import type { LoginResult } from '@plugins-identity/types.ts';
 import { LOGIN_URL } from '@plugins-identity/urls.ts';
+import { LOGIN_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -85,6 +86,7 @@ function Login() {
 const module: ViewModule = {
 	path: '/dashboard/account/login',
 	pathKey: LOGIN_URL,
+	layout: LOGIN_LAYOUT,
 	view: <Login/>,
 	viewKey: LOGIN_VIEW
 };

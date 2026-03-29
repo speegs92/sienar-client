@@ -1,6 +1,7 @@
 ﻿import { LinkButton, Card, CardActions, CardContent, CardHeader } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { DOWNLOAD_PERSONAL_DATA_URL, PERSONAL_DATA_URL } from '@plugins-identity/urls.ts';
+import { PERSONAL_DATA_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -41,6 +42,7 @@ function PersonalData() {
 const module: ViewModule = {
 	path: '/dashboard/account/personal-data',
 	pathKey: PERSONAL_DATA_URL,
+	layout: PERSONAL_DATA_LAYOUT,
 	view: <PersonalData/>,
 	viewKey: PERSONAL_DATA_VIEW
 };

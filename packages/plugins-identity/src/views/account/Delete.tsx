@@ -3,6 +3,7 @@
 // import { DELETE_ACCOUNT_SERVICE } from '@plugins-identity/services.ts';
 // import { DELETED_URL } from '@plugins-identity/urls.ts';
 import { DELETE_ACCOUNT_URL } from '@plugins-identity/urls.ts';
+import { DELETE_ACCOUNT_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -54,6 +55,7 @@ function Delete() {
 const module: ViewModule = {
 	path: '/dashboard/account/delete',
 	pathKey: DELETE_ACCOUNT_URL,
+	layout: DELETE_ACCOUNT_LAYOUT,
 	view: <Delete/>,
 	viewKey: DELETE_ACCOUNT_VIEW
 };

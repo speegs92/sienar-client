@@ -6,6 +6,7 @@
 // import { roles as appRoles } from '@plugins-identity/constants.ts';
 // import type { Role, User } from '@plugins-identity/types.ts';
 import { USERS_ROLES_URL } from '@plugins-identity/urls.ts';
+import { USERS_ROLES_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -84,6 +85,7 @@ function Roles() {
 const module: ViewModule = {
 	path: '/dashboard/users/:id/roles',
 	pathKey: USERS_ROLES_URL,
+	layout: USERS_ROLES_LAYOUT,
 	view: <Roles/>,
 	viewKey: USERS_ROLES_VIEW
 };

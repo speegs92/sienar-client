@@ -5,6 +5,7 @@
 // import { LOCKOUT_REASONS_SERVICE } from '@plugins-identity/services.ts';
 // import { roles } from '@plugins-identity/constants.ts';
 import { LOCKOUT_REASONS_ADD_URL, LOCKOUT_REASONS_EDIT_URL } from '@plugins-identity/urls.ts';
+import { LOCKOUT_REASONS_ADD_LAYOUT, LOCKOUT_REASONS_EDIT_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -51,6 +52,7 @@ function Upsert() {
 export const addModule: ViewModule = {
 	path: '/dashboard/lockout-reasons/add',
 	pathKey: LOCKOUT_REASONS_ADD_URL,
+	layout: LOCKOUT_REASONS_ADD_LAYOUT,
 	view: <Upsert/>,
 	viewKey: LOCKOUT_REASONS_ADD_VIEW
 };
@@ -58,6 +60,7 @@ export const addModule: ViewModule = {
 export const editModule: ViewModule = {
 	path: '/dashboard/lockout-reasons/:id',
 	pathKey: LOCKOUT_REASONS_EDIT_URL,
+	layout: LOCKOUT_REASONS_EDIT_LAYOUT,
 	view: <Upsert/>,
 	viewKey: LOCKOUT_REASONS_EDIT_VIEW
 };

@@ -3,6 +3,7 @@
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { roles } from '@plugins-identity/constants.ts';
 import { LOCKOUT_REASONS_URL } from '@plugins-identity/urls.ts';
+import { LOCKOUT_REASONS_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -37,6 +38,7 @@ function Index() {
 const module: ViewModule = {
 	path: '/dashboard/lockout-reasons',
 	pathKey: LOCKOUT_REASONS_URL,
+	layout: LOCKOUT_REASONS_LAYOUT,
 	view: <Index/>,
 	viewKey: LOCKOUT_REASONS_VIEW
 };

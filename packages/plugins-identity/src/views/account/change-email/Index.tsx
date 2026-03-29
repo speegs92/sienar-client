@@ -3,6 +3,7 @@
 // import { CHANGE_EMAIL_REQUESTED_URL } from '@plugins-identity/urls.ts';
 // import { CHANGE_EMAIL_SERVICE } from '@plugins-identity/services.ts';
 import { CHANGE_EMAIL_URL } from '@plugins-identity/urls.ts';
+import { CHANGE_EMAIL_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -54,6 +55,7 @@ function Index() {
 const module: ViewModule = {
 	path: '/dashboard/account/change-email',
 	pathKey: CHANGE_EMAIL_URL,
+	layout: CHANGE_EMAIL_LAYOUT,
 	view: <Index/>,
 	viewKey: CHANGE_EMAIL_VIEW
 };

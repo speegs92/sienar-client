@@ -10,6 +10,7 @@
 // import type { LockoutReason, User } from '@plugins-identity/types.ts';
 // import { roles } from '@plugins-identity/constants.ts';
 import { USERS_LOCK_URL } from '@plugins-identity/urls.ts';
+import { USERS_LOCK_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -117,6 +118,7 @@ function Lock() {
 const module: ViewModule = {
 	path: '/dashboard/users/:id/lock',
 	pathKey: USERS_LOCK_URL,
+	layout: USERS_LOCK_LAYOUT,
 	view: <Lock/>,
 	viewKey: USERS_LOCK_VIEW
 };

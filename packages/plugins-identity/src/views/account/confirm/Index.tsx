@@ -4,6 +4,7 @@
 // import { CONFIRM_SERVICE } from '@plugins-identity/services.ts';
 // import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { CONFIRM_URL } from '@plugins-identity/urls.ts';
+import { CONFIRM_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -48,6 +49,7 @@ function Index() {
 const module: ViewModule = {
 	path: '/dashboard/account/confirm',
 	pathKey: CONFIRM_URL,
+	layout: CONFIRM_LAYOUT,
 	view: <Index/>,
 	viewKey: CONFIRM_VIEW
 };

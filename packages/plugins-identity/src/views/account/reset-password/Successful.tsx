@@ -1,6 +1,7 @@
 ﻿import { Link } from '@sienar/ui';
 import { useDocumentTitle } from '@sienar/utils';
 import { LOGIN_URL, RESET_PASSWORD_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
+import { RESET_PASSWORD_SUCCESSFUL_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -27,6 +28,7 @@ function Successful() {
 const module: ViewModule = {
 	path: '/dashboard/account/reset-password/successful',
 	pathKey: RESET_PASSWORD_SUCCESSFUL_URL,
+	layout: RESET_PASSWORD_SUCCESSFUL_LAYOUT,
 	view: <Successful/>,
 	viewKey: RESET_PASSWORD_SUCCESSFUL_VIEW
 };

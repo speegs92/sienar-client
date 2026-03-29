@@ -13,6 +13,7 @@
 // import type { User } from '@plugins-identity/types.ts';
 // import { roles } from '@plugins-identity/constants.ts';
 import { USERS_URL } from '@plugins-identity/urls.ts';
+import { USERS_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -154,6 +155,7 @@ function Index() {
 const module: ViewModule = {
 	path: '/dashboard/users',
 	pathKey: USERS_URL,
+	layout: USERS_LAYOUT,
 	view: <Index/>,
 	viewKey: USERS_VIEW
 };

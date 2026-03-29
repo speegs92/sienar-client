@@ -5,6 +5,7 @@
 // import { RESET_PASSWORD_SERVICE } from '@plugins-identity/services.ts';
 // import { RESET_PASSWORD_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
 import { RESET_PASSWORD_URL } from '@plugins-identity/urls.ts';
+import { RESET_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -73,6 +74,7 @@ function Index() {
 const module: ViewModule = {
 	path: '/dashboard/account/reset-password',
 	pathKey: RESET_PASSWORD_URL,
+	layout: RESET_PASSWORD_LAYOUT,
 	view: <Index/>,
 	viewKey: RESET_PASSWORD_VIEW
 };

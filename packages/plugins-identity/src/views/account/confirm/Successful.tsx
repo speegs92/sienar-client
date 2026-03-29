@@ -1,6 +1,7 @@
 import { useDocumentTitle } from '@sienar/utils';
 import { Link } from '@sienar/ui';
 import { CONFIRM_SUCCESSFUL_URL, LOGIN_URL } from '@plugins-identity/urls.ts';
+import { CONFIRM_SUCCESSFUL_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -27,6 +28,7 @@ function Successful() {
 const module: ViewModule = {
 	path: '/dashboard/account/confirm/successful',
 	pathKey: CONFIRM_SUCCESSFUL_URL,
+	layout: CONFIRM_SUCCESSFUL_LAYOUT,
 	view: <Successful/>,
 	viewKey: CONFIRM_SUCCESSFUL_VIEW
 };
