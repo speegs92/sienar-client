@@ -1,8 +1,17 @@
 import { useSearchParams } from 'react-router-dom';
-import { StatusPage } from '@sienar/ui';
 import { useDocumentTitle } from '@sienar/utils';
+import { REGISTER_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
 
-export default function Successful() {
+import type { ReactNode } from 'react';
+import type { ViewModule } from '@sienar/plugins-core';
+import type { InjectionKey } from '@sienar/utils';
+
+/**
+ * The content of the register successful page
+ */
+export const REGISTER_SUCCESSFUL_VIEW = Symbol() as InjectionKey<ReactNode>;
+
+function Successful() {
 	useDocumentTitle('Registered');
 
 	const [ params ] = useSearchParams();
@@ -10,8 +19,20 @@ export default function Successful() {
 	const email = params.get('email');
 
 	return (
-		<StatusPage title='Registered successfully'>
-			Thank you for registering, {username}! A welcome email has been sent to {email}. Please click the verification link in the welcome email to verify your account.
-		</StatusPage>
+		<>
+			<h1>Registered successfully</h1>
+			<p>
+				Thank you for registering, {username}! A welcome email has been sent to {email}. Please click the verification link in the welcome email to verify your account.
+			</p>
+		</>
 	);
 }
+
+const module: ViewModule = {
+	path: '/dashboard/account/register/successful',
+	pathKey: REGISTER_SUCCESSFUL_URL,
+	view: <Successful/>,
+	viewKey: REGISTER_SUCCESSFUL_VIEW
+};
+
+export default module;

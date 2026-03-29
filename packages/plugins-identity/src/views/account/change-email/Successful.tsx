@@ -1,14 +1,33 @@
-﻿import { StatusPage } from '@sienar/ui';
-import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
+﻿import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
+import { CHANGE_EMAIL_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
 
-export default function Successful() {
+import type { ReactNode } from 'react';
+import type { ViewModule } from '@sienar/plugins-core';
+import type { InjectionKey } from '@sienar/utils';
+
+/**
+ * The content of the change email successful page
+ */
+export const CHANGE_EMAIL_SUCCESSFUL_VIEW = Symbol() as InjectionKey<ReactNode>;
+
+function Successful() {
 	useDocumentTitle('Email confirmed');
 
 	return (
 		<AuthorizeRoute>
-			<StatusPage title='Confirmed successfully'>
+			<h1>Confirmed successfully</h1>
+			<p>
 				Your new email address is now confirmed!
-			</StatusPage>
+			</p>
 		</AuthorizeRoute>
 	);
 }
+
+const module: ViewModule = {
+	path: '/dashboard/account/change-email/successful',
+	pathKey: CHANGE_EMAIL_SUCCESSFUL_URL,
+	view: <Successful/>,
+	viewKey: CHANGE_EMAIL_SUCCESSFUL_VIEW
+};
+
+export default module;

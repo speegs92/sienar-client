@@ -2,7 +2,7 @@
 import { aggregateLinks, classNames, filterLinks, useAuthContext, useActiveMenu } from '@sienar/utils';
 import { createThemedClassNames } from '@ui/theme.ts';
 import { useScrollLock } from '@ui/utils.ts';
-import { Button, Icon, Menu, MenuItem, ModalContainer, Notifications } from '@ui/components';
+import { Button, Container, Icon, Menu, MenuItem, ModalContainer, Notifications } from '@ui/components';
 import { Appbar } from './Appbar.tsx';
 import { Sidebar } from './Sidebar.tsx';
 import { MainContent } from './MainContent.tsx';
@@ -103,7 +103,9 @@ export function Application(props: ApplicationProps) {
 						sidebarOpen={open}
 						className='flex-grow-1'
 					>
-						{children}
+						<Container className='p-4'>
+							{children}
+						</Container>
 					</MainContent>
 				</div>
 			</Tag>

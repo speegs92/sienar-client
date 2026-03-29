@@ -1,10 +1,19 @@
 ﻿import { useSearchParams } from 'react-router-dom';
 import { Form, HiddenInput } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
-import { CHANGE_EMAIL_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
+import { CHANGE_EMAIL_CONFIRM_URL, CHANGE_EMAIL_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
 import { CHANGE_EMAIL_CONFIRM_SERVICE } from '@plugins-identity/services.ts';
 
-export default function Index() {
+import type { ReactNode } from 'react';
+import type { ViewModule } from '@sienar/plugins-core';
+import type { InjectionKey } from '@sienar/utils';
+
+/**
+ * The content of the change email confirmation page
+ */
+export const CHANGE_EMAIL_CONFIRM_VIEW = Symbol() as InjectionKey<ReactNode>;
+
+function Index() {
 	useDocumentTitle('Confirming email address');
 
 	const [ search ] = useSearchParams();
@@ -33,3 +42,12 @@ export default function Index() {
 		</AuthorizeRoute>
 	);
 }
+
+const module: ViewModule = {
+	path: '/dashboard/account/change-email/confirm',
+	pathKey: CHANGE_EMAIL_CONFIRM_URL,
+	view: <Index/>,
+	viewKey: CHANGE_EMAIL_CONFIRM_VIEW
+}
+
+export default module;

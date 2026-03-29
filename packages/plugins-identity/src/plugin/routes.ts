@@ -176,7 +176,7 @@ export function setupIdentityRoutes() {
 	registerRoutes(
 		LAYOUTS.DELETED_LAYOUT,
 		{
-			path: URLS.DELETED_URL,
+			path: URLS.ACCOUNT_DELETED_URL,
 			element: VIEWS.DELETED_VIEW
 		}
 	);

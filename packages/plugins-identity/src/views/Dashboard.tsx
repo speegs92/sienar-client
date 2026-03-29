@@ -1,13 +1,29 @@
-import Typography from '@mui/material/Typography';
-import { useDocumentTitle } from '@sienar/utils';
-import { AuthorizeRoute } from '@sienar/utils';
+import { MAIN_URL, MAIN_VIEW, MAIN_MENU } from '@sienar/plugins-core';
+import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 
-export default function Dashboard() {
+import type { ViewModule } from '@sienar/plugins-core';
+
+function Dashboard() {
 	useDocumentTitle('Dashboard');
 
 	return (
 		<AuthorizeRoute>
-			<Typography typography='h1'>Dashboard stub</Typography>
+			<h1>Dashboard stub</h1>
 		</AuthorizeRoute>
 	);
 }
+
+const module: ViewModule = {
+	path: '/dashboard',
+	pathKey: MAIN_URL,
+	view: <Dashboard/>,
+	viewKey: MAIN_VIEW,
+	menu: {
+		text: 'Dashboard',
+		href: MAIN_URL,
+		icon: ''
+	},
+	menuKey: MAIN_MENU
+};
+
+export default module;

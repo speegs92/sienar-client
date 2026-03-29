@@ -5,8 +5,16 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Help from '@mui/icons-material/Help';
+import { ABOUT_URL } from '@plugins-identity/urls.ts';
 
 import type { ReactNode } from 'react';
+import type { ViewModule } from '@sienar/plugins-core';
+import type { InjectionKey } from '@sienar/utils';
+
+/**
+ * The content of the about page
+ */
+export const ABOUT_VIEW = Symbol() as InjectionKey<ReactNode>;
 
 type Technology = {
 	name: string
@@ -97,7 +105,7 @@ const technologies: Technology[] = [
 	}
 ];
 
-export default function About() {
+function About() {
 	const authorLink = (
 		<a
 			href="https://levesque.dev"
@@ -168,3 +176,12 @@ export default function About() {
 		</>
 	);
 }
+
+const module: ViewModule = {
+	path: '/dashboard/about',
+	pathKey: ABOUT_URL,
+	view: <About/>,
+	viewKey: ABOUT_VIEW
+};
+
+export default module;

@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
-import LabelIcon from '@mui/icons-material/Label';
 import { AuthorizeRoute, getDateString, inject } from '@sienar/utils';
-import { StatusPage, LoadingPage } from '@sienar/ui';
+import { Icon } from '@sienar/ui';
 import { GET_LOCKOUT_REASONS_SERVICE } from '@plugins-identity/services.ts';
+import { ACCOUNT_LOCKED_URL } from '@plugins-identity/urls.ts';
+
+import type { ReactNode } from 'react';
+import type { ViewModule } from '@sienar/plugins-core';
+import type { InjectionKey } from '@sienar/utils';
 import type { AccountLockResult } from '@plugins-identity/types.ts';
 
-export default function AccountLocked() {
+/**
+ * The content of the account locked page
+ */
+export const ACCOUNT_LOCKED_VIEW = Symbol() as InjectionKey<ReactNode>;
+
+function AccountLocked() {
 	const [ params ] = useSearchParams();
 	const [ lockResult, setLockResult ] = useState<AccountLockResult|null>(null);
 
@@ -31,36 +35,47 @@ export default function AccountLocked() {
 		})();
 	}, []);
 
-	if (!lockResult) return <LoadingPage>Loading lockout reasons...</LoadingPage>;
+	if (!lockResult) {
+		return <p>Loading lockout reasons...</p>;
+	}
 
 	return (
 		<AuthorizeRoute mustBeLoggedOut>
-			<StatusPage title='Account locked out'>
-				{lockResult.lockoutEnd && (
-					<Typography>
-						Your account is currently locked until <strong>{getDateString(lockResult.lockoutEnd)}
-					</strong></Typography>
-				)}
-				{!lockResult.lockoutEnd && (
-					<Typography>
-						Your account is locked <strong>permanently</strong>.
-					</Typography>
-				)}
+			<h1>Account locked out</h1>
 
-				<Typography my={2}>Your account is locked for the following reasons:</Typography>
-				<List>
-					{lockResult.lockoutReasons.map(r => (
-						<ListItem key={r.id}>
-							<ListItemIcon>
-								<LabelIcon fontSize='small'/>
-							</ListItemIcon>
-							<ListItemText>
-								{r.reason}
-							</ListItemText>
-						</ListItem>
-					))}
-				</List>
-			</StatusPage>
+			{lockResult.lockoutEnd && (
+				<p>
+					Your account is currently locked until <strong>{getDateString(lockResult.lockoutEnd)}</strong>
+				</p>
+			)}
+
+			{!lockResult.lockoutEnd && (
+				<p>
+					Your account is locked <strong>permanently</strong>.
+				</p>
+			)}
+
+			<p>
+				Your account is locked for the following reasons:
+			</p>
+
+			<ul>
+				{lockResult.lockoutReasons.map(r => (
+					<li key={r.id}>
+						<Icon icon='label'/>
+						{r.reason}
+					</li>
+				))}
+			</ul>
 		</AuthorizeRoute>
 	)
 }
+
+const module: ViewModule = {
+	path: '/dashboard/account/locked',
+	pathKey: ACCOUNT_LOCKED_URL,
+	view: <AccountLocked/>,
+	viewKey: ACCOUNT_LOCKED_VIEW
+};
+
+export default module;

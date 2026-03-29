@@ -1,13 +1,34 @@
-import { Link, StatusPage } from '@sienar/ui';
 import { useDocumentTitle } from '@sienar/utils';
-import { LOGIN_URL } from '@plugins-identity/urls.ts';
+import { Link } from '@sienar/ui';
+import { CONFIRM_SUCCESSFUL_URL, LOGIN_URL } from '@plugins-identity/urls.ts';
 
-export default function Successful() {
+import type { ReactNode } from 'react';
+import type { ViewModule } from '@sienar/plugins-core';
+import type { InjectionKey } from '@sienar/utils';
+
+/**
+ * The content of the confirm account successful page
+ */
+export const CONFIRM_SUCCESSFUL_VIEW = Symbol() as InjectionKey<ReactNode>;
+
+function Successful() {
 	useDocumentTitle('Account confirmed');
 
 	return (
-		<StatusPage title='Confirmed successfully'>
-			Your account is now confirmed! You can now <Link to={LOGIN_URL}>log in</Link>.
-		</StatusPage>
+		<>
+			<h1>Confirmed successfully</h1>
+			<p>
+				Your account is now confirmed! You can now <Link href={LOGIN_URL}>log in</Link>.
+			</p>
+		</>
 	);
 }
+
+const module: ViewModule = {
+	path: '/dashboard/account/confirm/successful',
+	pathKey: CONFIRM_SUCCESSFUL_URL,
+	view: <Successful/>,
+	viewKey: CONFIRM_SUCCESSFUL_VIEW
+};
+
+export default module;

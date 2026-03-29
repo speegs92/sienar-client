@@ -1,9 +1,10 @@
-import { StatusPage } from '@sienar/ui';
-
 export default function MustBeLoggedOut() {
 	return (
-		<StatusPage title='You must be logged out'>
-			You cannot view this page because some pages, such as the login and registration page, require you to be logged out.
-		</StatusPage>
+		<>
+			<h1>You must be logged out</h1>
+			<p>
+				You cannot view this page because some pages, such as the login and registration page, require you to be logged out.
+			</p>
+		</>
 	);
 }
