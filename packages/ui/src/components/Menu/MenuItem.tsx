@@ -1,17 +1,16 @@
-import { ButtonBase } from '@ui/components/Button/ButtonBase.tsx';
+import { inject } from '@sienar/utils';
 import { useCloseableContext } from '@ui/utils.ts';
 import { createThemedClassNames, useThemeContext } from '@ui/theme.ts';
 
 import type { HTMLAttributes, MouseEventHandler, ReactNode } from 'react';
-import type { ButtonBaseProps } from '@ui/components/Button/ButtonBase.tsx';
+import type { InjectionKey } from '@sienar/utils';
 import type { Color } from '@ui/theme.ts';
 
 /**
  * The props for the menu item component
  */
 export interface MenuItemProps extends
-	Omit<HTMLAttributes<HTMLLIElement>, 'color'>,
-	Pick<ButtonBaseProps, 'href'> {
+	Omit<HTMLAttributes<HTMLLIElement>, 'color'> {
 	/**
 	 * The color of the menu item
 	 */
@@ -26,6 +25,11 @@ export interface MenuItemProps extends
 	 * The icon to display with the menu item, if any
 	 */
 	icon?: ReactNode;
+
+	/**
+	 * The <code>href</code> of the link, if any
+	 */
+	href?: string|InjectionKey<string>;
 
 	/**
 	 * The click handler, if any
@@ -58,7 +62,16 @@ export function MenuItem(props: MenuItemProps) {
 	const handleClick: MouseEventHandler<HTMLLIElement> = e => {
 		onClick?.(e);
 		closeableContext.close();
-	}
+	};
+
+	const content = (
+		<>
+			<span className='menu__item-icon'>
+				{icon}
+			</span>
+			{label ?? children}
+		</>
+	);
 
 	return (
 		<li
@@ -66,15 +79,20 @@ export function MenuItem(props: MenuItemProps) {
 			onClick={handleClick}
 			{...rest}
 		>
-			<ButtonBase
-				className='menu__item-button'
-				href={href}
-			>
-				<span className='menu__item-icon'>
-					{icon}
-				</span>
-				{label ?? children}
-			</ButtonBase>
+			{href && (
+				<a
+					className='menu__item-button'
+					href={typeof href === 'string' ? href : inject(href)}
+				>
+					{content}
+				</a>
+			)}
+
+			{!href && (
+				<button className='menu__item-button'>
+					{content}
+				</button>
+			)}
 		</li>
 	);
 }

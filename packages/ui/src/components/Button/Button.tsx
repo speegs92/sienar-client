@@ -1,38 +1,41 @@
-﻿import { classNames } from '@sienar/utils';
-import { ButtonBase } from './ButtonBase.tsx';
-import { createThemedClassNames } from '@ui/theme.ts';
+﻿import { forwardRef } from 'react';
+import { createButtonClasses } from './shared.ts';
 import './Button.scss';
 
-import type { Themeable } from '@ui/theme.ts';
-import type { ButtonBaseProps } from './ButtonBase.tsx';
+import type { ForwardedRef, ButtonHTMLAttributes } from 'react';
+import type { ButtonBaseProps } from './shared.ts';
 
 /**
  * The props of the button component
  */
-export interface ButtonProps extends ButtonBaseProps, Themeable {}
+export interface ButtonProps extends
+	ButtonBaseProps,
+	Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {}
 
-export function Button(props: ButtonProps) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
 	const {
 		color = 'default',
 		variant = 'solid',
 		icon,
 		className,
+		children,
 		...rest
 	} = props;
 
-	const classes = classNames(
+	const classes = createButtonClasses(
 		className,
-		createThemedClassNames(color, variant, 'button'),
-		{
-			'button--icon': !!icon
-		}
+		color,
+		variant,
+		!!icon
 	);
 
 	return (
-		<ButtonBase
+		<button
+			ref={ref}
 			className={classes}
-			icon={icon}
 			{...rest}
-		/>
+		>
+			{icon ? icon : children}
+		</button>
 	);
-}
+});
