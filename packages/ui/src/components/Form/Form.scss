@@ -1,0 +1,84 @@
+﻿@use 'sass:map';
+@use '@ui/styles/variables';
+
+.form-field {
+	--form-field-margin-bottom: var(--spacer-4);
+	--form-field-text-color: var(--color-heavy);
+
+	--form-field-input-background-color: var(--color-white);
+	--form-field-input-border-color: var(--color-light);
+	--form-field-input-border-style: solid;
+	--form-field-input-border-width: 1px;
+	--form-field-input-border-radius: var(--border-radius);
+	--form-field-input-padding-x: var(--spacer-2);
+	--form-field-input-padding-y: var(--spacer-2);
+	--form-field-input-text-color: var(--color-heavy);
+
+	--form-field-label-margin-bottom: var(--spacer-2);
+
+	margin-bottom: var(--form-field-margin-bottom);
+}
+
+.form-field__label {
+	margin-bottom: var(--form-field-label-margin-bottom);
+	color: var(--form-field-text-color);
+
+	display: block;
+	font-weight: bold;
+
+	transition: color var(--transition),
+		border-color var(--transition);
+}
+
+.form-field__input-wrapper {
+	background-color: var(--form-field-input-background-color);
+	border-color: var(--form-field-input-border-color);
+	border-style: var(--form-field-input-border-style);
+	border-width: var(--form-field-input-border-width);
+	border-radius: var(--form-field-input-border-radius);
+	padding: var(--form-field-input-padding-y) var(--form-field-input-padding-x);
+
+	display: flex;
+}
+
+.form-field__input {
+	color: var(--form-field-text-color);
+
+	appearance: none;
+	outline: none;
+	border: none;
+	display: block;
+	flex-grow: 1;
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active{
+		box-shadow: 0 0 0 1000px var(--form-field-input-background-color) inset !important;
+	}
+}
+
+@each $color in map.keys(variables.$theme-colors) {
+	.form-field--#{$color}.form-field--focused {
+		--form-field-text-color: var(--color-#{$color});
+		--form-field-input-border-color: var(--color-#{$color});
+	}
+}
+
+.form-field--invalid {
+	--form-field-input-border-color: var(--color-error);
+
+	&.form-field--focused {
+		--form-field-text-color: var(--color-error);
+		--form-field-input-border-color: var(--color-error);
+	}
+}
+
+.form-field--valid {
+	--form-field-input-border-color: var(--color-success);
+
+	&.form-field--focused {
+		--form-field-text-color: var(--color-success);
+		--form-field-input-border-color: var(--color-success);
+	}
+}
