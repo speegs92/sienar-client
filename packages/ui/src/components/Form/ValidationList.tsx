@@ -34,7 +34,7 @@ export function ValidationList(props: ValidationListProps) {
 	const {
 		validations,
 		hideNonErrors = false,
-		hideIfAllValid = false,
+		hideIfAllValid = true,
 		allValidMessage = 'All requirements met',
 		className,
 		...rest
