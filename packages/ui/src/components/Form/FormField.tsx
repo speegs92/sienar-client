@@ -5,11 +5,9 @@ import { ValidationList } from './ValidationList.tsx';
 import type { HTMLAttributes, ReactNode } from 'react';
 import type { ValidationResult } from '@sienar/utils';
 import type { Color } from '@ui/theme.ts';
-import type { FormInputProps } from './shared.ts';
+import type { ValidationListProps } from './ValidationList.tsx';
 
-export interface FormFieldProps extends
-	Omit<HTMLAttributes<HTMLElement>, 'color'>,
-	Pick<FormInputProps<any>, 'hideNonErrors'|'hideValidationIfValid'|'allValidMessage'> {
+export interface FormFieldProps extends Omit<HTMLAttributes<HTMLElement>, 'color'> {
 	/**
 	 * The theme color of the form input
 	 */
@@ -29,6 +27,11 @@ export interface FormFieldProps extends
 	 * The validation results
 	 */
 	validations: ValidationResult[];
+
+	/**
+	 * The validation list props
+	 */
+	validationListProps?: Omit<ValidationListProps, 'validations'>;
 }
 
 export function FormField(props: FormFieldProps) {
@@ -37,11 +40,9 @@ export function FormField(props: FormFieldProps) {
 		inputId,
 		labelContent,
 		validations,
-		hideNonErrors,
-		hideValidationIfValid,
-		allValidMessage,
 		className,
 		children,
+		validationListProps,
 		...rest
 	} = props;
 
@@ -76,9 +77,7 @@ export function FormField(props: FormFieldProps) {
 
 			<ValidationList
 				validations={validations}
-				hideNonErrors={hideNonErrors}
-				hideIfAllValid={hideValidationIfValid}
-				allValidMessage={allValidMessage}
+				{...validationListProps}
 			/>
 		</div>
 	);

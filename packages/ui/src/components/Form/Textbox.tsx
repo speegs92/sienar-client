@@ -5,6 +5,7 @@ import { FormField } from './FormField.tsx';
 import type { ChangeEvent, FocusEvent, PropsWithChildren, InputHTMLAttributes } from 'react';
 import { type Color } from '@ui/theme.ts';
 import type { FormInputProps } from './shared.ts';
+import type { ValidationListProps } from './ValidationList.tsx';
 
 /**
  * The props of the textbox component
@@ -22,6 +23,11 @@ export interface TextboxProps<T extends string | number> extends
 	 * The theme color of the form input
 	 */
 	color?: Color;
+
+	/**
+	 * The validation list props
+	 */
+	validationListProps?: Omit<ValidationListProps, 'validations'>;
 }
 
 export function Textbox<T extends string | number>(props: TextboxProps<T>) {
@@ -29,9 +35,7 @@ export function Textbox<T extends string | number>(props: TextboxProps<T>) {
 		id,
 		name,
 		displayName,
-		hideNonErrors,
-		hideValidationIfValid = true,
-		allValidMessage,
+		validationListProps,
 		validators = [],
 		value,
 		onBlur,
@@ -99,9 +103,7 @@ export function Textbox<T extends string | number>(props: TextboxProps<T>) {
 			inputId={id ?? inputId}
 			labelContent={children ?? displayName}
 			validations={validations}
-			hideNonErrors={hideNonErrors}
-			hideValidationIfValid={hideValidationIfValid}
-			allValidMessage={allValidMessage}
+			validationListProps={validationListProps}
 		>
 			<input
 				id={id ?? inputId}
