@@ -10,8 +10,8 @@
 	--form-field-input-border-style: solid;
 	--form-field-input-border-width: 1px;
 	--form-field-input-border-radius: var(--border-radius);
-	--form-field-input-padding-x: var(--spacer-2);
-	--form-field-input-padding-y: var(--spacer-2);
+	--form-field-input-padding-x: var(--spacer-3);
+	--form-field-input-padding-y: var(--spacer-3);
 	--form-field-input-text-color: var(--color-heavy);
 
 	--form-field-label-margin-bottom: var(--spacer-2);
@@ -39,6 +39,7 @@
 	padding: var(--form-field-input-padding-y) var(--form-field-input-padding-x);
 
 	display: flex;
+	align-items: stretch;
 }
 
 .form-field__input {
@@ -58,8 +59,33 @@
 	}
 }
 
+.form-field__input-left-icon,
+.form-field__input-right-icon {
+	display: flex;
+	width: 30px;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+	color: var(--form-field-text-color);
+	transition: color var(--transition);
+
+	// Combining display: flex, centered justify and align, and line-height 1px
+	// causes the icon to add no vertical space to the input wrapper
+	line-height: 1px;
+}
+
+.form-field__input-left-icon {
+	margin-right: var(--form-field-input-padding-x);
+}
+
+.form-field__input-right-icon {
+	margin-left: var(--form-field-input-padding-x);
+}
+
 @each $color in map.keys(variables.$theme-colors) {
-	.form-field--#{$color}.form-field--focused {
+	.form-field--#{$color}.form-field--focused,
+	.form-field--#{$color}.form-field--focused .form-field__input-left-icon,
+	.form-field--#{$color}.form-field--focused .form-field__input-right-icon {
 		--form-field-text-color: var(--color-#{$color});
 		--form-field-input-border-color: var(--color-#{$color});
 	}
@@ -68,7 +94,9 @@
 .form-field--invalid {
 	--form-field-input-border-color: var(--color-error);
 
-	&.form-field--focused {
+	&.form-field--focused,
+	&.form-field--focused .form-field__input-left-icon,
+	&.form-field__focused .form-field__input-right-icon{
 		--form-field-text-color: var(--color-error);
 		--form-field-input-border-color: var(--color-error);
 	}

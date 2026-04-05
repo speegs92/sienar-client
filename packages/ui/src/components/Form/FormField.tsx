@@ -24,6 +24,16 @@ export interface FormFieldProps extends Omit<HTMLAttributes<HTMLElement>, 'color
 	labelContent: ReactNode;
 
 	/**
+	 * The icon to show to the left of the input
+	 */
+	leftIcon?: ReactNode;
+
+	/**
+	 * The icon to show to the right of the input
+	 */
+	rightIcon?: ReactNode;
+
+	/**
 	 * The validation results
 	 */
 	validations: ValidationResult[];
@@ -39,6 +49,8 @@ export function FormField(props: FormFieldProps) {
 		color,
 		inputId,
 		labelContent,
+		leftIcon,
+		rightIcon,
 		validations,
 		className,
 		children,
@@ -72,7 +84,19 @@ export function FormField(props: FormFieldProps) {
 			</label>
 
 			<div className='form-field__input-wrapper'>
+				{leftIcon && (
+					<div className='form-field__input-left-icon'>
+						{leftIcon}
+					</div>
+				)}
+
 				{children}
+
+				{rightIcon && (
+					<div className='form-field__input-right-icon'>
+						{rightIcon}
+					</div>
+				)}
 			</div>
 
 			<ValidationList
