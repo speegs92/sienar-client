@@ -1,0 +1,43 @@
+﻿@use 'sass:map';
+@use '@ui/styles/variables';
+
+.checkbox {
+	--checkbox-margin-bottom: var(--spacer-4);
+
+	--checkbox-input-color: var(--color-heavy);
+	--checkbox-input-size: 24px;
+	--checkbox-input-margin-right: var(--spacer-3);
+
+	display: flex;
+	align-items: center;
+	margin-bottom: var(--checkbox-margin-bottom);
+}
+
+.checkbox__input {
+	accent-color: var(--checkbox-input-color);
+	margin-right: var(--checkbox-input-margin-right);
+	width: var(--checkbox-input-size);
+	height: var(--checkbox-input-size);
+}
+
+.checkbox__label {
+	transition: color var(--transition);
+}
+
+.checkbox__input:checked + .checkbox__label {
+	color: var(--checkbox-input-color);
+}
+
+@each $color in map.keys(variables.$theme-colors) {
+	.checkbox--#{$color} {
+		--checkbox-input-color: var(--color-#{$color});
+	}
+}
+
+.checkbox--valid {
+	--checkbox-input-color: var(--color-success);
+}
+
+.checkbox--invalid {
+	--checkbox-input-color: var(--color-error);
+}
