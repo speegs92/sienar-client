@@ -1,13 +1,11 @@
 ﻿import { useContext, useEffect, useId, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@ui/Card.tsx';
-import { formValidationContext, inject, useNavigate } from '@sienar/utils';
+import { classNames, formValidationContext, inject, useNavigate } from '@sienar/utils';
+import { Button, Card, CardActions, CardContent, CardHeader } from '@ui/components';
 
-import type { FormEvent, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode, SubmitEvent } from 'react';
 import type { CrudService, InjectionKey, StatusService } from '@sienar/utils';
-import type { CardProps } from '@ui/Card.tsx';
+import type { Color } from '@ui/theme.ts';
 
 export type UpsertFormProps<T> = {
 	upsert: true
@@ -37,7 +35,37 @@ export type RedirectOnSuccessFormProps = {
 	onSuccess?: never
 }
 
-export type FormProps<T> = Omit<CardProps, 'actions'|'title'> & {
+export type FormProps<T> = {
+	/**
+	 * The title text of the form. If omitted, it is determined programmatically if possible
+	 */
+	title?: string;
+
+	/**
+	 * The HTML tag with which to render the title
+	 */
+	titleTag?: keyof HTMLElementTagNameMap;
+
+	/**
+	 * The subtitle text of the form, if any
+	 */
+	subtitle?: string;
+
+	/**
+	 * The HTML tag with which to render the subtitle
+	 */
+	subtitleTag?: keyof HTMLElementTagNameMap;
+
+	/**
+	 * The theme color of the form, if any
+	 */
+	color?: Color;
+
+	/**
+	 * The icon to display in the form header, if any
+	 */
+	headerIcon?: ReactNode;
+
 	onSubmit?: (formValues: Record<string, any>) => boolean
 	onReset?: () => any
 	resetText?: string
@@ -49,21 +77,17 @@ export type FormProps<T> = Omit<CardProps, 'actions'|'title'> & {
 	immediate?: boolean
 }
 	& ( UpsertFormProps<T> | StatusFormProps)
-	& ( HandleSuccessFormProps<T> | RedirectOnSuccessFormProps);
+	& ( HandleSuccessFormProps<T> | RedirectOnSuccessFormProps)
+	& Omit<HTMLAttributes<HTMLFormElement>, 'title'|'color'>;
 
-export default function Form<T>(props: FormProps<T>) {
+export function Form<T>(props: FormProps<T>) {
 	const {
-		titleTypography,
-		titleComponent,
+		title,
+		titleTag: TitleTag = 'h1',
 		subtitle,
-		subtitleTypography,
-		subtitleComponent,
+		subtitleTag: SubtitleTag = 'h2',
 		headerIcon,
 		color,
-		headerBackgroundColor,
-		headerTextColor,
-		variant,
-		elevation,
 		onSubmit,
 		resetText = 'Reset',
 		showReset = false,
@@ -88,7 +112,7 @@ export default function Form<T>(props: FormProps<T>) {
 	const formContext = useContext(formValidationContext);
 	const navigate = useNavigate();
 
-	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		formContext.hasInteracted = true;
 
@@ -162,11 +186,15 @@ export default function Form<T>(props: FormProps<T>) {
 	// If editing, download existing entity and map to forms fields
 	useEffect(() => {
 		(async function () {
-			if (!(upsert && !isCreating)) return;
+			if (!(upsert && !isCreating)) {
+				return;
+			}
 
 			const service = inject(serviceKey);
 			const initial = await service.read(id!);
-			if (!initial) return;
+			if (!initial) {
+				return;
+			}
 
 			for (let [k, v] of Object.entries(initial)) {
 				// Let's be nice and handle IDs and concurrency stamps for the devs
@@ -183,7 +211,9 @@ export default function Form<T>(props: FormProps<T>) {
 				}
 
 				// If the element doesn't exist, there's nothing to do
-				if (!formContext.fields[k]) continue;
+				if (!formContext.fields[k]) {
+					continue;
+				}
 
 				// Set the value
 				formContext.fields[k].setValue(v)
@@ -191,64 +221,67 @@ export default function Form<T>(props: FormProps<T>) {
 		})();
 	}, []);
 
-	const actions = (
-		<Box sx={{
-			display: hideControls ? 'none' : 'block',
-			'& .MuiButtonBase-root': { mr: 2 }
-		}}>
-			<Button
-				form={formId}
-				ref={submitButtonRef}
-				color={color}
-				type='submit'
-				variant='contained'
-			>
-				{generateSubmitText(props, isCreating)}
-			</Button>
-
-			<Button
-				form={formId}
-				ref={resetButtonRef}
-				color='secondary'
-				type='reset'
-				variant='outlined'
-				sx={{
-					display: showReset ? undefined : 'none'
-				}}
-			>
-				{resetText}
-			</Button>
-			{additionalActions}
-		</Box>
-	);
-
 	return (
 		<formValidationContext.Provider value={formContext}>
-			<Card
-				title={generateCardTitle(props, isCreating)}
-				titleTypography={titleTypography}
-				titleComponent={titleComponent}
-				subtitle={subtitle}
-				subtitleTypography={subtitleTypography}
-				subtitleComponent={subtitleComponent}
-				headerIcon={headerIcon}
-				actions={actions}
-				color={color}
-				headerBackgroundColor={headerBackgroundColor}
-				headerTextColor={headerTextColor}
-				variant={variant}
-				elevation={elevation}
-			>
-				{information}
+			<Card color={color} style={{backgroundColor: 'var(--color-white)'}}>
+				<CardHeader>
+					<div>
+						<TitleTag>
+							{title || generateCardTitle(props, isCreating)}
+						</TitleTag>
+						{subtitle && (
+							<SubtitleTag>
+								{subtitle}
+							</SubtitleTag>
+						)}
+					</div>
 
-				<form
-					id={formId}
-					ref={formRef}
-					onSubmit={handleSubmit}
-					onReset={handleReset}
-				>
-					{children}
-				</form>
+					{headerIcon}
+				</CardHeader>
+
+				{information && (
+					<CardContent>
+						{information}
+					</CardContent>
+				)}
+
+				<CardContent>
+					<form
+						id={formId}
+						ref={formRef}
+						onSubmit={handleSubmit}
+						onReset={handleReset}
+					>
+						{children}
+					</form>
+				</CardContent>
+
+				{!hideControls && (
+					<CardActions>
+						<Button
+							form={formId}
+
+ref={submitButtonRef}
+							color={color}
+							type='submit'
+							variant='solid'
+						>
+							{generateSubmitText(props, isCreating)}
+						</Button>
+
+						<Button
+							className={classNames({ 'd-none': !showReset })}
+							// form={formId}
+							ref={resetButtonRef}
+							color='secondary'
+							// type='reset'
+							// variant='outlined'
+						>
+							{resetText}
+						</Button>
+						{additionalActions}
+					</CardActions>
+				)}
 			</Card>
 		</formValidationContext.Provider>
 	);
