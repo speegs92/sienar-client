@@ -20,22 +20,10 @@
 	height: var(--checkbox-input-size);
 }
 
-.checkbox__label {
-	transition: color var(--transition);
-}
-
-.checkbox__input:checked + .checkbox__label {
-	color: var(--checkbox-input-color);
-}
-
 @each $color in map.keys(variables.$theme-colors) {
 	.checkbox--#{$color} {
 		--checkbox-input-color: var(--color-#{$color});
 	}
-}
-
-.checkbox--valid {
-	--checkbox-input-color: var(--color-success);
 }
 
 .checkbox--invalid {
