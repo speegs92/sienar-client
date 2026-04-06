@@ -1,16 +1,17 @@
 ﻿import { useEffect, useId, useRef } from 'react';
-import { classNames, useFormFieldValidation, useRerender } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
+import { useFormFieldValidation, useRerender } from '@sienar/utils';
+import { FormCheckbox } from './FormCheckbox.tsx';
 import { ValidationList } from './ValidationList.tsx';
 
-import type { ChangeEvent, InputHTMLAttributes } from 'react';
+import type { ChangeEvent } from 'react';
 import type { Color } from '@ui/theme.ts';
+import type { FormCheckboxProps } from './FormCheckbox.tsx';
 import type { FormInputProps } from './shared.ts';
 import type { ValidationListProps } from './ValidationList.tsx';
 
 export interface StandaloneCheckboxProps extends
-	Omit<InputHTMLAttributes<HTMLInputElement>, 'color'|'onChange'|'value'>,
-	Omit<FormInputProps<boolean>, 'value'> {
+	Pick<FormInputProps<boolean>, 'onChange'>,
+	Omit<FormCheckboxProps, 'value'|'onChange'> {
 	/**
 	 * The theme color of the checkbox
 	 */
@@ -68,30 +69,18 @@ export function StandaloneCheckbox(props: StandaloneCheckboxProps) {
 		currentChecked.current = checked;
 	}, [checked]);
 
-	const classes = classNames(
-		className,
-		createThemedClassNames(color, undefined, 'checkbox')
-	);
-
 	return (
-		<div className={classes}>
-			<input
+		<div className='standalone-checkbox'>
+			<FormCheckbox
 				id={id ?? inputId}
-				className='checkbox__input'
 				name={name}
-				type='checkbox'
 				checked={currentChecked.current}
 				value={currentChecked.current.toString()}
 				onChange={handleChange}
 				{...rest}
-			/>
-
-			<label
-				className='checkbox__label'
-				htmlFor={id ?? inputId}
 			>
 				{children ?? displayName}
-			</label>
+			</FormCheckbox>
 
 			<ValidationList
 				validations={validations}
