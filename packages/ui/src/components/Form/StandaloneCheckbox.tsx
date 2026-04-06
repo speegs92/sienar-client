@@ -74,6 +74,7 @@ export function StandaloneCheckbox(props: StandaloneCheckboxProps) {
 			<FormCheckbox
 				id={id ?? inputId}
 				name={name}
+				color={color}
 				checked={currentChecked.current}
 				value={currentChecked.current.toString()}
 				onChange={handleChange}
