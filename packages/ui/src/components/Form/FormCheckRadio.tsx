@@ -1,15 +1,15 @@
-import { forwardRef } from 'react';
+import { forwardRef, type RefAttributes } from 'react';
 import { classNames } from '@sienar/utils';
 import { createThemedClassNames } from '@ui/theme.ts';
 
-import type { InputHTMLAttributes, PropsWithChildren } from 'react';
+import type { ForwardedRef, InputHTMLAttributes, PropsWithChildren, ReactElement } from 'react';
 import type { Color } from '@ui/theme.ts';
 import type { FormInputProps } from './shared.ts';
 
-export interface FormCheckRadioProps extends
+export interface FormCheckRadioProps<T> extends
 	PropsWithChildren,
-	Omit<InputHTMLAttributes<HTMLInputElement>, 'color'>,
-	Omit<FormInputProps<boolean>, 'value'|'onChange'> {
+	Omit<InputHTMLAttributes<HTMLInputElement>, 'color'|'value'>,
+	Omit<FormInputProps<T>, 'value'|'onChange'> {
 	/**
 	 * The theme color of the input
 	 */
@@ -24,12 +24,18 @@ export interface FormCheckRadioProps extends
 	 * The type of the input
 	 */
 	type: 'checkbox'|'radio';
+
+	/**
+	 * The value of the input
+	 */
+	value?: T;
 }
 
-export const FormCheckRadio = forwardRef<HTMLInputElement, FormCheckRadioProps>(function FormCheckbox(props, ref) {
+export const FormCheckRadio = forwardRef(function FormCheckRadio<T>(props: FormCheckRadioProps<T>, ref: ForwardedRef<HTMLInputElement>) {
 	const {
 		color,
 		type,
+		value,
 		className,
 		children,
 		...rest
@@ -46,6 +52,7 @@ export const FormCheckRadio = forwardRef<HTMLInputElement, FormCheckRadioProps>(
 				ref={ref}
 				className='check-radio__input'
 				type={type}
+				value={value as string}
 				{...rest}
 			/>
 
@@ -57,4 +64,4 @@ export const FormCheckRadio = forwardRef<HTMLInputElement, FormCheckRadioProps>(
 			</label>
 		</div>
 	)
-});
+}) as <T>(props: FormCheckRadioProps<T> & RefAttributes<HTMLInputElement>) => ReactElement;

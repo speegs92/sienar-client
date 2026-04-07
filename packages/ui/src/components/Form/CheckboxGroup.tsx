@@ -6,16 +6,16 @@ import type { ChangeEvent } from 'react';
 import type { FormCheckRadioGroupProps } from './FormCheckRadioGroup.tsx';
 import type { ValidationListProps } from './ValidationList.tsx';
 
-export interface CheckboxGroupProps extends Omit<FormCheckRadioGroupProps, 'validationListProps'> {
+export interface CheckboxGroupProps<T> extends Omit<FormCheckRadioGroupProps<T[]>, 'validationListProps'> {
 	validationListProps?: Omit<ValidationListProps, 'validations'>;
 }
 
-export function CheckboxGroup(props: CheckboxGroupProps) {
+export function CheckboxGroup<T>(props: CheckboxGroupProps<T>) {
 	const { validationListProps, ...rest } = props;
 
-	const currentSelected = useRef<string[]>(props.value ?? []);
+	const currentSelected = useRef<T[]>(props.value ?? []);
 	const [rerender] = useRerender();
-	const handleValueStateChange = (newValue: string[]) => {
+	const handleValueStateChange = (newValue: T[]) => {
 		currentSelected.current = [...newValue];
 		props.onChange?.(currentSelected.current);
 		rerender();
@@ -31,15 +31,15 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
 	const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
 		const checked = e.target.checked;
 
-		if (checked && currentSelected.current.includes(e.target.value) ||
-			!checked && !currentSelected.current.includes(e.target.value)) {
+		if (checked && currentSelected.current.includes(e.target.value as T) ||
+			!checked && !currentSelected.current.includes(e.target.value as T)) {
 			return;
 		}
 
 		let index = currentSelected.current.findIndex(c => c === e.target.value);
 		let changed = false;
 		if (checked && index === -1) {
-			currentSelected.current.push(e.target.value);
+			currentSelected.current.push(e.target.value as T);
 			changed = true;
 		} else if (!checked && index > -1) {
 			currentSelected.current.splice(index, 1);

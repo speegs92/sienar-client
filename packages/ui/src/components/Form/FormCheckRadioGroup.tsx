@@ -18,9 +18,9 @@ export function useCheckRadioGroupContext<T>() {
 /**
  * The props of the checkbox/radio group component
  */
-export interface FormCheckRadioGroupProps extends
+export interface FormCheckRadioGroupProps<T> extends
 	Omit<FieldsetHTMLAttributes<HTMLFieldSetElement>, 'color'|'onChange'>,
-	FormInputProps<string[]> {
+	FormInputProps<T> {
 	/**
 	 * The label content
 	 */
@@ -32,7 +32,7 @@ export interface FormCheckRadioGroupProps extends
 	validationListProps: ValidationListProps;
 }
 
-export function FormCheckRadioGroup(props: FormCheckRadioGroupProps) {
+export function FormCheckRadioGroup<T>(props: FormCheckRadioGroupProps<T>) {
 	const {
 		displayName,
 		children,
