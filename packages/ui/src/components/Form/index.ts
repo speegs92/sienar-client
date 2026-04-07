@@ -9,6 +9,8 @@ export * from './Checkbox.tsx';
 export * from './CheckboxGroup.tsx';
 export * from './Form.tsx';
 export * from './HiddenInput.tsx';
+export * from './Radio.tsx';
+export * from './RadioGroup.tsx';
 export * from './StandaloneCheckbox.tsx';
 export * from './Textbox.tsx';
 export * from './ValidationList.tsx';
