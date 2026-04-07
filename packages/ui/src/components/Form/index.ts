@@ -1,4 +1,4 @@
-import './FormCheckbox.scss';
+import './FormCheckRadio.scss';
 import './FormField.scss';
 import './StandaloneCheckbox.scss';
 import './ValidationList.scss';

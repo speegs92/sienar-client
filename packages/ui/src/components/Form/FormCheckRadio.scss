@@ -1,7 +1,7 @@
 ﻿@use 'sass:map';
 @use '@ui/styles/variables';
 
-.checkbox {
+.check-radio {
 	--checkbox-margin-bottom: var(--spacer-2);
 
 	--checkbox-input-color: var(--color-heavy);
@@ -13,7 +13,7 @@
 	margin-bottom: var(--checkbox-margin-bottom);
 }
 
-.checkbox__input {
+.check-radio__input {
 	accent-color: var(--checkbox-input-color);
 	margin-right: var(--checkbox-input-margin-right);
 	width: var(--checkbox-input-size);
@@ -21,11 +21,11 @@
 }
 
 @each $color in map.keys(variables.$theme-colors) {
-	.checkbox--#{$color} {
+	.check-radio--#{$color} {
 		--checkbox-input-color: var(--color-#{$color});
 	}
 }
 
-.checkbox--invalid {
+.check-radio--invalid {
 	--checkbox-input-color: var(--color-error);
 }
