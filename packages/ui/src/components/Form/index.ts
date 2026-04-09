@@ -1,3 +1,4 @@
+import './DatePicker.scss';
 import './FormCheckRadio.scss';
 import './FormCheckRadioGroup.scss';
 import './FormField.scss';
@@ -7,6 +8,7 @@ import './ValidationListItem.scss';
 
 export * from './Checkbox.tsx';
 export * from './CheckboxGroup.tsx';
+export * from './DatePicker.tsx';
 export * from './Form.tsx';
 export * from './HiddenInput.tsx';
 export * from './Radio.tsx';
