@@ -1,6 +1,7 @@
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { classNames, useFormFieldValidation, useRerender } from '@sienar/utils';
 import { FormField } from './FormField.tsx';
+import { useArbitraryFormFieldValues } from './shared.ts';
 
 import type { ChangeEvent, FocusEvent, PropsWithChildren, ReactNode, SelectHTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';
@@ -77,27 +78,7 @@ export function Select<T>(props: SelectProps<T>) {
 		rerender();
 	}
 
-	const { toValue, toString } = useMemo(() => {
-		const keyToValue = new Map<string, T>();
-		const valueToKey = new Map<T, string>();
-
-		options.forEach((o, i) => {
-			const key = `${id}-${i}`;
-			keyToValue.set(key, o);
-			valueToKey.set(o, key);
-		});
-
-		return {
-			toValue: (key: string) => keyToValue.get(key),
-			toString: (value: T|undefined) => {
-				if (value === undefined) {
-					return '';
-				}
-
-				return valueToKey.get(value) ?? ''
-			}
-		}
-	}, [options]);
+	const { mapToValue, mapToString } = useArbitraryFormFieldValues(options);
 
 	const [validations, interact] = useFormFieldValidation(name!, displayName, currentValue.current, handleValueStateChange, validators);
 
@@ -107,7 +88,7 @@ export function Select<T>(props: SelectProps<T>) {
 	};
 
 	const handleChange = async (e: ChangeEvent<HTMLSelectElement>) => {
-		const newValue = toValue(e.target.value);
+		const newValue = mapToValue(e.target.value);
 		if (currentValue.current !== newValue) {
 			handleValueStateChange(newValue);
 			interact();
@@ -130,7 +111,7 @@ export function Select<T>(props: SelectProps<T>) {
 		}
 	);
 
-	const asString = toString(currentValue.current);
+	const asString = mapToString(currentValue.current);
 
 	const defaultOptionRenderer = (item: T, value: string) => (
 		<option value={value}>
@@ -164,7 +145,7 @@ export function Select<T>(props: SelectProps<T>) {
 			>
 				{!hideDefaultOption && <option value='' disabled></option>}
 
-				{options.map(o => (optionRenderer ?? defaultOptionRenderer)(o, toString(o)))}
+				{options.map(o => (optionRenderer ?? defaultOptionRenderer)(o, mapToString(o)))}
 			</select>
 		</FormField>
 	);

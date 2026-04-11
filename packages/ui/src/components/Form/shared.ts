@@ -1,5 +1,30 @@
-﻿import type { PropsWithChildren } from 'react';
+﻿import { useMemo } from 'react';
+
+import type { PropsWithChildren } from 'react';
 import type { FormValueValidator } from '@sienar/utils';
+
+/**
+ * Enables form fields to use arbitrary values such as objects as form field values
+ *
+ * @param values The valid form field values
+ */
+export function useArbitraryFormFieldValues<T>(values: T[]) {
+	return useMemo(() => {
+		const keyToValue = new Map<string, T>();
+		const valueToKey = new Map<T, string>();
+
+		values.forEach((o, i) => {
+			const key = `value-${i.toString()}`;
+			keyToValue.set(key, o);
+			valueToKey.set(o, key);
+		});
+
+		return {
+			mapToValue: (key: string) => keyToValue.get(key),
+			mapToString: (value: T|undefined) => valueToKey.get(value!) ?? ''
+		};
+	}, values);
+}
 
 export interface FormInputProps<T extends unknown> extends PropsWithChildren {
 	/**
