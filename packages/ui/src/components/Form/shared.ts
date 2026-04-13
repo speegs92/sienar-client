@@ -14,6 +14,12 @@ export function useArbitraryFormFieldValues<T>(values: T[]) {
 		const valueToKey = new Map<T, string>();
 
 		values.forEach((o, i) => {
+			if (typeof o === 'string') {
+				keyToValue.set(o, o);
+				valueToKey.set(o, o);
+				return;
+			}
+
 			const key = `value-${i.toString()}`;
 			keyToValue.set(key, o);
 			valueToKey.set(o, key);
@@ -47,10 +53,10 @@ export interface FormInputProps<T extends unknown> extends PropsWithChildren {
 	 *
 	 * @param newValue The new value of the input
 	 */
-	onChange?: (newValue: T) => Promise<any>|any;
+	onChange?: (newValue: T|undefined) => Promise<any>|any;
 
 	/**
 	 * The validators for the input
 	 */
-	validators?: FormValueValidator<T>[];
+	validators?: FormValueValidator<T|undefined>[];
 }

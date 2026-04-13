@@ -19,9 +19,9 @@ export const formValidationContext = createContext<FormContext>({
 export function useFormFieldValidation<T extends unknown>(
 	inputName: string,
 	displayName: string|null|undefined,
-	value: T,
-	setValue: (newValue: T) => any,
-	validators: FormValueValidator<T>[]
+	value: T|undefined,
+	setValue: (newValue: T|undefined) => any,
+	validators: FormValueValidator<T|undefined>[]
 ): [
 	ValidationResult[],
 	() => void

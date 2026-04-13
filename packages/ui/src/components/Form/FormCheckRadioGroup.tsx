@@ -5,14 +5,15 @@ import type { ChangeEvent, FieldsetHTMLAttributes, ReactNode } from 'react';
 import type { FormInputProps } from './shared.ts';
 import type { ValidationListProps } from './ValidationList.tsx';
 
-export const checkboxRadioGroupContext = createContext<CheckRadioGroupContext<any>>({
+export const checkboxRadioGroupContext = createContext<CheckRadioGroupContext<any, any>>({
 	selected: '',
 	name: '',
-	handleChange: () => {}
+	handleChange: () => {},
+	mapToString: () => ''
 });
 
-export function useCheckRadioGroupContext<T>() {
-	return useContext<CheckRadioGroupContext<T>>(checkboxRadioGroupContext);
+export function useCheckRadioGroupContext<TSelected, TValue>() {
+	return useContext<CheckRadioGroupContext<TSelected, TValue>>(checkboxRadioGroupContext);
 }
 
 /**
@@ -59,11 +60,11 @@ export function FormCheckRadioGroup<T>(props: FormCheckRadioGroupProps<T>) {
 /**
  * The state of a checkbox or radio button input group
  */
-export type CheckRadioGroupContext<T> = {
+export type CheckRadioGroupContext<TSelected, TValue> = {
 	/**
 	 * The selected item(s)
 	 */
-	selected: T;
+	selected: TSelected;
 
 	/**
 	 * The name of the input field
@@ -74,4 +75,9 @@ export type CheckRadioGroupContext<T> = {
 	 * The function to handle the input change event
 	 */
 	handleChange: (e: ChangeEvent<HTMLInputElement>) => any;
+
+	/**
+	 * Maps an arbitrary JS value to a string for serialization into an input
+	 */
+	mapToString: (item: TValue) => string;
 }

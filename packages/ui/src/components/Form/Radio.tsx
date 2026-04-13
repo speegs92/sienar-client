@@ -8,17 +8,23 @@ import type { FormCheckRadioProps } from './FormCheckRadio.tsx';
 /**
  * The props for the radio component
  */
-export interface RadioProps<T> extends  Omit<FormCheckRadioProps<T>, 'checked'|'name'|'onChange'|'type'> {}
+export interface RadioProps<T> extends  Omit<FormCheckRadioProps, 'checked'|'name'|'onChange'|'type'|'value'> {
+	/**
+	 * The value of the radio button
+	 */
+	value: T;
+}
 
 export const Radio = forwardRef(function Radio<T>(props: RadioProps<T>, ref: ForwardedRef<HTMLInputElement>) {
 	const {
 		id,
+		value,
 		children,
 		...rest
 	} = props;
 
 	const inputId = useId();
-	const context = useCheckRadioGroupContext<T>();
+	const context = useCheckRadioGroupContext<T, T>();
 
 	return (
 		<FormCheckRadio
@@ -27,8 +33,9 @@ export const Radio = forwardRef(function Radio<T>(props: RadioProps<T>, ref: For
 			type='radio'
 			name={context.name}
 			checked={context.selected === props.value}
+			value={context.mapToString(value)}
 			onChange={context.handleChange}
-			children={children ?? rest.value?.toString()}
+			children={children ?? value?.toString()}
 			{...rest}
 		/>
 	);
