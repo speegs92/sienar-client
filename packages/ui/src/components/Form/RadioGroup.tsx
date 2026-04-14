@@ -28,7 +28,7 @@ export interface RadioGroupProps<T> extends Omit<FormCheckRadioGroupProps<T>, 'v
 	validationListProps?: Omit<ValidationListProps, 'validations'>;
 }
 
-export function RadioGroup<T>(props: RadioGroupProps<T>) {
+export function RadioGroup<T>(props: RadioGroupProps<T|undefined>) {
 	const {
 		options = [],
 		radioRenderer = (o, v) => (

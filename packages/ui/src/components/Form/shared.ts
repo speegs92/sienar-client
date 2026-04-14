@@ -53,10 +53,10 @@ export interface FormInputProps<T extends unknown> extends PropsWithChildren {
 	 *
 	 * @param newValue The new value of the input
 	 */
-	onChange?: (newValue: T|undefined) => Promise<any>|any;
+	onChange?: (newValue: T) => Promise<any>|any;
 
 	/**
 	 * The validators for the input
 	 */
-	validators?: FormValueValidator<T|undefined>[];
+	validators?: FormValueValidator<T>[];
 }

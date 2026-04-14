@@ -10,8 +10,8 @@ import type { FormInputProps } from './shared.ts';
 import type { ValidationListProps } from './ValidationList.tsx';
 
 export interface StandaloneCheckboxProps extends
-	Pick<FormInputProps<boolean>, 'onChange'>,
-	Omit<FormCheckRadioProps<boolean>, 'value'|'onChange'|'type'> {
+	Pick<FormInputProps<boolean>, 'onChange'|'validators'>,
+	Omit<FormCheckRadioProps, 'value'|'onChange'|'type'|'validators'> {
 	/**
 	 * The theme color of the checkbox
 	 */
