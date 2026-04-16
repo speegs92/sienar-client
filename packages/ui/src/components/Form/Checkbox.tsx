@@ -2,7 +2,7 @@ import { forwardRef, useId } from 'react';
 import { FormCheckRadio } from './FormCheckRadio.tsx';
 import { useCheckRadioGroupContext } from './FormCheckRadioGroup.tsx';
 
-import type { ForwardedRef, ReactElement, RefAttributes } from 'react';
+import type { ChangeEvent, ForwardedRef, ReactElement, RefAttributes } from 'react';
 import type { FormCheckRadioProps } from './FormCheckRadio.tsx';
 
 /**
@@ -24,7 +24,26 @@ export const Checkbox = forwardRef(function Checkbox<T>(props: CheckboxProps<T>,
 	} = props;
 
 	const inputId = useId();
-	const context = useCheckRadioGroupContext<T[], T>();
+	const context = useCheckRadioGroupContext<T[]>();
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const checked = e.target.checked;
+
+		if (checked && context.selected.includes(value) ||
+			!checked && !context.selected.includes(value)) {
+			return;
+		}
+
+		const index = context.selected.findIndex(c => c === value);
+
+		if (checked && index === -1) {
+			context.selected.push(value);
+			context.setSelected(context.selected);
+		} else if (!checked && index > -1) {
+			context.selected.splice(index, 1);
+			context.setSelected(context.selected);
+		}
+	};
 
 	return (
 		<FormCheckRadio
@@ -32,9 +51,8 @@ export const Checkbox = forwardRef(function Checkbox<T>(props: CheckboxProps<T>,
 			id={id ?? inputId}
 			type='checkbox'
 			name={context.name}
-			checked={!!props.value && context.selected.includes(props.value)}
-			value={context.mapToString(value)}
-			onChange={context.handleChange}
+			checked={context.selected.includes(props.value)}
+			onChange={handleChange}
 			children={children ?? value?.toString()}
 			{...rest}
 		/>

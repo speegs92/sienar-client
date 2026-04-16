@@ -1,10 +1,9 @@
-﻿import { useEffect, useRef } from 'react';
-import { useFormFieldValidation, useRerender } from '@sienar/utils';
+﻿import { useEffect, useState } from 'react';
+import { useFormFieldValidation } from '@sienar/utils';
 import { checkboxRadioGroupContext, FormCheckRadioGroup } from './FormCheckRadioGroup.tsx';
 import { Radio } from './Radio.tsx';
-import { useArbitraryFormFieldValues } from './shared.ts';
 
-import type { ChangeEvent, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import type { FormCheckRadioGroupProps } from './FormCheckRadioGroup.tsx';
 import type { ValidationListProps } from './ValidationList.tsx';
 
@@ -20,7 +19,7 @@ export interface RadioGroupProps<T> extends Omit<FormCheckRadioGroupProps<T>, 'v
 	/**
 	 * An optional render function to create the radio buttons
 	 */
-	radioRenderer?: (item: T, value: string) => ReactNode;
+	radioRenderer?: (item: T) => ReactNode;
 
 	/**
 	 * The validation list props
@@ -31,10 +30,10 @@ export interface RadioGroupProps<T> extends Omit<FormCheckRadioGroupProps<T>, 'v
 export function RadioGroup<T>(props: RadioGroupProps<T|undefined>) {
 	const {
 		options = [],
-		radioRenderer = (o, v) => (
+		radioRenderer = (o) => (
 			<Radio
 				value={o}
-				key={v}
+				key={o?.toString()}
 			>
 				{o as ReactNode}
 			</Radio>
@@ -44,43 +43,30 @@ export function RadioGroup<T>(props: RadioGroupProps<T|undefined>) {
 		...rest
 	} = props;
 
-	const currentSelected = useRef<T|undefined>(props.value);
-	const [rerender] = useRerender();
-	const { mapToValue, mapToString } = useArbitraryFormFieldValues(options);
+	const [selected, setSelected] = useState<T|undefined>(undefined);
 
 	const handleValueStateChange = (newValue: T|undefined) => {
-		currentSelected.current = newValue;
-		props.onChange?.(currentSelected.current);
-		rerender();
+		setSelected(newValue);
+		props.onChange?.(newValue);
+		interact();
 	};
 
 	const [validations, interact] = useFormFieldValidation(
 		props.name!,
 		props.displayName,
-		currentSelected.current,
+		selected,
 		handleValueStateChange,
 		props.validators ?? []);
 
-	const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-		const newValue = mapToValue(e.target.value);
-		if (currentSelected.current === newValue) {
-			return;
-		}
-
-		handleValueStateChange(newValue);
-		interact();
-	}
-
 	useEffect(() => {
-		currentSelected.current = props.value;
+		setSelected(props.value);
 	}, [props.value]);
 
 	return (
 		<checkboxRadioGroupContext.Provider value={{
-			selected: currentSelected.current,
-			name: props.name!,
-			handleChange,
-			mapToString
+			selected,
+			setSelected: handleValueStateChange,
+			name: props.name!
 		}}>
 			<FormCheckRadioGroup
 				validationListProps={{
@@ -89,7 +75,7 @@ export function RadioGroup<T>(props: RadioGroupProps<T|undefined>) {
 				}}
 				{...rest}
 			>
-				{options.map(o => radioRenderer(o, mapToString(o)))}
+				{options.map(o => radioRenderer(o))}
 				{children}
 			</FormCheckRadioGroup>
 		</checkboxRadioGroupContext.Provider>

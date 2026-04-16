@@ -2,7 +2,7 @@ import { forwardRef, useId } from 'react';
 import { FormCheckRadio } from './FormCheckRadio.tsx';
 import { useCheckRadioGroupContext } from './FormCheckRadioGroup.tsx';
 
-import type { ForwardedRef, ReactElement, RefAttributes } from 'react';
+import type { ChangeEvent, ForwardedRef, ReactElement, RefAttributes } from 'react';
 import type { FormCheckRadioProps } from './FormCheckRadio.tsx';
 
 /**
@@ -24,7 +24,13 @@ export const Radio = forwardRef(function Radio<T>(props: RadioProps<T>, ref: For
 	} = props;
 
 	const inputId = useId();
-	const context = useCheckRadioGroupContext<T, T>();
+	const context = useCheckRadioGroupContext<T>();
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target.checked) {
+			context.setSelected(value);
+		}
+	};
 
 	return (
 		<FormCheckRadio
@@ -33,8 +39,7 @@ export const Radio = forwardRef(function Radio<T>(props: RadioProps<T>, ref: For
 			type='radio'
 			name={context.name}
 			checked={context.selected === props.value}
-			value={context.mapToString(value)}
-			onChange={context.handleChange}
+			onChange={handleChange}
 			children={children ?? value?.toString()}
 			{...rest}
 		/>

@@ -1,19 +1,18 @@
 import { createContext, useContext } from 'react';
 import { ValidationList } from './ValidationList.tsx';
 
-import type { ChangeEvent, FieldsetHTMLAttributes, ReactNode } from 'react';
+import type { FieldsetHTMLAttributes, ReactNode } from 'react';
 import type { FormInputProps } from './shared.ts';
 import type { ValidationListProps } from './ValidationList.tsx';
 
-export const checkboxRadioGroupContext = createContext<CheckRadioGroupContext<any, any>>({
+export const checkboxRadioGroupContext = createContext<CheckRadioGroupContext<any>>({
 	selected: '',
-	name: '',
-	handleChange: () => {},
-	mapToString: () => ''
+	setSelected: () => {},
+	name: ''
 });
 
-export function useCheckRadioGroupContext<TSelected, TValue>() {
-	return useContext<CheckRadioGroupContext<TSelected, TValue>>(checkboxRadioGroupContext);
+export function useCheckRadioGroupContext<T>() {
+	return useContext<CheckRadioGroupContext<T>>(checkboxRadioGroupContext);
 }
 
 /**
@@ -60,24 +59,19 @@ export function FormCheckRadioGroup<T>(props: FormCheckRadioGroupProps<T>) {
 /**
  * The state of a checkbox or radio button input group
  */
-export type CheckRadioGroupContext<TSelected, TValue> = {
+export interface CheckRadioGroupContext<T> {
 	/**
-	 * The selected item(s)
+	 * The selected value
 	 */
-	selected: TSelected;
+	selected: T;
+
+	/**
+	 * Sets the selected value
+	 */
+	setSelected: (newValue: T) => void;
 
 	/**
 	 * The name of the input field
 	 */
 	name: string;
-
-	/**
-	 * The function to handle the input change event
-	 */
-	handleChange: (e: ChangeEvent<HTMLInputElement>) => any;
-
-	/**
-	 * Maps an arbitrary JS value to a string for serialization into an input
-	 */
-	mapToString: (item: TValue) => string;
 }
