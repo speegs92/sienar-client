@@ -45,6 +45,7 @@ function Login() {
 	return (
 		<AuthorizeRoute mustBeLoggedOut>
 			<Form
+				type='status'
 				serviceKey={LOGIN_SERVICE}
 				title='Log in'
 				submitText='Log in'
