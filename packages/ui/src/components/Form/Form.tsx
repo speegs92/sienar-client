@@ -221,7 +221,7 @@ export function Form<T>(props: FormProps<T>) {
 	const formId = useId();
 	const params = useParams();
 	const id = params['id'];
-	const isCreating = !!(type === 'upsert' && !id);
+	const isCreating = type === 'upsert' && !id;
 	const formRef = useRef<HTMLFormElement>(null);
 	const submitButtonRef = useRef<HTMLButtonElement>(null);
 	const resetButtonRef = useRef<HTMLButtonElement>(null);
