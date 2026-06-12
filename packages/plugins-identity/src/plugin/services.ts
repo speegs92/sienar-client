@@ -15,17 +15,6 @@ export function setupIdentityServices() {
 	);
 
 	provide(
-		SERVICES.CONFIRM_SERVICE,
-		(data, config) => sendStatusServiceRequest(
-			'/api/account/confirm',
-			'POST',
-			data,
-			config
-		),
-		false
-	);
-
-	provide(
 		SERVICES.DELETE_ACCOUNT_SERVICE,
 		(data, config) => sendStatusServiceRequest(
 			'/api/account',
