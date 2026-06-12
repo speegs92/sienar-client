@@ -26,17 +26,6 @@ export function setupIdentityServices() {
 	);
 
 	provide(
-		SERVICES.RESET_PASSWORD_SERVICE,
-		(data, config) => sendStatusServiceRequest(
-			'/api/account/password',
-			'PATCH',
-			data,
-			config
-		),
-		false
-	);
-
-	provide(
 		SERVICES.GET_LOCKOUT_REASONS_SERVICE,
 		(data, config) => sendServiceRequest(
 			'/api/account/lockout-reasons',
