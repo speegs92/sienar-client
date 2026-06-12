@@ -8,7 +8,6 @@ import { setupViewModules } from './viewModules.ts';
 export * from './layouts.tsx';
 export * from './menus.tsx';
 export * from './partials.tsx';
-export * from './routes.ts';
 export * from './services.ts';
 export * from './urls.ts';
 export * from './viewModules.ts';
