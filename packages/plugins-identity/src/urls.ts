@@ -7,7 +7,6 @@ export const PRIVACY_POLICY_URL = Symbol() as InjectionKey<string>;
 // region Account
 
 export const CHANGE_EMAIL_URL = Symbol() as InjectionKey<string>;
-export const CHANGE_EMAIL_CONFIRM_URL = Symbol() as InjectionKey<string>;
 export const CHANGE_EMAIL_REQUESTED_URL = Symbol() as InjectionKey<string>;
 export const CHANGE_EMAIL_SUCCESSFUL_URL = Symbol() as InjectionKey<string>;
 export const CHANGE_PASSWORD_URL = Symbol() as InjectionKey<string>;

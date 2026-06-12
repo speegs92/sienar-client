@@ -4,7 +4,6 @@ import type { AccountLockRequest, AccountLockResult, AddUserToRoleRequest, Locko
 // region Account
 
 export const CHANGE_EMAIL_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;
-export const CHANGE_EMAIL_CONFIRM_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;
 export const CHANGE_PASSWORD_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;
 export const CONFIRM_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;
 export const DELETE_ACCOUNT_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;

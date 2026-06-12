@@ -15,17 +15,6 @@ export function setupIdentityServices() {
 	);
 
 	provide(
-		SERVICES.CHANGE_EMAIL_CONFIRM_SERVICE,
-		(data, config) => sendStatusServiceRequest(
-			'/api/account/email',
-			'PATCH',
-			data,
-			config
-		),
-		false
-	);
-
-	provide(
 		SERVICES.CHANGE_PASSWORD_SERVICE,
 		(data, config) => sendStatusServiceRequest(
 			'/api/account/change-password',
@@ -63,28 +52,6 @@ export function setupIdentityServices() {
 		(data, config) => sendStatusServiceRequest(
 			'/api/account/password',
 			'DELETE',
-			data,
-			config
-		),
-		false
-	);
-
-	provide(
-		SERVICES.LOGIN_SERVICE,
-		(data, config) => sendServiceRequest(
-			'/api/account/login',
-			'POST',
-			data,
-			config
-		),
-		false
-	);
-
-	provide(
-		SERVICES.REGISTER_SERVICE,
-		(data, config) => sendStatusServiceRequest(
-			'/api/account',
-			'POST',
 			data,
 			config
 		),
