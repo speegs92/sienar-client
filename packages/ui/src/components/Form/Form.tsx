@@ -58,7 +58,7 @@ export type FormProps = {
 	/**
 	 * The submit button text
 	 */
-	submitText: string;
+	submitText?: string;
 
 	/**
 	 * The function to call on reset
@@ -117,7 +117,7 @@ export function Form(props: FormProps) {
 		beforeSubmit,
 		endpoint,
 		method,
-		submitText,
+		submitText = 'Submit',
 		resetText = 'Reset',
 		showReset = false,
 		resetOnSubmit = false,
