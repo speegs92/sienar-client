@@ -26,17 +26,6 @@ export function setupIdentityServices() {
 	);
 
 	provide(
-		SERVICES.FORGOT_PASSWORD_SERVICE,
-		(data, config) => sendStatusServiceRequest(
-			'/api/account/password',
-			'DELETE',
-			data,
-			config
-		),
-		false
-	);
-
-	provide(
 		SERVICES.RESET_PASSWORD_SERVICE,
 		(data, config) => sendStatusServiceRequest(
 			'/api/account/password',

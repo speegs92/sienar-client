@@ -1,9 +1,5 @@
-﻿// import Typography from '@mui/material/Typography';
-// import { Form, Textbox } from '@sienar/ui';
-// import { AuthorizeRoute, required, useDocumentTitle } from '@sienar/utils';
-// import { FORGOT_PASSWORD_SERVICE } from '@plugins-identity/services.ts';
-// import { FORGOT_PASSWORD_SUCCESSFUL_URL } from '@plugins-identity/urls.ts';
-import { FORGOT_PASSWORD_URL } from '@plugins-identity/urls.ts';
+﻿import { Form, Textbox } from '@sienar/ui';
+import { AuthorizeRoute, required, useDocumentTitle } from '@sienar/utils';
 import { FORGOT_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
 
 import type { ReactNode } from 'react';
@@ -16,38 +12,37 @@ import type { InjectionKey } from '@sienar/utils';
 export const FORGOT_PASSWORD_VIEW = Symbol() as InjectionKey<ReactNode>;
 
 function Index() {
-	// useDocumentTitle('Password reset');
-	//
-	// return (
-	// 	<AuthorizeRoute mustBeLoggedOut>
-	// 		<Form
-	// 			serviceKey={FORGOT_PASSWORD_SERVICE}
-	// 			title='Forgot password'
-	// 			submitText='Request password reset'
-	// 			information={(
-	// 				<Typography>
-	// 					Please enter your username or email address. If your account exists, you should receive an email to reset your password shortly.
-	// 				</Typography>
-	// 			)}
-	// 			successRedirectRoute={FORGOT_PASSWORD_SUCCESSFUL_URL}
-	// 		>
-	// 			<Textbox
-	// 				name='accountName'
-	// 				displayName='Username or email address'
-	// 				validators={[required()]}
-	// 				hideNonErrors
-	// 			>
-	// 				Username or email address
-	// 			</Textbox>
-	// 		</Form>
-	// 	</AuthorizeRoute>
-	// );
-	return <></>
+	useDocumentTitle('Password reset');
+
+	return (
+		<AuthorizeRoute mustBeLoggedOut>
+			<Form
+				title='Forgot password'
+				submitText='Request password reset'
+				endpoint='/api/account/password'
+				method='DELETE'
+				information={(
+					<p>
+						Please enter your username or email address. If your account exists, you should receive an email to reset your password shortly.
+					</p>
+				)}
+				onSuccess='/dashboard/account/forgot-password/successful'
+			>
+				<Textbox
+					name='accountName'
+					displayName='Username or email address'
+					validators={[required()]}
+					validationListProps={{ hideNonErrors: true }}
+				>
+					Username or email address
+				</Textbox>
+			</Form>
+		</AuthorizeRoute>
+	);
 }
 
 const module: ViewModule = {
 	path: '/dashboard/account/forgot-password',
-	pathKey: FORGOT_PASSWORD_URL,
 	layout: FORGOT_PASSWORD_LAYOUT,
 	view: <Index/>,
 	viewKey: FORGOT_PASSWORD_VIEW
