@@ -24,6 +24,7 @@ function Requested() {
 	);
 }
 
+// TODO: remove pathKey from all view modules and possibly remove it from the ViewModule definition altogether. It may be a value passed when creating the Sienar React application initially - that way, it can be provided by ASP.NET on a SPA page
 const module: ViewModule = {
 	path: '/dashboard/account/change-email/requested',
 	pathKey: CHANGE_EMAIL_REQUESTED_URL,
