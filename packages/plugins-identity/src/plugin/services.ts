@@ -15,17 +15,6 @@ export function setupIdentityServices() {
 	);
 
 	provide(
-		SERVICES.DELETE_ACCOUNT_SERVICE,
-		(data, config) => sendStatusServiceRequest(
-			'/api/account',
-			'DELETE',
-			data,
-			config
-		),
-		false
-	);
-
-	provide(
 		SERVICES.GET_LOCKOUT_REASONS_SERVICE,
 		(data, config) => sendServiceRequest(
 			'/api/account/lockout-reasons',
