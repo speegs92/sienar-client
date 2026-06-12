@@ -1,121 +1,15 @@
 ﻿import { useContext, useEffect, useId, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { classNames, formValidationContext, inject, useNavigate } from '@sienar/utils';
+import { classNames, formValidationContext, type RequestResult, sendRequest, useNavigate, type ValidationResult } from '@sienar/utils';
 import { Button, Card, CardActions, CardContent, CardHeader } from '@ui/components';
 
 import type { HTMLAttributes, ReactNode, SubmitEvent } from 'react';
-import type { CrudService, FormContext, InjectionKey, ResultService, StatusService } from '@sienar/utils';
+import type { HttpMethod } from '@sienar/utils';
 import type { Color } from '@ui/theme.ts';
-
-/**
- * The props for the upsert form component
- */
-export interface UpsertFormProps<T> {
-	/**
-	 * The type of the form
-	 */
-	type: 'upsert';
-
-	/**
-	 * The injection key of the CRUD service
-	 */
-	serviceKey: InjectionKey<CrudService<T>>;
-
-	/**
-	 * The form title when creating
-	 */
-	createTitle: string;
-
-	/**
-	 * The submit button text when creating
-	 */
-	createSubmitText?: string;
-
-	/**
-	 * The form title when updating
-	 */
-	updateTitle: string;
-
-	/**
-	 * The submit button text when updating
-	 */
-	updateSubmitText?: string;
-}
-
-/**
- * Props to use when the form only cares about the success of its action
- */
-export type StatusFormProps<T> = {
-	/**
-	 * The type of the form
-	 */
-	type: 'status';
-
-	/**
-	 * The injection key of the status service
-	 */
-	serviceKey: InjectionKey<StatusService<T>>;
-
-	/**
-	 * The title of the status form
-	 */
-	title: string;
-
-	/**
-	 * The text of the form's submit button
-	 */
-	submitText?: string;
-}
-
-export type ResultFormProps<TResult> = {
-	type: 'result';
-
-	serviceKey: InjectionKey<ResultService<TResult>>;
-
-	title: string;
-
-	submitText?: string;
-}
-
-/**
- * Props to use when a form responds to a successful submission by calling a callback
- */
-export type HandleSuccessFormProps<T> = {
-	/**
-	 * The action to take on successful submission
-	 */
-	handleSuccess: 'callback';
-
-	/**
-	 * The callback to call on success
-	 */
-	onSuccess: (result: T) => unknown;
-}
-
-/**
- * Props to use when a form responds to a successful submission by redirecting to another page
- */
-export type RedirectOnSuccessFormProps = {
-	/**
-	 * The action to take on successful submission
-	 */
-	handleSuccess: 'redirect';
-
-	/**
-	 * The path to which the form should redirect on success
-	 */
-	successRedirectRoute: string|InjectionKey<string>
-
-	/**
-	 * The query parameters the form should use when redirecting
-	 */
-	successRedirectQueryParams?: object;
-}
 
 /**
  * The props of the form component
  */
-export type FormProps<T> = {
+export type FormProps = {
 	/**
 	 * The title text of the form. If omitted, it is determined programmatically if possible
 	 */
@@ -147,9 +41,24 @@ export type FormProps<T> = {
 	headerIcon?: ReactNode;
 
 	/**
-	 * The function to call on submit. If it returns <code>true</code>, the form submission will continue. Otherwise, submission will end
+	 * The function to call before submit. If it returns <code>true</code>, the form submission will continue. Otherwise, submission will end
 	 */
-	onSubmit?: (payload: T) => boolean;
+	beforeSubmit?: <T>(payload: T) => boolean;
+
+	/**
+	 * The endpoint to which the form should submit its data
+	 */
+	endpoint: string;
+
+	/**
+	 * The HTTP method with which the form should submit its data
+	 */
+	method: HttpMethod;
+
+	/**
+	 * The submit button text
+	 */
+	submitText: string;
 
 	/**
 	 * The function to call on reset
@@ -190,12 +99,14 @@ export type FormProps<T> = {
 	 * Whether the form should immediately submit upon rendering
 	 */
 	immediate?: boolean;
-}
-	& ( UpsertFormProps<T> | StatusFormProps<T> | ResultFormProps<T>)
-	& ( HandleSuccessFormProps<T> | RedirectOnSuccessFormProps)
-	& Omit<HTMLAttributes<HTMLFormElement>, 'title'|'color'>;
 
-export function Form<T>(props: FormProps<T>) {
+	/**
+	 * The function to call or the path to which to navigate on a successful form submission
+	 */
+	onSuccess?: string|((result: RequestResult<any>) => any);
+} & Omit<HTMLAttributes<HTMLFormElement>, 'title'|'color'>;
+
+export function Form(props: FormProps) {
 	const {
 		title,
 		titleTag: TitleTag = 'h1',
@@ -203,7 +114,10 @@ export function Form<T>(props: FormProps<T>) {
 		subtitleTag: SubtitleTag = 'h2',
 		headerIcon,
 		color,
-		onSubmit,
+		beforeSubmit,
+		endpoint,
+		method,
+		submitText,
 		resetText = 'Reset',
 		showReset = false,
 		resetOnSubmit = false,
@@ -213,15 +127,10 @@ export function Form<T>(props: FormProps<T>) {
 		children,
 		onReset,
 		immediate,
-		type,
-		handleSuccess,
-		serviceKey
+		onSuccess
 	} = props;
 
 	const formId = useId();
-	const params = useParams();
-	const id = params['id'];
-	const isCreating = type === 'upsert' && !id;
 	const formRef = useRef<HTMLFormElement>(null);
 	const submitButtonRef = useRef<HTMLButtonElement>(null);
 	const resetButtonRef = useRef<HTMLButtonElement>(null);
@@ -247,29 +156,39 @@ export function Form<T>(props: FormProps<T>) {
 		for (let field in formContext.fields) {
 			payload[field] = formContext.fields[field].value;
 		}
+		console.log(payload);
 
-		if (onSubmit && !onSubmit(payload as T)) {
+		if (beforeSubmit && !beforeSubmit(payload)) {
 			return;
 		}
 
-		const config = { formContext };
-		let result: any;
-		if (type === 'upsert') {
-			const formData = mapToFormData(formContext);
+		const result = await sendRequest<any>(
+			endpoint,
+			method,
+			{
+				body: JSON.stringify(payload),
+				requestOptions: {
+					headers: {
+						"Content-Type": "application/json"
+					}
+				},
+				onUnprocessable: e => {
+					for (let errored in e.errors) {
+						const validationErrors: ValidationResult[] = e.errors[errored].map(e => {
+							return {
+								valid: false,
+								message: e
+							};
+						});
 
-			const service = inject(serviceKey);
-
-			if (isCreating) {
-				result = await service.create(formData, config);
-			} else {
-				result = await service.update(formData, config);
+						// TODO: consider notifying of errors which don't have a matching field?
+						formContext.fields[errored]?.setValidationResults(validationErrors);
+					}
+				}
 			}
-		} else if (type === 'status') {
-			const service = inject(serviceKey);
-			result = await service(payload as T, config);
-		}
+		);
 
-		if (!result) {
+		if (!result || !result.wasSuccessful) {
 			return;
 		}
 
@@ -277,10 +196,10 @@ export function Form<T>(props: FormProps<T>) {
 			resetButtonRef.current!.click();
 		}
 
-		if (handleSuccess === 'callback') {
-			props.onSuccess(result);
-		} else {
-			navigate(props.successRedirectRoute, props.successRedirectQueryParams);
+		if (typeof onSuccess === 'function') {
+			onSuccess(result.result);
+		} else if (typeof onSuccess === 'string') {
+			navigate(onSuccess);
 		}
 	};
 
@@ -306,51 +225,13 @@ export function Form<T>(props: FormProps<T>) {
 		};
 	}, []);
 
-	// If editing, download existing entity and map to forms fields
-	useEffect(() => {
-		(async function () {
-			if (!(type === 'upsert' && !isCreating)) {
-				return;
-			}
-
-			const service = inject(serviceKey);
-			const initial = await service.read(id!);
-			if (!initial) {
-				return;
-			}
-
-			for (let [k, v] of Object.entries(initial)) {
-				// Let's be nice and handle IDs and concurrency stamps for the devs
-				if (k === 'id' || k === 'concurrencyStamp') {
-					formContext.fields[k] = {
-						displayName: k,
-						validator: () => true,
-						value: v,
-						setValue: () => {},
-						validationResults: [],
-						setValidationResults: ([]) => {}
-					}
-					continue;
-				}
-
-				// If the element doesn't exist, there's nothing to do
-				if (!formContext.fields[k]) {
-					continue;
-				}
-
-				// Set the value
-				formContext.fields[k].setValue(v)
-			}
-		})();
-	}, []);
-
 	return (
 		<formValidationContext.Provider value={formContext}>
 			<Card color={color} style={{backgroundColor: 'var(--color-white)'}}>
 				<CardHeader>
 					<div>
 						<TitleTag>
-							{title || generateCardTitle(props, isCreating)}
+							{title}
 						</TitleTag>
 						{subtitle && (
 							<SubtitleTag>
@@ -389,7 +270,7 @@ ref={submitButtonRef}
 							type='submit'
 							variant='solid'
 						>
-							{generateSubmitText(props, isCreating)}
+							{submitText}
 						</Button>
 
 						<Button
@@ -408,48 +289,4 @@ ref={submitButtonRef}
 			</Card>
 		</formValidationContext.Provider>
 	);
-}
-
-function generateSubmitText(
-	props: UpsertFormProps<unknown>|StatusFormProps<unknown>|ResultFormProps<unknown>,
-	isCreating: boolean
-): string {
-	const defaultText = 'Submit';
-
-	if (props.type === 'upsert') {
-		return isCreating
-			? props.createSubmitText ?? defaultText
-			: props.updateSubmitText ?? defaultText;
-	}
-
-	return props.submitText ?? defaultText;
-}
-
-function generateCardTitle(
-	props: UpsertFormProps<unknown>|StatusFormProps<unknown>|ResultFormProps<unknown>,
-	isCreating: boolean
-): string {
-	if (props.type === 'upsert') {
-		return isCreating
-			? props.createTitle
-			: props.updateTitle;
-	}
-
-	return props.title;
-}
-
-function mapToFormData(context: FormContext): FormData {
-	const formData = new FormData();
-
-	for (let field in context.fields) {
-		if (Array.isArray(context.fields[field].value)) {
-			for (let value of context.fields[field].value) {
-				formData.append(field, value);
-			}
-		} else {
-			formData.append(field, context.fields[field].value);
-		}
-	}
-
-	return formData;
 }

@@ -4,12 +4,10 @@ import { AuthorizeRoute, required, useNavigate, useAuthContext, useDocumentTitle
 import { MAIN_URL } from '@sienar/plugins-core';
 import { ACCOUNT_LOCKED_URL, FORGOT_PASSWORD_URL, LOGIN_URL } from '@plugins-identity/urls.ts';
 import { LOGIN_LAYOUT } from '@plugins-identity/layouts.ts';
-import { LOGIN_SERVICE } from '@plugins-identity/services.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
 import type { InjectionKey, RequestResult } from '@sienar/utils';
-import type { LoginResult } from '@plugins-identity/types.ts';
 
 /**
  * The content of the login page
@@ -45,10 +43,10 @@ function Login() {
 	return (
 		<AuthorizeRoute mustBeLoggedOut>
 			<Form
-				type='status'
-				serviceKey={LOGIN_SERVICE}
 				title='Log in'
 				submitText='Log in'
+				endpoint='/api/account/login'
+				method='POST'
 				onSuccess={onLogin}
 				additionalActions={(
 					<LinkButton
@@ -85,6 +83,21 @@ function Login() {
 			</Form>
 		</AuthorizeRoute>
 	);
+}
+
+/**
+ * The data describing the result of a login operation
+ */
+interface LoginResult {
+	/**
+	 * The ID of the user who failed to log in
+	 */
+	userId: string
+
+	/**
+	 * The verification code the user can use to view the reason(s) their account is locked
+	 */
+	verificationCode: string
 }
 
 const module: ViewModule = {

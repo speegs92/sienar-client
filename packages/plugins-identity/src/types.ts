@@ -154,21 +154,6 @@ export type AccountLockResult = {
 	lockoutEnd?: string|null
 }
 
-/**
- * The data describing the result of a login operation
- */
-export type LoginResult = {
-	/**
-	 * The ID of the user who failed to log in
-	 */
-	userId: string
-
-	/**
-	 * The verification code the user can use to view the reason(s) their account is locked
-	 */
-	verificationCode: string
-}
-
 // endregion
 
 // region Lockout reasons

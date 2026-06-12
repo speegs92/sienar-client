@@ -2,6 +2,7 @@
 import { inject } from '@utils/di.ts';
 import type { InjectionKey } from '@utils/di.ts';
 import type { LinkDictionary } from '@utils/menus.ts';
+import type { FormContext } from '@utils/validation.ts';
 
 export const DOCUMENT_TITLE_SUFFIX = Symbol() as InjectionKey<string>;
 
@@ -31,6 +32,40 @@ export function useDocumentTitle(title: string, ignoreSuffix: boolean = false) {
 
 		document.title = calculatedTitle;
 	}, []);
+}
+
+/**
+ * Maps the initial form state
+ *
+ * @param initial The initial form values
+ * @param formContext The form context
+ */
+export function mapInitialFormState(
+	initial: Record<string, any>,
+	formContext: FormContext
+) {
+	for (let [k, v] of Object.entries(initial)) {
+		// Let's be nice and handle IDs and concurrency stamps for the devs
+		if (k === 'id' || k === 'concurrencyStamp') {
+			formContext.fields[k] = {
+				displayName: k,
+				validator: () => true,
+				value: v,
+				setValue: () => {},
+				validationResults: [],
+				setValidationResults: ([]) => {}
+			}
+			continue;
+		}
+
+		// If the element doesn't exist, there's nothing to do
+		if (!formContext.fields[k]) {
+			continue;
+		}
+
+		// Set the value
+		formContext.fields[k].setValue(v)
+	}
 }
 
 /**

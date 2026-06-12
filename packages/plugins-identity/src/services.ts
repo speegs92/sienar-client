@@ -1,5 +1,5 @@
 import type { CrudService, InjectionKey, Service, StatusService } from '@sienar/utils';
-import type { AccountLockRequest, AccountLockResult, AddUserToRoleRequest, LockoutReason, LoginResult, ManuallyConfirmUserAccountRequest, RemoveUserFromRoleRequest, Role, UnlockUserAccountRequest, User } from '@plugins-identity/types.ts';
+import type { AccountLockRequest, AccountLockResult, AddUserToRoleRequest, LockoutReason, ManuallyConfirmUserAccountRequest, RemoveUserFromRoleRequest, Role, UnlockUserAccountRequest, User } from '@plugins-identity/types.ts';
 
 // region Account
 
@@ -9,8 +9,6 @@ export const CHANGE_PASSWORD_SERVICE = Symbol() as InjectionKey<StatusService<Fo
 export const CONFIRM_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;
 export const DELETE_ACCOUNT_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;
 export const FORGOT_PASSWORD_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;
-export const LOGIN_SERVICE = Symbol() as InjectionKey<Service<FormData, LoginResult>>;
-export const REGISTER_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;
 export const RESET_PASSWORD_SERVICE = Symbol() as InjectionKey<StatusService<FormData>>;
 export const GET_LOCKOUT_REASONS_SERVICE = Symbol() as InjectionKey<Service<AccountLockRequest, AccountLockResult>>;
 
