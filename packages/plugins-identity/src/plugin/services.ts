@@ -15,17 +15,6 @@ export function setupIdentityServices() {
 	);
 
 	provide(
-		SERVICES.CHANGE_PASSWORD_SERVICE,
-		(data, config) => sendStatusServiceRequest(
-			'/api/account/change-password',
-			'PATCH',
-			data,
-			config
-		),
-		false
-	);
-
-	provide(
 		SERVICES.CONFIRM_SERVICE,
 		(data, config) => sendStatusServiceRequest(
 			'/api/account/confirm',
