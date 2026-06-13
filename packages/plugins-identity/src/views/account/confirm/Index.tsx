@@ -2,6 +2,7 @@
 import { Form, HiddenInput } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { CONFIRM_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -44,7 +45,7 @@ function Index() {
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/confirm',
+	path: urls.account.confirm.index,
 	layout: CONFIRM_LAYOUT,
 	view: <Index/>,
 	viewKey: CONFIRM_VIEW

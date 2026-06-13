@@ -2,6 +2,7 @@
 import { Form, HiddenInput, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, containsLower, containsNumber, containsSpecialCharacter, containsUpper, matches, maxLength, minLength, useDocumentTitle } from '@sienar/utils';
 import { RESET_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -68,7 +69,7 @@ function Index() {
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/reset-password',
+	path: urls.account.resetPassword.index,
 	layout: RESET_PASSWORD_LAYOUT,
 	view: <Index/>,
 	viewKey: RESET_PASSWORD_VIEW

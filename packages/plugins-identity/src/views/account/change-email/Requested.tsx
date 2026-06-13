@@ -1,6 +1,6 @@
 ﻿import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
-import { CHANGE_EMAIL_REQUESTED_URL } from '@plugins-identity/urls.ts';
 import { CHANGE_EMAIL_REQUESTED_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -26,8 +26,7 @@ function Requested() {
 
 // TODO: remove pathKey from all view modules and possibly remove it from the ViewModule definition altogether. It may be a value passed when creating the Sienar React application initially - that way, it can be provided by ASP.NET on a SPA page
 const module: ViewModule = {
-	path: '/dashboard/account/change-email/requested',
-	pathKey: CHANGE_EMAIL_REQUESTED_URL,
+	path: urls.account.changeEmail.requested,
 	layout: CHANGE_EMAIL_REQUESTED_LAYOUT,
 	view: <Requested/>,
 	viewKey: CHANGE_EMAIL_REQUESTED_VIEW

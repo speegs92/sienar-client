@@ -1,6 +1,7 @@
 ﻿import { Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, containsLower, containsNumber, containsSpecialCharacter, containsUpper, matches, maxLength, minLength, required, useDocumentTitle } from '@sienar/utils';
 import { CHANGE_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -54,7 +55,7 @@ function Index() {
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/change-password',
+	path: urls.account.changePassword.index,
 	layout: CHANGE_PASSWORD_LAYOUT,
 	view: <Index/>,
 	viewKey: CHANGE_PASSWORD_VIEW

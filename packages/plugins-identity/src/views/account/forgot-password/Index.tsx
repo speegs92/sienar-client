@@ -1,6 +1,7 @@
 ﻿import { Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useDocumentTitle } from '@sienar/utils';
 import { FORGOT_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -42,7 +43,7 @@ function Index() {
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/forgot-password',
+	path: urls.account.forgotPassword.index,
 	layout: FORGOT_PASSWORD_LAYOUT,
 	view: <Index/>,
 	viewKey: FORGOT_PASSWORD_VIEW

@@ -3,6 +3,7 @@ import { Form, HiddenInput, Link, Textbox, StandaloneCheckbox } from '@sienar/ui
 import { AuthorizeRoute, containsLower, containsNumber, containsSpecialCharacter, containsUpper, inject, isEmail, matches, maxLength, minLength, required, useDocumentTitle } from '@sienar/utils';
 import { PRIVACY_POLICY_URL, TOS_URL } from '@plugins-identity/urls.ts';
 import { REGISTER_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -100,7 +101,7 @@ function Index() {
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/register',
+	path: urls.account.register.index,
 	layout: REGISTER_LAYOUT,
 	view: <Index/>,
 	viewKey: REGISTER_VIEW

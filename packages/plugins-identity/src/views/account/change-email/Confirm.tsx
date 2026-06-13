@@ -2,6 +2,7 @@
 import { Form, HiddenInput } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { CHANGE_EMAIL_CONFIRM_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -44,7 +45,7 @@ function Index() {
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/change-email/confirm',
+	path: urls.account.changeEmail.confirm,
 	layout: CHANGE_EMAIL_CONFIRM_LAYOUT,
 	view: <Index/>,
 	viewKey: CHANGE_EMAIL_CONFIRM_VIEW

@@ -1,6 +1,7 @@
 ﻿import { Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useAuthContext, useDocumentTitle, useNavigate } from '@sienar/utils';
 import { DELETE_ACCOUNT_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -50,7 +51,7 @@ function Delete() {
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/delete',
+	path: urls.account.delete,
 	layout: DELETE_ACCOUNT_LAYOUT,
 	view: <Delete/>,
 	viewKey: DELETE_ACCOUNT_VIEW

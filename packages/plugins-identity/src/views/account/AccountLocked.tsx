@@ -3,8 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { AuthorizeRoute, getDateString, inject } from '@sienar/utils';
 import { Icon } from '@sienar/ui';
 import { GET_LOCKOUT_REASONS_SERVICE } from '@plugins-identity/services.ts';
-import { ACCOUNT_LOCKED_URL } from '@plugins-identity/urls.ts';
 import { ACCOUNT_LOCKED_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -73,8 +73,7 @@ function AccountLocked() {
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/locked',
-	pathKey: ACCOUNT_LOCKED_URL,
+	path: urls.account.locked,
 	layout: ACCOUNT_LOCKED_LAYOUT,
 	view: <AccountLocked/>,
 	viewKey: ACCOUNT_LOCKED_VIEW

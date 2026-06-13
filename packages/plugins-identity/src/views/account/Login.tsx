@@ -2,8 +2,8 @@
 import { Icon, LinkButton, Form, StandaloneCheckbox, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useNavigate, useAuthContext, useDocumentTitle } from '@sienar/utils';
 import { MAIN_URL } from '@sienar/plugins-core';
-import { ACCOUNT_LOCKED_URL, FORGOT_PASSWORD_URL, LOGIN_URL } from '@plugins-identity/urls.ts';
 import { LOGIN_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -23,7 +23,7 @@ function Login() {
 	const onLogin = async (result: RequestResult<LoginResult>) => {
 		if (result.result) {
 			const { userId, verificationCode } = result.result;
-			navigate(ACCOUNT_LOCKED_URL, { userId, verificationCode });
+			navigate(urls.account.locked, { userId, verificationCode });
 		}
 
 		if (!result.wasSuccessful) return;
@@ -50,7 +50,7 @@ function Login() {
 				onSuccess={onLogin}
 				additionalActions={(
 					<LinkButton
-						href={FORGOT_PASSWORD_URL}
+						href={urls.account.forgotPassword.index}
 						color='secondary'
 						variant='outlined'
 					>
@@ -101,8 +101,7 @@ interface LoginResult {
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/login',
-	pathKey: LOGIN_URL,
+	path: urls.account.login,
 	layout: LOGIN_LAYOUT,
 	view: <Login/>,
 	viewKey: LOGIN_VIEW

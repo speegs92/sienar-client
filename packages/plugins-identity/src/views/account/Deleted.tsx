@@ -1,8 +1,7 @@
 ﻿import { Link } from '@sienar/ui';
 import { useDocumentTitle } from '@sienar/utils';
-import { REGISTER_URL } from '@plugins-identity/urls.ts';
-import { ACCOUNT_DELETED_URL } from '@plugins-identity/urls.ts';
 import { DELETED_LAYOUT } from '@plugins-identity/layouts.ts';
+import { urls } from '@plugins-identity/constants.ts';
 
 import type { ReactNode } from 'react';
 import type { ViewModule } from '@sienar/plugins-core';
@@ -20,15 +19,14 @@ function Deleted() {
 		<>
 			<h1>Account deleted successfully</h1>
 			<p>
-				Your account has been deleted. You can no longer log in or access your account data, but you can <Link href={REGISTER_URL}>register again</Link>.
+				Your account has been deleted. You can no longer log in or access your account data, but you can <Link href={urls.account.register.index}>register again</Link>.
 			</p>
 		</>
 	);
 }
 
 const module: ViewModule = {
-	path: '/dashboard/account/deleted',
-	pathKey: ACCOUNT_DELETED_URL,
+	path: urls.account.deleted,
 	layout: DELETED_LAYOUT,
 	view: <Deleted/>,
 	viewKey: ACCOUNT_DELETED_VIEW
