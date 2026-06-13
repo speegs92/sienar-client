@@ -10,7 +10,7 @@ import Lock from '@mui/icons-material/Lock';
 import Settings from '@mui/icons-material/Settings';
 import { USER_SETTINGS_MENU } from '@plugins-identity/menus.ts';
 import * as URLS from '@plugins-identity/urls.ts';
-import { roles } from '@plugins-identity/constants.ts';
+import { roles, urls } from '@plugins-identity/constants.ts';
 
 export function setupIdentityMenus() {
 	addLinksWithPriority(
@@ -62,25 +62,25 @@ export function setupIdentityMenus() {
 		USER_SETTINGS_MENU,
 		{
 			text: 'Change email address',
-			href: URLS.CHANGE_EMAIL_URL,
+			href: urls.account.changeEmail.index,
 			icon: <Email/>,
 			requireLoggedIn: true
 		},
 		{
 			text: 'Change password',
-			href: URLS.CHANGE_PASSWORD_URL,
+			href: urls.account.changePassword.index,
 			icon: <Lock/>,
 			requireLoggedIn: true
 		},
 		{
 			text: 'Personal data',
-			href: URLS.PERSONAL_DATA_URL,
+			href: urls.account.personalData,
 			icon: <Key/>,
 			requireLoggedIn: true
 		},
 		{
 			text: 'Delete account',
-			href: URLS.DELETE_ACCOUNT_URL,
+			href: urls.account.delete,
 			icon: <DeleteForever/>,
 			requireLoggedIn: true
 		}
