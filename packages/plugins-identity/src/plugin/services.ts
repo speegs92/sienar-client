@@ -1,29 +1,8 @@
-import { ApiCrudService, provide, sendServiceRequest, sendStatusServiceRequest } from '@sienar/utils';
+import { ApiCrudService, provide, sendStatusServiceRequest } from '@sienar/utils';
 import * as SERVICES from '@plugins-identity/services.ts';
 import type { LockoutReason, Role, User } from '@plugins-identity/types.ts';
 
 export function setupIdentityServices() {
-	provide(
-		SERVICES.CHANGE_EMAIL_SERVICE,
-		(data, config) => sendStatusServiceRequest(
-			'/api/account/change-email',
-			'POST',
-			data,
-			config
-		),
-		false
-	);
-
-	provide(
-		SERVICES.GET_LOCKOUT_REASONS_SERVICE,
-		(data, config) => sendServiceRequest(
-			'/api/account/lockout-reasons',
-			'POST',
-			data,
-			config
-		),
-		false
-	);
 
 	provide(
 		SERVICES.USERS_SERVICE,
