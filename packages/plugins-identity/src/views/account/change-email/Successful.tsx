@@ -23,7 +23,7 @@ function Successful() {
 		</AuthorizeRoute>
 	);
 }
-s
+
 const module: ViewModule = {
 	path: urls.account.changeEmail.successful,
 	layout: CHANGE_EMAIL_SUCCESSFUL_LAYOUT,
