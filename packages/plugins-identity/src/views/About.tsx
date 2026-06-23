@@ -1,10 +1,4 @@
-import Grid from '@mui/material/Grid';
-import Icon from '@mui/material/Icon';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Help from '@mui/icons-material/Help';
+import { Column, Icon, Row, Stack } from '@sienar/ui';
 import { ABOUT_URL } from '@plugins-identity/urls.ts';
 
 import type { ReactNode } from 'react';
@@ -24,7 +18,7 @@ type Technology = {
 }
 
 const iconDimensions = { width: 48, height: 48 };
-const UnknownIcon = () => <Help fontSize='large' sx={iconDimensions}/>;
+const UnknownIcon = () => <Icon icon='info'/>;
 
 const technologies: Technology[] = [
 	{
@@ -117,62 +111,47 @@ function About() {
 
 	return (
 		<>
-			<Typography
-				typography="h1"
-				component="h1"
-				mb={4}
-			>
+			<h1>
 				About Sienar
-			</Typography>
-			<Typography mb={4}>
+			</h1>
+			<p>
 				Sienar is an application development framework created and developed by {authorLink} that aims to create an opinionated approach to addressing the most common needs of many applications.
-			</Typography>
+			</p>
 
-			<Typography mb={4}>
+			<p>
 				Sienar leverages several open source libraries. It's not possible to list <em>all</em> the libraries Sienar uses because of how intertwined open source software is, but the following is a list of libraries that Sienar <em>directly</em> relies on:
-			</Typography>
+			</p>
 
-			<Grid
-				container
-				spacing={2}
-				justifyContent="stretch"
-			>
+			<Row className='justify-stretch'>
 				{technologies.map(t => (
-					<Grid
+					<Column
 						key={t.name}
-						size={3}
+						col={12}
+						md={6}
+						lg={4}
+						xl={3}
 					>
 						<Stack
-							component={Paper}
-							direction='column'
-							alignItems='center'
-							elevation={1}
-							p={2}
-							sx={{ height: '100%' }}
+							align='center'
+							className='p-2'
+							style={{ height: '100%' }}
 						>
-							<Icon sx={{
+							<div style={{
 								height: 48,
 								width: 48
 							}}>
 								{t.icon}
-							</Icon>
-							<Typography
-								component={Link}
-								href={t.link}
-								typography='h6'
-								mt={1}
-								mb={2}
-								underline='hover'
-							>
-								{t.name}
-							</Typography>
-							<Typography>
+							</div>
+							<h6 className='mt-1 mb-2'>
+								<a href={t.link}>{t.name}</a>
+							</h6>
+							<p>
 								{t.reason}
-							</Typography>
+							</p>
 						</Stack>
-					</Grid>
+					</Column>
 				))}
-			</Grid>
+			</Row>
 		</>
 	);
 }

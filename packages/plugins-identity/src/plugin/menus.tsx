@@ -1,13 +1,6 @@
 import { addLinks, addLinksWithPriority, DASHBOARD_MENU, DASHBOARD_UTILS_MENU, DASHBOARD_UTILS_SETTINGS_MENU } from '@sienar/utils';
 import { MAIN_URL } from '@sienar/plugins-core';
-import Dashboard from '@mui/icons-material/Dashboard';
-import DeleteForever from '@mui/icons-material/DeleteForever';
-import Email from '@mui/icons-material/Email';
-import Group from '@mui/icons-material/Group';
-import Info from '@mui/icons-material/Info';
-import Key from '@mui/icons-material/Key';
-import Lock from '@mui/icons-material/Lock';
-import Settings from '@mui/icons-material/Settings';
+import { Icon } from '@sienar/ui';
 import { USER_SETTINGS_MENU } from '@plugins-identity/menus.ts';
 import * as URLS from '@plugins-identity/urls.ts';
 import { roles, urls } from '@plugins-identity/constants.ts';
@@ -19,7 +12,7 @@ export function setupIdentityMenus() {
 		{
 			text: 'Dashboard',
 			href: MAIN_URL,
-			icon: <Dashboard/>,
+			icon: <Icon icon='dashboard'/>,
 			requireLoggedIn: false
 		}
 	);
@@ -30,7 +23,7 @@ export function setupIdentityMenus() {
 		{
 			text: 'About',
 			href: URLS.ABOUT_URL,
-			icon: <Info/>
+			icon: <Icon icon='info'/>
 		}
 	);
 
@@ -39,7 +32,7 @@ export function setupIdentityMenus() {
 		{
 			text: 'Settings',
 			roles: roles.admin,
-			icon: <Settings/>,
+			icon: <Icon icon='settings'/>,
 			childMenu: DASHBOARD_UTILS_SETTINGS_MENU
 		}
 	);
@@ -49,12 +42,12 @@ export function setupIdentityMenus() {
 		{
 			text: 'Users',
 			href: URLS.USERS_URL,
-			icon: <Group/>
+			icon: <Icon icon='users'/>
 		},
 		{
 			text: 'Lockout reasons',
 			href: URLS.LOCKOUT_REASONS_URL,
-			icon: <Lock/>
+			icon: <Icon icon='lock'/>
 		}
 	);
 
@@ -63,25 +56,25 @@ export function setupIdentityMenus() {
 		{
 			text: 'Change email address',
 			href: urls.account.changeEmail.index,
-			icon: <Email/>,
+			icon: <Icon icon='email'/>,
 			requireLoggedIn: true
 		},
 		{
 			text: 'Change password',
 			href: urls.account.changePassword.index,
-			icon: <Lock/>,
+			icon: <Icon icon='lock'/>,
 			requireLoggedIn: true
 		},
 		{
 			text: 'Personal data',
 			href: urls.account.personalData,
-			icon: <Key/>,
+			icon: <Icon icon='key'/>,
 			requireLoggedIn: true
 		},
 		{
 			text: 'Delete account',
 			href: urls.account.delete,
-			icon: <DeleteForever/>,
+			icon: <Icon icon='trash'/>,
 			requireLoggedIn: true
 		}
 	);

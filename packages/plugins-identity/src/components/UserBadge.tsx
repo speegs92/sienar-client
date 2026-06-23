@@ -1,18 +1,18 @@
 ﻿import { useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Logout from '@mui/icons-material/Logout';
-import Settings from '@mui/icons-material/Settings';
-import { aggregateLinks, createApiCall, filterLinks, inject, useAuthContext } from '@sienar/utils';
+// import Avatar from '@mui/material/Avatar';
+// import Box from '@mui/material/Box';
+// import Divider from '@mui/material/Divider';
+// import IconButton from '@mui/material/IconButton';
+// import ListItemIcon from '@mui/material/ListItemIcon';
+// import ListItemText from '@mui/material/ListItemText';
+// import Menu from '@mui/material/Menu';
+// import MenuItem from '@mui/material/MenuItem';
+// import Stack from '@mui/material/Stack';
+// import Typography from '@mui/material/Typography';
+// import Logout from '@mui/icons-material/Logout';
+// import Settings from '@mui/icons-material/Settings';
+import { aggregateLinks, createApiCall, filterLinks, useAuthContext } from '@sienar/utils';
+import { Button, Dropdown, Icon, Menu, MenuDivider, MenuItem, Stack } from '@sienar/ui';
 import { USER_SETTINGS_MENU } from '@plugins-identity/menus.ts';
 
 import type { ReactNode } from 'react';
@@ -60,12 +60,11 @@ export default function UserBadge(props: UserBadgeProps) {
 		menu.forEach(item => {
 			settingsMenuContent.push((
 				<MenuItem
-					component={Link}
-					to={typeof item.href === 'string' ? item.href : inject(item.href!)}
+					href={item.href}
+					icon={item.icon}
 					key={item.text}
 				>
-					{item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
-					<ListItemText>{item.text}</ListItemText>
+					{item.text}
 				</MenuItem>
 			));
 		});
@@ -76,59 +75,42 @@ export default function UserBadge(props: UserBadgeProps) {
 		// 2. The order of menu items will not change during runtime, as this is determined at startup only
 		// 3. The provided menuKeys prop should not be changed during runtime
 		// These circumstances ensure that React's optimizations will still work because the order of elements rendered will never change. It's possible that some new elements might be added or removed in certain circumstances, but React will still rightly identify the diff and happily re-render. Those cases are so few and far between anyway (they should probably never happen during normal app execution) that they aren't really worth considering.
-		settingsMenuContent.push(<Divider key={i}/>)
+		settingsMenuContent.push(<MenuDivider key={i}/>)
 	});
 
 	return (
 		<Stack
-			direction='row'
-			sx={{
-				pt: 2,
-				gap: 1,
-				alignItems: 'center',
-				borderTop: '1px solid',
-				borderColor: 'divider',
-			}}
+			direction='horizontal'
+			// sx={{
+			// 	pt: 2,
+			// 	gap: 1,
+			// 	alignItems: 'center',
+			// 	borderTop: '1px solid',
+			// 	borderColor: 'divider',
+			// }}
 		>
-			<Avatar
-				sizes='small'
-				alt={username!}
-				sx={{ width: 36, height: 36 }}
-			/>
-			<Box sx={{ mr: 'auto' }}>
-				<Typography
-					variant='body2'
-					sx={{
-						lineHeight: '16px',
-						fontWeight: 500,
-						ml: 1
-					}}
-				>
-					{username}
-				</Typography>
-			</Box>
-			<IconButton
+			<div style={{ width: 36, height: 36 }}>
+				U
+			</div>
+			<div className='mr-auto'>
+				<p>{username}</p>
+			</div>
+			<Dropdown icon={<Icon icon='settings'/>}>
+
+			</Dropdown>
+			<Button
 				ref={settingsButtonRef}
 				onClick={toggleSettingsMenu}
 			>
-				<Settings/>
-			</IconButton>
-			<Menu
-				open={settingsOpen}
-				anchorEl={settingsButtonRef.current}
-				anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-				transformOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-				onClose={toggleSettingsMenu}
-				onClick={toggleSettingsMenu}
-			>
+
+			</Button>
+			<Menu>
 				{settingsMenuContent}
-				<MenuItem onClick={logoutCall}>
-					<ListItemIcon>
-						<Logout/>
-					</ListItemIcon>
-					<ListItemText>
-						Log out
-					</ListItemText>
+				<MenuItem
+					icon={<Icon icon='logout'/>}
+					onClick={logoutCall}
+				>
+					Log out
 				</MenuItem>
 			</Menu>
 		</Stack>
