@@ -58,7 +58,9 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(functio
 
 	return (
 		<Link
+			ref={ref}
 			to={destination}
+			className={classes}
 			{...rest}
 		>
 			{childContent}
