@@ -1,18 +1,6 @@
-﻿import { useMemo, useRef, useState } from 'react';
-// import Avatar from '@mui/material/Avatar';
-// import Box from '@mui/material/Box';
-// import Divider from '@mui/material/Divider';
-// import IconButton from '@mui/material/IconButton';
-// import ListItemIcon from '@mui/material/ListItemIcon';
-// import ListItemText from '@mui/material/ListItemText';
-// import Menu from '@mui/material/Menu';
-// import MenuItem from '@mui/material/MenuItem';
-// import Stack from '@mui/material/Stack';
-// import Typography from '@mui/material/Typography';
-// import Logout from '@mui/icons-material/Logout';
-// import Settings from '@mui/icons-material/Settings';
+﻿import { useMemo } from 'react';
 import { aggregateLinks, createApiCall, filterLinks, useAuthContext } from '@sienar/utils';
-import { Button, Dropdown, Icon, Menu, MenuDivider, MenuItem, Stack } from '@sienar/ui';
+import { Dropdown, Icon, Menu, MenuDivider, MenuItem, Stack } from '@sienar/ui';
 import { USER_SETTINGS_MENU } from '@plugins-identity/menus.ts';
 
 import type { ReactNode } from 'react';
@@ -27,8 +15,6 @@ export default function UserBadge(props: UserBadgeProps) {
 		menuKeys = [USER_SETTINGS_MENU]
 	} = props;
 
-	const [settingsOpen, setSettingsOpen] = useState(false);
-	const settingsButtonRef = useRef<HTMLButtonElement|null>(null);
 	const authContext = useAuthContext();
 	const logoutCall = createApiCall(
 		'/api/account/login',
@@ -52,8 +38,6 @@ export default function UserBadge(props: UserBadgeProps) {
 
 		return links;
 	}, [isLoggedIn, roles]);
-
-	const toggleSettingsMenu = () => setSettingsOpen(!settingsOpen);
 
 	const settingsMenuContent: ReactNode[] = [];
 	settingsMenus.map((menu, i) => {
@@ -81,38 +65,40 @@ export default function UserBadge(props: UserBadgeProps) {
 	return (
 		<Stack
 			direction='horizontal'
-			// sx={{
-			// 	pt: 2,
-			// 	gap: 1,
-			// 	alignItems: 'center',
-			// 	borderTop: '1px solid',
-			// 	borderColor: 'divider',
-			// }}
+			align='center'
+			className='pt-2 mx-n2 px-2'
+			style={{
+				borderTop: '1px solid var(--color-light)'
+			}}
 		>
-			<div style={{ width: 36, height: 36 }}>
+			<div
+				className='d-flex justify-content-center align-items-center bg-primary text-white mr-4'
+				style={{
+					width: 36,
+					height: 36,
+					borderRadius: '9999px'
+				}}
+			>
 				U
 			</div>
 			<div className='mr-auto'>
 				<p>{username}</p>
 			</div>
-			<Dropdown icon={<Icon icon='settings'/>}>
-
-			</Dropdown>
-			<Button
-				ref={settingsButtonRef}
-				onClick={toggleSettingsMenu}
+			<Dropdown
+				buttonVariant='text'
+				icon={<Icon icon='cog'/>}
+				direction='up'
 			>
-
-			</Button>
-			<Menu>
-				{settingsMenuContent}
-				<MenuItem
-					icon={<Icon icon='logout'/>}
-					onClick={logoutCall}
-				>
-					Log out
-				</MenuItem>
-			</Menu>
+				<Menu>
+					{settingsMenuContent}
+					<MenuItem
+						icon={<Icon icon='logout'/>}
+						onClick={logoutCall}
+					>
+						Log out
+					</MenuItem>
+				</Menu>
+			</Dropdown>
 		</Stack>
 	)
 }
