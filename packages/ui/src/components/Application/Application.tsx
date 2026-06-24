@@ -76,18 +76,20 @@ export function Application(props: ApplicationProps) {
 					setOpen={setOpen}
 					{...sidebarProps}
 				>
-					{inject(DRAWER_HEADER_PARTIAL, true)}
+					<div className='flex-grow-1'>
+						{inject(DRAWER_HEADER_PARTIAL, true)}
 
-					<Menu color={color}>
-						{menuItems.map(item => (
-							<MenuItem
-								key={item.text}
-								label={item.text}
-								href={item.href}
-								icon={item.icon}
-							/>
-						))}
-					</Menu>
+						<Menu color={color}>
+							{menuItems.map(item => (
+								<MenuItem
+									key={item.text}
+									label={item.text}
+									href={item.href}
+									icon={item.icon}
+								/>
+							))}
+						</Menu>
+					</div>
 
 					{inject(DRAWER_FOOTER_PARTIAL, true)}
 				</Sidebar>
