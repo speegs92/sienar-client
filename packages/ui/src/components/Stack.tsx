@@ -44,13 +44,13 @@ export function Stack(props: StackProps) {
 	} = props;
 
 	const align: FlexAlign = flexAlign ??
-		direction === 'horizontal'
+		(direction === 'horizontal'
 			? 'start'
-			: 'stretch';
+			: 'stretch');
 	const justify: FlexJustify = flexJustify ??
-		direction == 'horizontal'
+		(direction == 'horizontal'
 			? 'between'
-			: 'end';
+			: 'end');
 
 	const classes = classNames(
 		className,
