@@ -197,7 +197,7 @@ export function Form(props: FormProps) {
 		}
 
 		if (typeof onSuccess === 'function') {
-			onSuccess(result.result);
+			onSuccess(result);
 		} else if (typeof onSuccess === 'string') {
 			navigate(onSuccess);
 		}
