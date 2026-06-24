@@ -1,5 +1,5 @@
 ﻿import { useMemo, useState } from 'react';
-import { aggregateLinks, classNames, filterLinks, useAuthContext, useActiveMenu } from '@sienar/utils';
+import { aggregateLinks, classNames, DRAWER_HEADER_PARTIAL, DRAWER_FOOTER_PARTIAL, filterLinks, inject, useAuthContext, useActiveMenu } from '@sienar/utils';
 import { createThemedClassNames } from '@ui/theme.ts';
 import { useScrollLock } from '@ui/utils.ts';
 import { Button, Container, Icon, Menu, MenuItem, ModalContainer, Notifications } from '@ui/components';
@@ -76,6 +76,8 @@ export function Application(props: ApplicationProps) {
 					setOpen={setOpen}
 					{...sidebarProps}
 				>
+					{inject(DRAWER_HEADER_PARTIAL, true)}
+
 					<Menu color={color}>
 						{menuItems.map(item => (
 							<MenuItem
@@ -86,6 +88,8 @@ export function Application(props: ApplicationProps) {
 							/>
 						))}
 					</Menu>
+
+					{inject(DRAWER_FOOTER_PARTIAL, true)}
 				</Sidebar>
 
 				<div className='app__window'>
