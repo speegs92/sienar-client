@@ -44,6 +44,37 @@
 	}
 
 	// Themed styles
+	&.button--solid {
+		--button-background-color: var(--color-heavy);
+		--button-border-color: var(--color-heavy);
+		--button-text-color: #{functions.get-contrasting-text-color('heavy')};
+
+		&:hover {
+			--button-background-color: var(--color-heavy-darken);
+			--button-border-color: var(--color-heavy-darken);
+		}
+	}
+
+	&.button--outlined {
+		--button-background-color: transparent;
+		--button-border-color: var(--color-heavy);
+		--button-text-color: var(--color-heavy);
+
+		&:hover {
+			--button-background-color: var(--color-heavy-transparent);
+		}
+	}
+
+	&.button--text {
+		--button-background-color: transparent;
+		--button-border-color: transparent;
+		--button-text-color: var(--color-heavy);
+
+		&:hover {
+			--button-background-color: var(--color-heavy-transparent);
+		}
+	}
+
 	@each $color in map.keys(variables.$theme-colors) {
 		&.button--#{$color}.button--solid {
 			--button-background-color: var(--color-#{$color});
