@@ -24,6 +24,10 @@
 		background-color var(--transition),
 		color var(--transition);
 
+	&:hover {
+		--#{$var-prefix}-background-color: var(--color-heavy-transparent);
+	}
+
 	@each $color in map.keys(variables.$theme-colors) {
 		&#{&}--#{$color} {
 			--#{$var-prefix}-text-color: var(--color-#{$color});
