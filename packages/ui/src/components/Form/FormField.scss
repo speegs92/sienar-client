@@ -2,7 +2,7 @@
 @use '@ui/styles/variables';
 
 .form-field {
-	--form-field-margin-bottom: var(--spacer-4);
+	--form-field-margin-bottom: var(--spacer-8);
 	--form-field-text-color: var(--color-heavy);
 
 	--form-field-input-background-color: var(--color-white);
@@ -104,11 +104,7 @@
 	}
 }
 
-.form-field--valid {
+.form-field--valid.form-field--focused {
 	--form-field-input-border-color: var(--color-success);
-
-	&.form-field--focused {
-		--form-field-text-color: var(--color-success);
-		--form-field-input-border-color: var(--color-success);
-	}
+	--form-field-text-color: var(--color-success);
 }
