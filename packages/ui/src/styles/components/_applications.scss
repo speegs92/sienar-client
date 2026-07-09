@@ -3,7 +3,7 @@
 @use '@ui/styles/functions';
 
 .app {
-	--app-background-color: var(--color-light);
+	--app-background-color: var(--color-light-lighten);
 
 	background-color: var(--app-background-color);
 

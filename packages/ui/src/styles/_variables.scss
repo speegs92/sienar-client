@@ -75,7 +75,7 @@ $default-theme-colors: (
 	),
 	light: (
 		default: $light,
-		lighten: color.scale($light, $lightness: $lighten-lightness),
+		lighten: rgb(240, 240, 240),
 		darken: color.scale($light, $lightness: $darken-lightness)
 	),
 	heavy: (
