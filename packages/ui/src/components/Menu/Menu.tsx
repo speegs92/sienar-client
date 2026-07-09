@@ -1,6 +1,5 @@
 import { classNames } from '@sienar/utils';
 import { createThemedClassNames, ThemeContext, useThemeContext } from '@ui/theme.ts';
-import './Menu.scss';
 
 import type { ComponentPropsWithoutRef, ElementType } from 'react';
 import type { Color } from '@ui/theme.ts';

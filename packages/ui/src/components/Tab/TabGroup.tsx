@@ -2,7 +2,6 @@
 import { classNames } from '@sienar/utils';
 import { createThemedClassNames } from '@ui/theme.ts';
 import { TabContext } from './utils.ts';
-import './TabGroup.scss';
 
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';

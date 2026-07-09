@@ -7,8 +7,6 @@ import { modalDefaultValuesContext } from './utils.ts';
 import type { ModalInstance } from '@sienar/utils';
 import type { Breakpoint } from '@ui/theme.ts';
 
-import './ModalContainer.scss';
-
 /**
  * The props for the modal component
  */

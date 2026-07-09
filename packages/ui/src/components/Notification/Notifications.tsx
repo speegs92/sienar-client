@@ -6,8 +6,6 @@ import { notificationContext } from './utils.ts';
 import type { ReactNode } from 'react';
 import type { NotificationType } from '@sienar/utils';
 
-import './Notifications.scss';
-
 /**
  * The props for the notification provider component
  */

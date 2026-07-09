@@ -6,7 +6,6 @@ import { Button, Container, Icon, Menu, MenuItem, ModalContainer, Notifications 
 import { Appbar } from './Appbar.tsx';
 import { Sidebar } from './Sidebar.tsx';
 import { MainContent } from './MainContent.tsx';
-import './Application.scss';
 
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';

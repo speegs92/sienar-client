@@ -5,8 +5,6 @@ import { Icon } from '@ui/components';
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';
 
-import './DismissButton.scss';
-
 export interface DismissButtonProps extends HTMLAttributes<HTMLButtonElement> {
 	/**
 	 * The color of the dismiss button

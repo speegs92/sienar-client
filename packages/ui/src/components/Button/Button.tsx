@@ -1,6 +1,5 @@
 ﻿import { forwardRef } from 'react';
 import { createButtonClasses } from './shared.ts';
-import './Button.scss';
 
 import type { ForwardedRef, ButtonHTMLAttributes } from 'react';
 import type { ButtonBaseProps } from './shared.ts';

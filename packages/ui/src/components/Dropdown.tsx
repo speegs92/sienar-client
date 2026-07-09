@@ -3,7 +3,6 @@ import { classNames } from '@sienar/utils';
 import { Button } from '@ui/components/Button/Button.tsx';
 import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
 import { CloseableContext } from '@ui/utils.ts';
-import './Dropdown.scss';
 
 import type { HTMLAttributes,  ReactNode } from 'react';
 import type { Color, Direction, HorizontalAlignment, Variant, VerticalAlignment } from '@ui/theme.ts';

@@ -1,5 +1,4 @@
 ﻿import { classNames } from '@sienar/utils';
-import './Container.scss';
 
 import type { HTMLAttributes } from 'react';
 import type { HorizontalAlignment, Breakpoint } from '@ui/theme.ts';

@@ -1,4 +1,9 @@
-﻿.validation-list__result {
+﻿.validation-list {
+	padding: 0;
+	list-style: none;
+}
+
+.validation-list__result {
 	--validation-result-margin-bottom: var(--spacer-2);
 	--validation-result-text-color: var(--color-heavy);
 

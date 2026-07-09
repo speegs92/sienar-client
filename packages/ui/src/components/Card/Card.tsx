@@ -1,6 +1,5 @@
 ﻿import { classNames } from '@sienar/utils';
 import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
-import './Card.scss';
 
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';

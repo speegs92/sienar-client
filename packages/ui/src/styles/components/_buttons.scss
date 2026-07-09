@@ -74,37 +74,62 @@
 			--button-background-color: var(--color-heavy-transparent);
 		}
 	}
+}
 
-	@each $color in map.keys(variables.$theme-colors) {
-		&.button--#{$color}.button--solid {
-			--button-background-color: var(--color-#{$color});
-			--button-border-color: var(--color-#{$color});
-			--button-text-color: #{functions.get-contrasting-text-color($color)};
+.dismiss-button {
+	--dismiss-button-background-color: transparent;
+	--dismiss-button-text-color: var(--color-heavy);
 
-			&:hover {
-				--button-background-color: var(--color-#{$color}-darken);
-				--button-border-color: var(--color-#{$color}-darken);
-			}
+	background: var(--dismiss-button-background-color);
+	color: var(--dismiss-button-text-color);
+
+	border: none;
+	cursor: pointer;
+	aspect-ratio: 1/1;
+	border-radius: 9999px;
+
+	&:hover {
+		--notification-close-button-background-color: var(--color-heavy-transparent);
+	}
+}
+
+@each $color in map.keys(variables.$theme-colors) {
+	.button.button--#{$color}.button--solid {
+		--button-background-color: var(--color-#{$color});
+		--button-border-color: var(--color-#{$color});
+		--button-text-color: #{functions.get-contrasting-text-color($color)};
+
+		&:hover {
+			--button-background-color: var(--color-#{$color}-darken);
+			--button-border-color: var(--color-#{$color}-darken);
 		}
+	}
 
-		&.button--#{$color}.button--outlined {
-			--button-background-color: transparent;
-			--button-border-color: var(--color-#{$color});
-			--button-text-color: var(--color-#{$color});
+	.button.button--#{$color}.button--outlined {
+		--button-background-color: transparent;
+		--button-border-color: var(--color-#{$color});
+		--button-text-color: var(--color-#{$color});
 
-			&:hover {
-				--button-background-color: var(--color-#{$color}-transparent);
-			}
+		&:hover {
+			--button-background-color: var(--color-#{$color}-transparent);
 		}
+	}
 
-		&.button--#{$color}.button--text {
-			--button-background-color: transparent;
-			--button-border-color: transparent;
-			--button-text-color: var(--color-#{$color});
+	.button.button--#{$color}.button--text {
+		--button-background-color: transparent;
+		--button-border-color: transparent;
+		--button-text-color: var(--color-#{$color});
 
-			&:hover {
-				--button-background-color: var(--color-#{$color}-transparent);
-			}
+		&:hover {
+			--button-background-color: var(--color-#{$color}-transparent);
+		}
+	}
+
+	.dismiss-button--#{$color} {
+		--dismiss-button-text-color: var(--color-#{$color});
+
+		&:hover {
+			--dismiss-button-background-color: var(--color-#{$color}-transparent);
 		}
 	}
 }
