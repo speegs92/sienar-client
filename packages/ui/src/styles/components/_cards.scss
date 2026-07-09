@@ -49,6 +49,10 @@
 		--card-border-color: var(--color-#{$color});
 	}
 
+	.card--background-#{$color} {
+		--card-background-color: var(--color-#{$color});
+	}
+
 	.card__header--#{$color} {
 		--card-background-color: var(--color-#{$color});
 		--card-text-color:  #{functions.get-contrasting-text-color($color)};

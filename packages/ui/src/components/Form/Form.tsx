@@ -227,7 +227,7 @@ export function Form(props: FormProps) {
 
 	return (
 		<formValidationContext.Provider value={formContext}>
-			<Card color={color} style={{backgroundColor: 'var(--color-white)'}}>
+			<Card color={color}>
 				<CardHeader>
 					<div>
 						<TitleTag>

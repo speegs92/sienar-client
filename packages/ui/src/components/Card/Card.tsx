@@ -14,6 +14,11 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, 'color'> {
 	color?: Color;
 
 	/**
+	 * The background color of the card
+	 */
+	backgroundColor?: Color;
+
+	/**
 	 * The HTML tag with which to render the card
 	 */
 	tag?: keyof HTMLElementTagNameMap;
@@ -22,6 +27,7 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, 'color'> {
 export function Card(props: CardProps) {
 	const {
 		color,
+		backgroundColor,
 		tag: Tag = 'article',
 		className,
 		...rest
@@ -29,7 +35,10 @@ export function Card(props: CardProps) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'card')
+		createThemedClassNames(color, undefined, 'card'),
+		{
+			[`card--background-${backgroundColor}`]: !!backgroundColor
+		}
 	);
 
 	return (
