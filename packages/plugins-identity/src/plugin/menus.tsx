@@ -74,7 +74,7 @@ export function setupIdentityMenus() {
 		{
 			text: 'Delete account',
 			href: urls.account.delete,
-			icon: <Icon icon='trash'/>,
+			icon: <Icon icon='delete'/>,
 			requireLoggedIn: true
 		}
 	);
