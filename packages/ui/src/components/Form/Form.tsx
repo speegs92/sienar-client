@@ -1,9 +1,8 @@
 ﻿import { useContext, useEffect, useId, useRef } from 'react';
-import { classNames, formValidationContext, type RequestResult, sendRequest, useNavigate, type ValidationResult } from '@sienar/utils';
-import { Button, Card, CardActions, CardContent, CardHeader } from '@ui/components';
+import { formValidationContext, sendRequest, useNavigate } from '@sienar/utils';
 
 import type { HTMLAttributes, ReactNode, SubmitEvent } from 'react';
-import type { HttpMethod } from '@sienar/utils';
+import type { HttpMethod, RequestResult, ValidationResult } from '@sienar/utils';
 import type { Color } from '@ui/theme.ts';
 
 /**
@@ -108,22 +107,10 @@ export type FormProps = {
 
 export function Form(props: FormProps) {
 	const {
-		title,
-		titleTag: TitleTag = 'h1',
-		subtitle,
-		subtitleTag: SubtitleTag = 'h2',
-		headerIcon,
-		color,
 		beforeSubmit,
 		endpoint,
 		method,
-		submitText = 'Submit',
-		resetText = 'Reset',
-		showReset = false,
 		resetOnSubmit = false,
-		hideControls = false,
-		information,
-		additionalActions,
 		children,
 		onReset,
 		immediate,
@@ -227,66 +214,14 @@ export function Form(props: FormProps) {
 
 	return (
 		<formValidationContext.Provider value={formContext}>
-			<Card color={color}>
-				<CardHeader>
-					<div>
-						<TitleTag>
-							{title}
-						</TitleTag>
-						{subtitle && (
-							<SubtitleTag>
-								{subtitle}
-							</SubtitleTag>
-						)}
-					</div>
-
-					{headerIcon}
-				</CardHeader>
-
-				{information && (
-					<CardContent>
-						{information}
-					</CardContent>
-				)}
-
-				<CardContent>
-					<form
-						id={formId}
-						ref={formRef}
-						onSubmit={handleSubmit}
-						onReset={handleReset}
-					>
-						{children}
-					</form>
-				</CardContent>
-
-				{!hideControls && (
-					<CardActions>
-						<Button
-							form={formId}
-
-ref={submitButtonRef}
-							color={color}
-							type='submit'
-							variant='solid'
-						>
-							{submitText}
-						</Button>
-
-						<Button
-							className={classNames({ 'd-none': !showReset })}
-							// form={formId}
-							ref={resetButtonRef}
-							color='secondary'
-							// type='reset'
-							// variant='outlined'
-						>
-							{resetText}
-						</Button>
-						{additionalActions}
-					</CardActions>
-				)}
-			</Card>
+			<form
+				id={formId}
+				ref={formRef}
+				onSubmit={handleSubmit}
+				onReset={handleReset}
+			>
+				{children}
+			</form>
 		</formValidationContext.Provider>
 	);
 }
