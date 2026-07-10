@@ -74,3 +74,13 @@
 		}
 	}
 }
+
+@mixin make-responsive() {
+	@content('');
+
+	@each $breakpoint, $size in variables.$breakpoints {
+		@media (min-width: $size) {
+			@content('-#{$breakpoint}');
+		}
+	}
+}
