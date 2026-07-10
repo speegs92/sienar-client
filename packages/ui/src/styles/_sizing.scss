@@ -1,6 +1,7 @@
-﻿@use 'variables';
+﻿@use 'mixins';
+@use 'variables';
 
-@mixin create-utilities($infix) {
+@include mixins.make-responsive() using ($infix) {
 	@each $size, $value in variables.$width-height-percentages {
 		.h#{$infix}-#{$size} {
 			height: #{$value};
@@ -20,13 +21,5 @@
 		.min-vw#{$infix}-#{$realLevel} {
 			min-width: #{$realLevel}vw;
 		}
-	}
-}
-
-@include create-utilities('');
-
-@each $breakpoint, $width in variables.$breakpoints {
-	@media (min-width: #{$width}) {
-		@include create-utilities('-#{$breakpoint}');
 	}
 }

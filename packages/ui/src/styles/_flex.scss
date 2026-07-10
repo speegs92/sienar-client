@@ -1,4 +1,5 @@
-﻿@use 'variables';
+﻿@use 'mixins';
+@use 'variables';
 
 $flex-direction-values: row, row-reverse, column, column-reverse;
 $justify-values: (
@@ -12,7 +13,7 @@ $justify-values: (
 $align-values: start, end, center, baseline, stretch;
 $wrap-values: wrap, nowrap, wrap-reverse;
 
-@mixin create-utilities($infix) {
+@include mixins.make-responsive() using ($infix) {
 	@each $direction in $flex-direction-values {
 		.flex#{$infix}-#{$direction} {
 			flex-direction: #{$direction};
@@ -54,13 +55,5 @@ $wrap-values: wrap, nowrap, wrap-reverse;
 		.flex-#{$infix}-shrink-#{$level} {
 			flex-shrink: #{$level};
 		}
-	}
-}
-
-@include create-utilities('');
-
-@each $breakpoint, $width in variables.$breakpoints {
-	@media (min-width: #{$width}) {
-		@include create-utilities('-#{$breakpoint}');
 	}
 }

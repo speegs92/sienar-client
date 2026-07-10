@@ -1,4 +1,5 @@
 ﻿@use 'sass:math';
+@use 'mixins';
 @use 'variables';
 
 $columns: 12;
@@ -11,28 +12,20 @@ $columns: 12;
 	max-width: 100%;
 }
 
-@mixin create-utilities($breakpoint-infix) {
-	.col#{$breakpoint-infix} {
+@include mixins.make-responsive() using ($infix) {
+	.col#{$infix} {
 		flex: 1 0 0;
 	}
 
-	.col#{$breakpoint-infix}-auto {
+	.col#{$infix}-auto {
 		flex: 0 0 auto;
 		width: auto;
 	}
 
 	@for $i from 0 through $columns {
-		.col#{$breakpoint-infix}-#{$i} {
+		.col#{$infix}-#{$i} {
 			flex: 0 0 auto;
 			width: #{math.div($i, $columns) * 100}#{'%'};
 		}
-	}
-}
-
-@include create-utilities('');
-
-@each $breakpoint, $width in variables.$breakpoints {
-	@media (min-width: $width) {
-		@include create-utilities('-#{$breakpoint}');
 	}
 }
