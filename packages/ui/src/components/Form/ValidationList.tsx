@@ -62,7 +62,12 @@ export function ValidationList(props: ValidationListProps) {
 			className={classes}
 			{...rest}
 		>
-			{filtered.map(r => <ValidationListItem validation={r}/>)}
+			{filtered.map(r => (
+				<ValidationListItem
+					key={r.message}
+					validation={r}
+				/>
+			))}
 		</ul>
 	) || null;
 }
