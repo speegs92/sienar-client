@@ -3,6 +3,7 @@ export * from './Backdrop.tsx';
 export * from './Button/index.ts';
 export * from './Card/index.tsx';
 export * from './Container.tsx';
+export * from './Content.tsx';
 export * from './Dropdown.tsx';
 export * from './Form/index.ts';
 export * from './Grid/index.ts';
