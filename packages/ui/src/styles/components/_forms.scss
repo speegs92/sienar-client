@@ -3,16 +3,16 @@
 
 .form-field {
 	--form-field-margin-bottom: var(--spacer-8);
-	--form-field-text-color: var(--color-heavy);
+	--form-field-text-color: var(--color-bold);
 
 	--form-field-input-background-color: var(--color-white);
-	--form-field-input-border-color: var(--color-light);
+	--form-field-input-border-color: var(--color-soft-darken);
 	--form-field-input-border-style: solid;
 	--form-field-input-border-width: 1px;
 	--form-field-input-border-radius: var(--border-radius);
 	--form-field-input-padding-x: var(--spacer-3);
 	--form-field-input-padding-y: var(--spacer-3);
-	--form-field-input-text-color: var(--color-heavy);
+	--form-field-input-text-color: var(--color-bold);
 
 	--form-field-label-margin-bottom: var(--spacer-2);
 
@@ -74,7 +74,7 @@ select.form-field__input {
 	}
 
 	.form-field--focused & {
-		--form-field-text-color: var(--color-heavy);
+		--form-field-text-color: var(--color-bold);
 	}
 }
 
@@ -143,7 +143,7 @@ select.form-field__input {
 .check-radio {
 	--checkbox-margin-bottom: var(--spacer-2);
 
-	--checkbox-input-color: var(--color-heavy);
+	--checkbox-input-color: var(--color-bold);
 	--checkbox-input-size: 24px;
 	--checkbox-input-margin-right: var(--spacer-3);
 

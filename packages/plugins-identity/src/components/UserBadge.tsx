@@ -68,7 +68,7 @@ export default function UserBadge(props: UserBadgeProps) {
 			align='center'
 			className='pt-2 mx-n2 px-2'
 			style={{
-				borderTop: '1px solid var(--color-light)'
+				borderTop: '1px solid var(--color-soft-darken)'
 			}}
 		>
 			<div

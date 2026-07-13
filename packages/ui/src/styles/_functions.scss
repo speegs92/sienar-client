@@ -12,7 +12,7 @@
 	}
 
 	@if (color.channel($actual-color, 'lightness', $space: hsl) > 70%) {
-		@return var(--color-heavy);
+		@return var(--color-bold);
 	} @else {
 		@return var(--color-white);
 	}

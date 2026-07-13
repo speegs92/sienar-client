@@ -6,7 +6,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: var(--color-heavy);
+	background-color: var(--color-bold);
 	z-index: 1;
 
 	@include mixins.fade-in('backdrop', .5);

@@ -3,13 +3,13 @@
 @use '@ui/styles/functions';
 
 .button {
-	--button-background-color: var(--color-heavy);
-	--button-border-color: var(--color-heavy);
+	--button-background-color: var(--color-bold);
+	--button-border-color: var(--color-bold);
 	--button-border-style: solid;
 	--button-border-width: 1px;
 	--button-padding-x: var(--spacer-2);
 	--button-padding-y: var(--spacer-2);
-	--button-text-color: #{functions.get-contrasting-text-color('heavy')};
+	--button-text-color: #{functions.get-contrasting-text-color('bold')};
 
 	border-width: var(--button-border-width);
 	border-style: var(--button-border-style);
@@ -46,40 +46,40 @@
 
 	// Themed styles
 	&.button--solid {
-		--button-background-color: var(--color-heavy);
-		--button-border-color: var(--color-heavy);
-		--button-text-color: #{functions.get-contrasting-text-color('heavy')};
+		--button-background-color: var(--color-bold);
+		--button-border-color: var(--color-bold);
+		--button-text-color: #{functions.get-contrasting-text-color('bold')};
 
 		&:hover {
-			--button-background-color: var(--color-heavy-darken);
-			--button-border-color: var(--color-heavy-darken);
+			--button-background-color: var(--color-bold-darken);
+			--button-border-color: var(--color-bold-darken);
 		}
 	}
 
 	&.button--outlined {
 		--button-background-color: transparent;
-		--button-border-color: var(--color-heavy);
-		--button-text-color: var(--color-heavy);
+		--button-border-color: var(--color-bold);
+		--button-text-color: var(--color-bold);
 
 		&:hover {
-			--button-background-color: var(--color-heavy-transparent);
+			--button-background-color: var(--color-bold-transparent);
 		}
 	}
 
 	&.button--text {
 		--button-background-color: transparent;
 		--button-border-color: transparent;
-		--button-text-color: var(--color-heavy);
+		--button-text-color: var(--color-bold);
 
 		&:hover {
-			--button-background-color: var(--color-heavy-transparent);
+			--button-background-color: var(--color-bold-transparent);
 		}
 	}
 }
 
 .dismiss-button {
 	--dismiss-button-background-color: transparent;
-	--dismiss-button-text-color: var(--color-heavy);
+	--dismiss-button-text-color: var(--color-bold);
 
 	background: var(--dismiss-button-background-color);
 	color: var(--dismiss-button-text-color);
@@ -90,7 +90,7 @@
 	border-radius: 9999px;
 
 	&:hover {
-		--notification-close-button-background-color: var(--color-heavy-transparent);
+		--notification-close-button-background-color: var(--color-bold-transparent);
 	}
 }
 

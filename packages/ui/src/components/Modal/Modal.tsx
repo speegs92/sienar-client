@@ -40,7 +40,7 @@ export function Modal<T>(props: ModalProps<T>) {
 							</h2>
 							<DismissButton
 								className='ml-4'
-								color='heavy'
+								color='bold'
 								onClick={() => close('canceled')}
 							/>
 						</CardHeader>

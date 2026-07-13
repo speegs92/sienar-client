@@ -32,7 +32,7 @@ export function Menu<T extends ElementType = 'ul'>(props: MenuProps<T>) {
 	);
 
 	return (
-		<ThemeContext.Provider value={{ color: color ?? parentTheme.color ?? 'heavy' }}>
+		<ThemeContext.Provider value={{ color: color ?? parentTheme.color ?? 'bold' }}>
 			<Tag className={classes} {...rest} />
 		</ThemeContext.Provider>
 	);

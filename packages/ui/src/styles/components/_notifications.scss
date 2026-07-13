@@ -18,7 +18,7 @@
 	--notification-margin-bottom: var(--spacer-2);
 	--notification-padding-x: var(--spacer-2);
 	--notification-padding-y: var(--spacer-2);
-	box-shadow: var(--box-shadow) var(--color-heavy);
+	box-shadow: var(--box-shadow) var(--color-bold);
 
 	background-color: var(--notification-background-color);
 	border-color: var(--notification-border-color);
@@ -43,7 +43,7 @@
 		& .dismiss-button--#{$color} {
 			--dismiss-button-text-color: #{functions.get-contrasting-text-color($color)};
 			&:hover {
-				--dismiss-button-background-color: var(--color-light-transparent);
+				--dismiss-button-background-color: var(--color-soft-darken-transparent);
 			}
 		}
 	}

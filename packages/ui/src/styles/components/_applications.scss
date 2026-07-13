@@ -3,6 +3,7 @@
 @use '@ui/styles/functions';
 
 .app {
+	// TODO: change this to a --color-background
 	--app-background-color: var(--color-light-lighten);
 
 	background-color: var(--app-background-color);
@@ -19,7 +20,7 @@
 	--appbar-min-height: 64px;
 	--appbar-padding-x: var(--spacer-2);
 	--appbar-padding-y: var(--spacer-2);
-	--appbar-text-color: var(--heavy);
+	--appbar-text-color: var(--color-bold);
 
 	background-color: var(--appbar-background-color);
 	border-bottom-color: var(--appbar-border-color);

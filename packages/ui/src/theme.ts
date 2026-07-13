@@ -37,8 +37,8 @@ export type Color =
 	| 'info'
 	| 'warning'
 	| 'error'
-	| 'light'
-	| 'heavy'
+	| 'soft'
+	| 'bold'
 	| 'default';
 
 /**

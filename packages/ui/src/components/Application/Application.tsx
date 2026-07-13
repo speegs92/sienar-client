@@ -40,7 +40,7 @@ export interface ApplicationProps extends Omit<HTMLAttributes<HTMLElement>, 'col
 export function Application(props: ApplicationProps) {
 	const {
 		tag: Tag = 'div',
-		color = 'heavy',
+		color = 'bold',
 		className,
 		appbarProps,
 		sidebarProps,
