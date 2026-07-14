@@ -34,12 +34,12 @@ export interface ContentProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * The background color of the content, if any
 	 */
-	background?: Color;
+	bgColor?: Color;
 
 	/**
 	 * The foreground color of the content, if any
 	 */
-	foreground?: Color;
+	fgColor?: Color;
 
 	/**
 	 * The padding of the content, if any
@@ -59,8 +59,8 @@ export function Content(props: ContentProps) {
 		subtitle,
 		subtitleTag: SubtitleTag = 'h2',
 		maxWidth = 'sm',
-		background,
-		foreground,
+		bgColor,
+		fgColor,
 		padding = 5,
 		children,
 		className,
@@ -71,8 +71,8 @@ export function Content(props: ContentProps) {
 
 	const contentClasses = classNames(
 		{
-			[`bg-${background}`]: !!background,
-			[`text-${foreground}`]: !!foreground,
+			[`bg-${bgColor}`]: !!bgColor,
+			[`text-${fgColor}`]: !!fgColor,
 			[`p-${padding}`]: padding !== undefined
 		}
 	);
