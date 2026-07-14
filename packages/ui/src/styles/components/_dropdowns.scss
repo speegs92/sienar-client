@@ -1,7 +1,6 @@
 ﻿.dropdown {
 	--dropdown-border-radius: var(--border-radius);
-	// TODO: change this to a --color-background
-	--dropdown-content-shadow-color: var(--color-light-darken);
+	--dropdown-content-shadow-color: var(--color-background);
 
 	position: relative;
 	display: inline-block;

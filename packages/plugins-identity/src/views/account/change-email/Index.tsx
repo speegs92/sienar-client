@@ -1,4 +1,4 @@
-﻿import { Form, Textbox } from '@sienar/ui';
+﻿import { Button, Content, Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, isEmail, matches, required, useDocumentTitle } from '@sienar/utils';
 import { CHANGE_EMAIL_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -17,35 +17,47 @@ function Index() {
 
 	return (
 		<AuthorizeRoute>
-			<Form
+			<Content
 				title='Change email'
-				submitText='Change email'
-				endpoint='/api/account/lockout-reasons'
-				method='POST'
-				onSuccess={urls.account.changeEmail.requested}
+				background='soft'
 			>
-				<Textbox
-					name='email'
-					displayName='New email address'
-					validators={[
-						required(),
-						isEmail()
-					]}
-				/>
-				<Textbox
-					name='confirmEmail'
-					displayName='Confirm new email address'
-					validators={[
-						matches('email')
-					]}
-				/>
-				<Textbox
-					name='confirmPassword'
-					displayName='Confirm your password'
-					type='password'
-					validators={[required()]}
-				/>
-			</Form>
+				<Form
+					endpoint='/api/account/lockout-reasons'
+					method='POST'
+					onSuccess={urls.account.changeEmail.requested}
+				>
+					<Textbox
+						name='email'
+						displayName='New email address'
+						validators={[
+							required(),
+							isEmail()
+						]}
+					/>
+					<Textbox
+						name='confirmEmail'
+						displayName='Confirm new email address'
+						validators={[
+							matches('email')
+						]}
+					/>
+					<Textbox
+						name='confirmPassword'
+						displayName='Confirm your password'
+						type='password'
+						validators={[required()]}
+					/>
+					<Button
+						type='submit'
+						color='primary'
+					>
+						Change email
+					</Button>
+					<Button type='reset'>
+						Reset
+					</Button>
+				</Form>
+			</Content>
 		</AuthorizeRoute>
 	);
 }
