@@ -1,5 +1,5 @@
 ﻿import { useSearchParams } from 'react-router-dom';
-import { Icon, LinkButton, Form, StandaloneCheckbox, Textbox } from '@sienar/ui';
+import { Button, Icon, LinkButton, Form, StandaloneCheckbox, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useNavigate, useAuthContext, useDocumentTitle } from '@sienar/utils';
 import { MAIN_URL } from '@sienar/plugins-core';
 import { LOGIN_LAYOUT } from '@plugins-identity/layouts.ts';
@@ -80,6 +80,13 @@ function Login() {
 				<StandaloneCheckbox name='rememberMe' color='secondary'>
 					Remember me
 				</StandaloneCheckbox>
+
+				<Button
+					type='submit'
+					color='primary'
+				>
+					Log in
+				</Button>
 			</Form>
 		</AuthorizeRoute>
 	);
