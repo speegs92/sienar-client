@@ -47,6 +47,11 @@ export interface ContentProps extends HTMLAttributes<HTMLElement> {
 	padding?: number|null;
 
 	/**
+	 * Whether to inset the header with the rest of the content
+	 */
+	insetHeader?: boolean;
+
+	/**
 	 * The HTML tag with which to render the content
 	 */
 	tag?: keyof HTMLElementTagNameMap;
@@ -62,6 +67,7 @@ export function Content(props: ContentProps) {
 		bgColor = 'soft',
 		fgColor = 'bold',
 		padding = 8,
+		insetHeader = false,
 		children,
 		className,
 		tag: Tag = 'article'
@@ -77,23 +83,28 @@ export function Content(props: ContentProps) {
 		}
 	);
 
+	const headerContent = (
+		<header className='text-align-center'>
+			<TitleTag>
+				{title}
+			</TitleTag>
+			{subtitle && (
+				<SubtitleTag>
+					{subtitle}
+				</SubtitleTag>
+			)}
+		</header>
+	);
+
 	return (
 		<Tag className={classes}>
 			<Container
 				maxWidth={maxWidth}
 			>
-				<header className='text-align-center'>
-					<TitleTag>
-						{title}
-					</TitleTag>
-					{subtitle && (
-						<SubtitleTag>
-							{subtitle}
-						</SubtitleTag>
-					)}
-				</header>
+				{!insetHeader && headerContent}
 
 				<div className={contentClasses}>
+					{insetHeader && headerContent}
 					{children}
 				</div>
 			</Container>
