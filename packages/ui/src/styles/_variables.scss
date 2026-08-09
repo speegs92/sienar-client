@@ -81,6 +81,11 @@ $default-theme-colors: (
 		default: $bold,
 		lighten: color.scale($bold, $lightness: $lighten-lightness),
 		darken: color.scale($bold, $lightness: $darken-lightness)
+	),
+	background: (
+		default: $background,
+		lighten: color.scale($background, $lightness: $lighten-lightness),
+		darken: color.scale($background, $lightness: $darken-lightness)
 	)
 );
 

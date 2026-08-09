@@ -16,8 +16,6 @@
 		}
 	}
 
-	--color-background: variables.$background;
-
 	--spacer-size: #{variables.$spacer-size};
 
 	@for $i from 0 through variables.$spacer-count {
