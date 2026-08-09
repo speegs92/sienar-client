@@ -1,6 +1,10 @@
 ﻿@use 'sass:map';
 @use '@ui/styles/variables';
 
+form > .button {
+	margin-right: var(--spacer-4);
+}
+
 .form-field {
 	--form-field-margin-bottom: var(--spacer-8);
 	--form-field-text-color: var(--color-bold);
