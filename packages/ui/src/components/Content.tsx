@@ -34,17 +34,17 @@ export interface ContentProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * The background color of the content, if any
 	 */
-	bgColor?: Color;
+	bgColor?: Color|null;
 
 	/**
 	 * The foreground color of the content, if any
 	 */
-	fgColor?: Color;
+	fgColor?: Color|null;
 
 	/**
 	 * The padding of the content, if any
 	 */
-	padding?: number;
+	padding?: number|null;
 
 	/**
 	 * The HTML tag with which to render the content
@@ -59,9 +59,9 @@ export function Content(props: ContentProps) {
 		subtitle,
 		subtitleTag: SubtitleTag = 'h2',
 		maxWidth = 'sm',
-		bgColor,
-		fgColor,
-		padding = 5,
+		bgColor = 'soft',
+		fgColor = 'bold',
+		padding = 8,
 		children,
 		className,
 		tag: Tag = 'article'
@@ -73,7 +73,7 @@ export function Content(props: ContentProps) {
 		{
 			[`bg-${bgColor}`]: !!bgColor,
 			[`text-${fgColor}`]: !!fgColor,
-			[`p-${padding}`]: padding !== undefined
+			[`p-${padding}`]: padding !== null
 		}
 	);
 
