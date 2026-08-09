@@ -1,4 +1,4 @@
-﻿import { Form, Textbox } from '@sienar/ui';
+﻿import { Button, Content, Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useAuthContext, useDocumentTitle, useNavigate } from '@sienar/utils';
 import { DELETE_ACCOUNT_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -20,32 +20,38 @@ function Delete() {
 
 	return (
 		<AuthorizeRoute>
-			<Form
-				title='Delete account'
-				submitText='Delete account forever!'
-				color='error'
-				endpoint='/api/account'
-				method='DELETE'
-				information={(
-					<p>
-						Are you sure you want to delete your account? This cannot be undone! Enter your password to confirm you wish to proceed.
-					</p>
-				)}
-				onSuccess={successful => {
-					if (successful) {
-						authContext.logout();
-						navigate('/dashboard/account/deleted');
-					}
-				}}
-			>
-				<Textbox
-					name='password'
-					displayName='Password'
-					type='password'
-					validators={[required()]}
-					validationListProps={{ hideNonErrors: true }}
-				/>
-			</Form>
+			<Content title='Delete account'>
+				<p>
+					Are you sure you want to delete your account? This cannot be undone! Enter your password to confirm you wish to proceed.
+				</p>
+
+				<Form
+					color='error'
+					endpoint='/api/account'
+					method='DELETE'
+					onSuccess={successful => {
+						if (successful) {
+							authContext.logout();
+							navigate('/dashboard/account/deleted');
+						}
+					}}
+				>
+					<Textbox
+						name='password'
+						displayName='Password'
+						type='password'
+						validators={[required()]}
+						validationListProps={{ hideNonErrors: true }}
+					/>
+
+					<Button
+						type='submit'
+						color='error'
+					>
+						Delete account forever!
+					</Button>
+				</Form>
+			</Content>
 		</AuthorizeRoute>
 	);
 }

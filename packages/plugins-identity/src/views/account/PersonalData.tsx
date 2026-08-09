@@ -1,4 +1,4 @@
-﻿import { LinkButton, Card, CardActions, CardContent, CardHeader } from '@sienar/ui';
+﻿import { Content, LinkButton } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { PERSONAL_DATA_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -17,24 +17,18 @@ function PersonalData() {
 
 	return (
 		<AuthorizeRoute>
-			<Card>
-				<CardHeader>Personal data</CardHeader>
+			<Content title='Personal data'>
+				<p>
+					By creating an account, you give us personal data that we store. You have the right to know what data we have. You also have the right to request that we delete your personal data.
+				</p>
 
-				<CardContent>
-					<p>
-						By creating an account, you give us personal data that we store. You have the right to know what data we have. You also have the right to request that we delete your personal data.
-					</p>
-				</CardContent>
-
-				<CardActions>
-					<LinkButton
-						href='/api/account/personal-data'
-						target='_blank'
-					>
-						Download personal data
-					</LinkButton>
-				</CardActions>
-			</Card>
+				<LinkButton
+					href='/api/account/personal-data'
+					target='_blank'
+				>
+					Download personal data
+				</LinkButton>
+			</Content>
 		</AuthorizeRoute>
 	);
 }

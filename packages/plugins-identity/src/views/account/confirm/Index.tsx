@@ -1,5 +1,5 @@
 ﻿import { useSearchParams } from 'react-router-dom';
-import { Form, HiddenInput } from '@sienar/ui';
+import { Content, Form, HiddenInput } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { CONFIRM_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -22,24 +22,26 @@ function Index() {
 
 	return (
 		<AuthorizeRoute mustBeLoggedOut>
-			<Form
-				title='Confirming account'
-				endpoint='/api/account/confirm'
-				method='POST'
-				onSuccess='/dashboard/account/confirm/successful'
-				hideControls
-				immediate
-			>
-				Please wait while we confirm your account...
-				<HiddenInput
-					value={ userId ?? '' }
-					name='userId'
-				/>
-				<HiddenInput
-					value={ code ?? '' }
-					name='verificationCode'
-				/>
-			</Form>
+			<Content title='Confirming account'>
+				<p>
+					Please wait while we confirm your account...
+				</p>
+
+				<Form
+					endpoint='/api/account/confirm'
+					method='POST'
+					onSuccess='/dashboard/account/confirm/successful'
+				>
+					<HiddenInput
+						value={ userId ?? '' }
+						name='userId'
+					/>
+					<HiddenInput
+						value={ code ?? '' }
+						name='verificationCode'
+					/>
+				</Form>
+			</Content>
 		</AuthorizeRoute>
 	);
 }

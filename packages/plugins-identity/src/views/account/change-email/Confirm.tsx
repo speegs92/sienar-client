@@ -1,5 +1,5 @@
 ﻿import { useSearchParams } from 'react-router-dom';
-import { Form, HiddenInput } from '@sienar/ui';
+import { Content, Form, HiddenInput } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { CHANGE_EMAIL_CONFIRM_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -22,24 +22,27 @@ function Index() {
 
 	return (
 		<AuthorizeRoute>
-			<Form
-				title='Confirming new email'
-				endpoint='/api/account/email'
-				method='PATCH'
-				onSuccess='/dashboard/account/change-email/successful'
-				hideControls
-				immediate
-			>
-				Please wait while we confirm your new email address...
-				<HiddenInput
-					value={ userId ?? '' }
-					name='userId'
-				/>
-				<HiddenInput
-					value={ code ?? '' }
-					name='verificationCode'
-				/>
-			</Form>
+			<Content title='Confirming new email'>
+				<p>
+					Please wait while we confirm your new email address...
+				</p>
+
+				<Form
+					endpoint='/api/account/email'
+					method='PATCH'
+					onSuccess='/dashboard/account/change-email/successful'
+					immediate
+				>
+					<HiddenInput
+						value={ userId ?? '' }
+						name='userId'
+					/>
+					<HiddenInput
+						value={ code ?? '' }
+						name='verificationCode'
+					/>
+				</Form>
+			</Content>
 		</AuthorizeRoute>
 	);
 }

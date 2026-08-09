@@ -1,4 +1,4 @@
-﻿import { Form, Textbox } from '@sienar/ui';
+﻿import { Button, Content, Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, containsLower, containsNumber, containsSpecialCharacter, containsUpper, matches, maxLength, minLength, required, useDocumentTitle } from '@sienar/utils';
 import { CHANGE_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -17,39 +17,45 @@ function Index() {
 
 	return (
 		<AuthorizeRoute>
-			<Form
-				title='Change password'
-				submitText='Change password'
-				endpoint='/api/account/change-password'
-				method='PATCH'
-				onSuccess='/dashboard/account/change-password/successful'
-			>
-				<Textbox
-					name='newPassword'
-					displayName='New password'
-					type='password'
-					validators={[
-						minLength(8),
-						maxLength(64),
-						containsNumber(),
-						containsLower(),
-						containsUpper(),
-						containsSpecialCharacter()
-					]}
-				/>
-				<Textbox
-					name='confirmNewPassword'
-					displayName='Confirm new password'
-					type='password'
-					validators={[matches('newPassword')]}
-				/>
-				<Textbox
-					name='currentPassword'
-					displayName='Current password'
-					type='password'
-					validators={[required()]}
-				/>
-			</Form>
+			<Content title='Change password'>
+				<Form
+					endpoint='/api/account/change-password'
+					method='PATCH'
+					onSuccess='/dashboard/account/change-password/successful'
+				>
+					<Textbox
+						name='newPassword'
+						displayName='New password'
+						type='password'
+						validators={[
+							minLength(8),
+							maxLength(64),
+							containsNumber(),
+							containsLower(),
+							containsUpper(),
+							containsSpecialCharacter()
+						]}
+					/>
+					<Textbox
+						name='confirmNewPassword'
+						displayName='Confirm new password'
+						type='password'
+						validators={[matches('newPassword')]}
+					/>
+					<Textbox
+						name='currentPassword'
+						displayName='Current password'
+						type='password'
+						validators={[required()]}
+					/>
+
+					<Button
+						color='primary'
+					>
+						Change password
+					</Button>
+				</Form>
+			</Content>
 		</AuthorizeRoute>
 	);
 }

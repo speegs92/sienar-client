@@ -1,4 +1,4 @@
-﻿import { Form, Textbox } from '@sienar/ui';
+﻿import { Button, Content, Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useDocumentTitle } from '@sienar/utils';
 import { FORGOT_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -17,27 +17,33 @@ function Index() {
 
 	return (
 		<AuthorizeRoute mustBeLoggedOut>
-			<Form
-				title='Forgot password'
-				submitText='Request password reset'
-				endpoint='/api/account/password'
-				method='DELETE'
-				information={(
-					<p>
-						Please enter your username or email address. If your account exists, you should receive an email to reset your password shortly.
-					</p>
-				)}
-				onSuccess='/dashboard/account/forgot-password/successful'
-			>
-				<Textbox
-					name='accountName'
-					displayName='Username or email address'
-					validators={[required()]}
-					validationListProps={{ hideNonErrors: true }}
+			<Content title='Forgot password'>
+				<p>
+					Please enter your username or email address. If your account exists, you should receive an email to reset your password shortly.
+				</p>
+
+				<Form
+					endpoint='/api/account/password'
+					method='DELETE'
+					onSuccess='/dashboard/account/forgot-password/successful'
 				>
-					Username or email address
-				</Textbox>
-			</Form>
+					<Textbox
+						name='accountName'
+						displayName='Username or email address'
+						validators={[required()]}
+						validationListProps={{ hideNonErrors: true }}
+					>
+						Username or email address
+					</Textbox>
+
+					<Button
+						type='submit'
+						color='primary'
+					>
+						Request password reset
+					</Button>
+				</Form>
+			</Content>
 		</AuthorizeRoute>
 	);
 }

@@ -17,10 +17,7 @@ function Index() {
 
 	return (
 		<AuthorizeRoute>
-			<Content
-				title='Change email'
-				bgColor='soft'
-			>
+			<Content title='Change email'>
 				<Form
 					endpoint='/api/account/lockout-reasons'
 					method='POST'
