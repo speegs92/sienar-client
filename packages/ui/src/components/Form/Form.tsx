@@ -119,8 +119,6 @@ export function Form(props: FormProps) {
 
 	const formId = useId();
 	const formRef = useRef<HTMLFormElement>(null);
-	const submitButtonRef = useRef<HTMLButtonElement>(null);
-	const resetButtonRef = useRef<HTMLButtonElement>(null);
 	const formContext = useContext(formValidationContext);
 	const navigate = useNavigate();
 
@@ -180,7 +178,7 @@ export function Form(props: FormProps) {
 		}
 
 		if (resetOnSubmit) {
-			resetButtonRef.current!.click();
+			formRef.current!.reset();
 		}
 
 		if (typeof onSuccess === 'function') {
@@ -197,7 +195,7 @@ export function Form(props: FormProps) {
 
 	useEffect(() => {
 		if (immediate) {
-			submitButtonRef.current!.click();
+			formRef.current!.requestSubmit();
 		}
 	}, []);
 
