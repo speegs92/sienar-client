@@ -84,7 +84,10 @@ export function Content(props: ContentProps) {
 	);
 
 	const headerContent = (
-		<header className='text-align-center'>
+		<header className={classNames(
+			'text-align-center',
+			insetHeader ? undefined : 'mt-8'
+		)}>
 			<TitleTag>
 				{title}
 			</TitleTag>
