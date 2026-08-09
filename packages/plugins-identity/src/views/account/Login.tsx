@@ -1,5 +1,5 @@
 ﻿import { useSearchParams } from 'react-router-dom';
-import { Button, Icon, LinkButton, Form, StandaloneCheckbox, Textbox } from '@sienar/ui';
+import { Button, Content, Icon, LinkButton, Form, StandaloneCheckbox, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useNavigate, useAuthContext, useDocumentTitle } from '@sienar/utils';
 import { MAIN_URL } from '@sienar/plugins-core';
 import { LOGIN_LAYOUT } from '@plugins-identity/layouts.ts';
@@ -42,13 +42,42 @@ function Login() {
 
 	return (
 		<AuthorizeRoute mustBeLoggedOut>
-			<Form
-				title='Log in'
-				submitText='Log in'
-				endpoint='/api/account/login'
-				method='POST'
-				onSuccess={onLogin}
-				additionalActions={(
+			<Content title='Log in'>
+				<Form
+					endpoint='/api/account/login'
+					method='POST'
+					onSuccess={onLogin}
+				>
+					<Textbox
+						name='accountName'
+						displayName='Username or email address'
+						leftIcon={<Icon icon='account'/>}
+						validators={[required()]}
+						validationListProps={{
+							hideNonErrors: true
+						}}
+					/>
+					<Textbox
+						name='password'
+						displayName='Password'
+						type='password'
+						leftIcon={<Icon icon='lock'/>}
+						validators={[required()]}
+						validationListProps={{
+							hideNonErrors: true
+						}}
+					/>
+					<StandaloneCheckbox name='rememberMe' color='secondary'>
+						Remember me
+					</StandaloneCheckbox>
+
+					<Button
+						type='submit'
+						color='primary'
+					>
+						Log in
+					</Button>
+
 					<LinkButton
 						href={urls.account.forgotPassword.index}
 						color='secondary'
@@ -56,38 +85,8 @@ function Login() {
 					>
 						I forgot my password
 					</LinkButton>
-				)}
-			>
-				<Textbox
-					name='accountName'
-					displayName='Username or email address'
-					leftIcon={<Icon icon='account'/>}
-					validators={[required()]}
-					validationListProps={{
-						hideNonErrors: true
-					}}
-				/>
-				<Textbox
-					name='password'
-					displayName='Password'
-					type='password'
-					leftIcon={<Icon icon='lock'/>}
-					validators={[required()]}
-					validationListProps={{
-						hideNonErrors: true
-					}}
-				/>
-				<StandaloneCheckbox name='rememberMe' color='secondary'>
-					Remember me
-				</StandaloneCheckbox>
-
-				<Button
-					type='submit'
-					color='primary'
-				>
-					Log in
-				</Button>
-			</Form>
+				</Form>
+			</Content>
 		</AuthorizeRoute>
 	);
 }
