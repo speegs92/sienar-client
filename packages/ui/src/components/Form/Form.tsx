@@ -1,7 +1,7 @@
 ﻿import { useContext, useEffect, useId, useRef } from 'react';
 import { formValidationContext, sendRequest, useNavigate } from '@sienar/utils';
 
-import type { HTMLAttributes, ReactNode, SubmitEvent } from 'react';
+import type { HTMLAttributes, SubmitEvent } from 'react';
 import type { HttpMethod, RequestResult, ValidationResult } from '@sienar/utils';
 import type { Color } from '@ui/theme.ts';
 
@@ -10,35 +10,9 @@ import type { Color } from '@ui/theme.ts';
  */
 export type FormProps = {
 	/**
-	 * The title text of the form. If omitted, it is determined programmatically if possible
-	 */
-	title?: string;
-
-	/**
-	 * The HTML tag with which to render the title
-	 */
-	titleTag?: keyof HTMLElementTagNameMap;
-
-	/**
-	 * The subtitle text of the form, if any
-	 */
-	subtitle?: string;
-
-	/**
-	 * The HTML tag with which to render the subtitle
-	 */
-	subtitleTag?: keyof HTMLElementTagNameMap;
-
-	/**
 	 * The theme color of the form, if any
 	 */
 	color?: Color;
-
-	/**
-	 * The icon to display in the form header, if any
-	 */
-	headerIcon?: ReactNode;
-
 	/**
 	 * The function to call before submit. If it returns <code>true</code>, the form submission will continue. Otherwise, submission will end
 	 */
@@ -55,44 +29,14 @@ export type FormProps = {
 	method: HttpMethod;
 
 	/**
-	 * The submit button text
-	 */
-	submitText?: string;
-
-	/**
 	 * The function to call on reset
 	 */
 	onReset?: () => any;
 
 	/**
-	 * The reset button text
-	 */
-	resetText?: string;
-
-	/**
-	 * Whether to show the reset button on the form
-	 */
-	showReset?: boolean;
-
-	/**
 	 * Whether to reset the form on submit
 	 */
 	resetOnSubmit?: boolean;
-
-	/**
-	 * Whether to hide the form controls
-	 */
-	hideControls?: boolean;
-
-	/**
-	 * A string or React node to show to users at the top of the form, generally to provide information or instructions
-	 */
-	information?: ReactNode;
-
-	/**
-	 * Additional buttons or links to show in the card actions area
-	 */
-	additionalActions?: ReactNode;
 
 	/**
 	 * Whether the form should immediately submit upon rendering
@@ -103,7 +47,7 @@ export type FormProps = {
 	 * The function to call or the path to which to navigate on a successful form submission
 	 */
 	onSuccess?: string|((result: RequestResult<any>) => any);
-} & Omit<HTMLAttributes<HTMLFormElement>, 'title'|'color'>;
+} & Omit<HTMLAttributes<HTMLFormElement>, 'color'>;
 
 export function Form(props: FormProps) {
 	const {
