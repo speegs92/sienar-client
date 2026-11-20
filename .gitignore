@@ -1,0 +1,16 @@
+# IDE
+**/.idea/
+*.iml
+*.sln.ide
+*.user
+*.suo
+.vs/
+.vscode/
+
+# Client
+*.js
+*.css
+*.map
+
+node_modules/
+package-lock.json
