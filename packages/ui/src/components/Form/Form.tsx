@@ -29,6 +29,16 @@ export type FormProps = {
 	method: HttpMethod;
 
 	/**
+	 * The ID of the entity to load on initial render, if any
+	 */
+	entityId?: number;
+
+	/**
+	 * A function to map a read-DTO to the appropriate edit-DTO fields, if any. If this function is omitted, the read-DTO entity is mapped by name onto the edit-DTO fields
+	 */
+	dataTransformer?: (input: Record<string, any>) => Record<string, any>
+
+	/**
 	 * The function to call on reset
 	 */
 	onReset?: () => any;
@@ -54,6 +64,8 @@ export function Form(props: FormProps) {
 		beforeSubmit,
 		endpoint,
 		method,
+		entityId,
+		dataTransformer,
 		resetOnSubmit = false,
 		children,
 		onReset,
@@ -141,6 +153,52 @@ export function Form(props: FormProps) {
 		if (immediate) {
 			formRef.current!.requestSubmit();
 		}
+	}, []);
+
+	useEffect(() => {
+		if (entityId === undefined){
+			return;
+		}
+
+		(async () => {
+			// Fetch the entity data from the API
+			const entityResult = await sendRequest<Record<string, any>>(
+				`${endpoint}/${entityId}`,
+				'GET');
+			if (!entityResult.wasSuccessful || !entityResult.result) {
+				return;
+			}
+
+			// Map the entity from a read-DTO to an edit-DTO, if necessary
+			let entity = entityResult.result;
+			if (dataTransformer) {
+				entity = dataTransformer(entity);
+			}
+
+			// Map the entity fields
+			for (let [k, v] of Object.entries(entity)) {
+				// Map the 'id' and 'concurrencyStamp' fields
+				if (k === 'id' || k === 'concurrencyStamp') {
+					formContext.fields[k] = {
+						displayName: k,
+						validator: () => true,
+						value: v,
+						setValue: () => {},
+						validationResults: [],
+						setValidationResults: ([]) => {}
+					}
+
+					continue;
+				}
+
+				// If there is no such field, skip it
+				if (!formContext.fields[k]) {
+					continue;
+				}
+
+				formContext.fields[k].setValue(v);
+			}
+		})();
 	}, []);
 
 	// This effect does nothing on load, but when the component unmounts,
